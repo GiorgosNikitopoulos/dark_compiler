@@ -131,11 +131,24 @@ def run_pipeline(
     input_results_dir: Path,
     output_dir: Path,
     item_jobs: int,
-    resume: bool,
+    fresh: bool = False,
+    retry_failed: bool = False,
     run_id: str | None = None,
     keep_images: bool = False,
     elf_mode: str = MODE_LAST_ELF_LAYER,
 ) -> None:
+    """Run the CXXCrafter compile-and-trace pipeline.
+
+    Resume semantics:
+      * Auto-resume by default. If ``output_dir`` already contains
+        ``state/checkpoint.json``/``state/completed_items.jsonl``, those
+        are restored and previously processed pairs are filtered out.
+      * ``fresh=True`` wipes ``state/`` first, forcing every pair to
+        re-run from scratch. Records and traces are left untouched.
+      * Pairs previously recorded with status ``success`` are always
+        skipped. Pairs recorded as ``failed`` are skipped unless
+        ``retry_failed=True``, in which case they are re-enqueued.
+    """
     if elf_mode not in VALID_MODES:
         raise ValueError(f"unknown elf_mode {elf_mode!r}; expected one of {VALID_MODES}")
 
@@ -152,9 +165,10 @@ def run_pipeline(
     registry.keep_images = keep_images
     registry.set_metric_callback(lambda key, amount: metrics.inc(key, amount))
 
-    completed_ids = state.load_completed_item_ids() if resume else set()
-    if not resume:
-        completed_ids = set()
+    if fresh:
+        state.wipe()
+
+    statuses = state.load_completed_item_statuses()
 
     pairs = load_commit_pairs(input_results_dir)
     if not pairs:
@@ -164,8 +178,8 @@ def run_pipeline(
         )
     metrics.set_total_items(len(pairs))
 
-    checkpoint = state.load_checkpoint() if resume else {}
-    if resume:
+    checkpoint = state.load_checkpoint()
+    if checkpoint:
         previous_metrics = checkpoint.get("metrics", {})
         for key, value in previous_metrics.items():
             if hasattr(metrics.snapshot, key) and isinstance(value, int):
@@ -176,13 +190,40 @@ def run_pipeline(
     if not run_id:
         run_id = naming.make_run_id()
 
+    success_count = sum(1 for s in statuses.values() if s == "success")
+    failed_count = sum(1 for s in statuses.values() if s != "success")
+
     pending_pairs: list[tuple[int, object]] = []
     for idx, pair in enumerate(pairs):
-        if pair.item_id in completed_ids:
+        prev_status = statuses.get(pair.item_id)
+        if prev_status == "success":
             metrics.inc("skipped_items", 1)
-            metrics.flush({"item_id": pair.item_id, "event": "skip"})
+            metrics.flush({"item_id": pair.item_id, "event": "skip", "reason": "prior_success"})
+            continue
+        if prev_status and prev_status != "success" and not retry_failed:
+            metrics.inc("skipped_items", 1)
+            metrics.flush(
+                {
+                    "item_id": pair.item_id,
+                    "event": "skip",
+                    "reason": "prior_failed_pass_retry_failed_to_retry",
+                }
+            )
             continue
         pending_pairs.append((idx, pair))
+
+    if statuses:
+        logger.info(
+            "auto-resume: %d pairs previously processed (%d success / %d failed); "
+            "enqueueing %d pending (retry_failed=%s, fresh=%s)",
+            len(statuses), success_count, failed_count,
+            len(pending_pairs), retry_failed, fresh,
+        )
+    else:
+        logger.info(
+            "fresh start: enqueueing %d pairs (retry_failed=%s, fresh=%s)",
+            len(pending_pairs), retry_failed, fresh,
+        )
 
     def _process_pair(idx: int, pair) -> dict[str, Any]:
         try:

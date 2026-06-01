@@ -57,9 +57,8 @@ class CXXCompileOutcome:
     error: str | None = None
     # Index of the layer whose ELFs we kept (None when none kept / mode=all).
     chosen_layer_index: int | None = None
-    # "llm" when CXXCrafter generated the Dockerfile from scratch,
-    # "parent_reuse" when we re-used the parent's successful Dockerfile,
-    # "skipped" when we never attempted (e.g. clone failed).
+    # "llm" when CXXCrafter generated the Dockerfile from scratch (the only
+    # successful path), "skipped" when we never attempted (e.g. clone failed).
     built_via: str = "llm"
 
     def to_dict(self) -> dict[str, Any]:

@@ -14,11 +14,15 @@ Two operating modes:
   ELFs were added; pick the **last layer that actually added at least one
   ELF** (this skips trailing metadata-only layers like ``CMD``/``ENV`` which
   show up as empty diffs); then in pass 2 only physically extract the
-  binaries from that one layer to ``out_dir/elfs/build/``.
-* ``all``: extract every ELF from every layer to ``out_dir/elfs/layer_NNN/``.
+  binaries from that one layer to ``out_dir/elfs/`` as a *flat* listing
+  (basenames only). Collisions are disambiguated with ``__N`` suffixes.
+* ``all``: extract every ELF from every layer to ``out_dir/elfs/layer_NNN/``
+  (also flat per layer).
 
 Either way the manifest at ``out_dir/elf_manifest.json`` records the
-per-layer summary so a later inspection can see what was skipped.
+per-layer summary, including a ``binaries`` list mapping the flat output
+filename back to the ELF's original in-image path so the source is never
+lost.
 """
 from __future__ import annotations
 
@@ -75,22 +79,37 @@ class TraceResult:
         }
 
 
-def _safe_relpath(name: str) -> Path:
-    """Sanitize a tar entry name into a path that cannot escape out_dir."""
-    parts = []
-    for part in Path(name).parts:
-        if part in ("", ".", ".."):
-            continue
-        if part.startswith("/"):
-            part = part.lstrip("/")
-        if not part:
-            continue
-        if len(part) > _MAX_PATH_COMPONENT:
-            part = part[:_MAX_PATH_COMPONENT]
-        parts.append(part)
-    if not parts:
-        return Path("_unnamed")
-    return Path(*parts)
+def _safe_basename(name: str) -> str:
+    """Reduce a tar entry name to a single safe basename for flat output.
+
+    Strips any directory components (so we never write under ``tmp/src/...``
+    inside ``elfs/``), drops empty/``.``/``..`` segments, and caps the
+    resulting name length to ``_MAX_PATH_COMPONENT``.
+    """
+    base = Path(name).name
+    if base in ("", ".", ".."):
+        return "_unnamed"
+    if len(base) > _MAX_PATH_COMPONENT:
+        base = base[:_MAX_PATH_COMPONENT]
+    return base
+
+
+def _disambiguate(basename: str, used: dict[str, int]) -> str:
+    """Pick a unique flat filename in a destination dir.
+
+    First occurrence keeps the original basename. Subsequent occurrences
+    get a ``__N`` suffix inserted before the first dot so the extension
+    chain (``.so.1.7.18``, ``.c.o``) survives intact.
+    """
+    if basename not in used:
+        used[basename] = 0
+        return basename
+    used[basename] += 1
+    n = used[basename]
+    if "." in basename:
+        head, _, tail = basename.partition(".")
+        return f"{head}__{n}.{tail}"
+    return f"{basename}__{n}"
 
 
 def _save_image(image_tag: str, dest: Path) -> None:
@@ -164,9 +183,18 @@ def _extract_layer_elfs(
     layer_path: str,
     expected_names: set[str],
     dest_dir: Path,
-) -> list[str]:
-    """Pull only the ELFs whose names are in ``expected_names`` to ``dest_dir``."""
-    written: list[str] = []
+    used_names: dict[str, int],
+) -> list[dict[str, str]]:
+    """Pull only the ELFs whose names are in ``expected_names`` to ``dest_dir``.
+
+    Files are written *flat* into ``dest_dir`` (no nested directories from
+    the in-image path). ``used_names`` is mutated to track basename
+    collisions across calls sharing a destination.
+
+    Returns a list of ``{"name": flat_filename, "src_path": in_image_path}``
+    so the caller can record the original location in the manifest.
+    """
+    written: list[dict[str, str]] = []
     if not expected_names:
         return written
     layer_member = outer.getmember(layer_path)
@@ -185,13 +213,13 @@ def _extract_layer_elfs(
                 head = data_fh.read(ELF_MAGIC_LEN)
                 if head != ELF_MAGIC:
                     continue
-                rel = _safe_relpath(entry.name)
-                dest_path = dest_dir / rel
-                dest_path.parent.mkdir(parents=True, exist_ok=True)
+                src_path = entry.name.lstrip("./")
+                flat = _disambiguate(_safe_basename(entry.name), used_names)
+                dest_path = dest_dir / flat
                 with dest_path.open("wb") as out_fh:
                     out_fh.write(head)
                     shutil.copyfileobj(data_fh, out_fh)
-                written.append(entry.name.lstrip("./"))
+                written.append({"name": flat, "src_path": src_path})
                 remaining.discard(entry.name)
                 if not remaining:
                     break
@@ -251,36 +279,45 @@ def trace_elfs(
             keep_indices = {entry["layer_index"] for entry in discovered if entry["elf_names"]}
 
         # Pass 2 - extraction (only the layers we marked to keep).
+        # In ``last_elf_layer`` mode every kept layer shares the single
+        # ``elfs/`` destination, so a single ``used_names`` dict carries
+        # collision counters across layers. In ``all`` mode each layer has
+        # its own ``layer_NNN/`` dir, so each layer gets a fresh counter.
         layers_summary: list[dict[str, Any]] = []
         unique_paths: set[str] = set()
         total_elfs = 0
+        shared_used: dict[str, int] = {}
         if keep_indices:
             with tarfile.open(image_tar_path, mode="r") as outer_extract:
                 for entry in discovered:
                     layer_index = entry["layer_index"]
                     elf_names: list[str] = entry["elf_names"]
                     keep = layer_index in keep_indices
-                    written: list[str] = []
+                    binaries: list[dict[str, str]] = []
                     if keep and elf_names:
                         if mode == MODE_LAST_ELF_LAYER:
-                            dest_dir = elf_root / "build"
+                            dest_dir = elf_root
+                            used = shared_used
                         else:
                             dest_dir = elf_root / f"layer_{layer_index:03d}"
+                            used = {}
                         dest_dir.mkdir(parents=True, exist_ok=True)
-                        written = _extract_layer_elfs(
+                        binaries = _extract_layer_elfs(
                             outer_extract,
                             entry["layer_digest"],
                             set(elf_names),
                             dest_dir,
+                            used,
                         )
-                        for path in written:
-                            unique_paths.add(path)
+                        for bin_entry in binaries:
+                            unique_paths.add(bin_entry["src_path"])
                             total_elfs += 1
                     layers_summary.append(
                         {
                             "layer_index": layer_index,
                             "layer_digest": entry["layer_digest"],
-                            "elf_paths": written if keep else [],
+                            "elf_paths": [b["name"] for b in binaries] if keep else [],
+                            "binaries": binaries if keep else [],
                             "elf_candidates": len(elf_names),
                             "kept": keep,
                             "skipped": entry.get("skipped", False),
@@ -293,6 +330,7 @@ def trace_elfs(
                         "layer_index": entry["layer_index"],
                         "layer_digest": entry["layer_digest"],
                         "elf_paths": [],
+                        "binaries": [],
                         "elf_candidates": len(entry["elf_names"]),
                         "kept": False,
                         "skipped": entry.get("skipped", False),
@@ -305,10 +343,7 @@ def trace_elfs(
         except Exception:
             pass
 
-    if mode == MODE_LAST_ELF_LAYER:
-        elf_dir_str = str(elf_root / "build")
-    else:
-        elf_dir_str = str(elf_root)
+    elf_dir_str = str(elf_root)
 
     chosen_digest = None
     if chosen_index is not None:
