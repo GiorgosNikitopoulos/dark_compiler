@@ -1,0 +1,51 @@
+# ---- Base image -------------------------------------------------
+FROM ubuntu:22.04
+
+# ---- Environment ------------------------------------------------
+ENV DEBIAN_FRONTEND=noninteractive
+
+# ---- Use faster mirrors, update packages -------------------------
+# (single RUN – required by the template)
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list \
+    && sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get upgrade -y
+
+# ---- Install basic build tools -----------------------------------
+# Each apt‑get install is performed in its own RUN layer
+RUN apt-get install -y build-essential
+RUN apt-get install -y software-properties-common
+
+# ---- Install additional dependencies -----------------------------
+# Only pkg‑config is required by the Makefile
+RUN apt-get install -y pkg-config
+
+# ---- Install CMake (required for out‑of‑tree build) -------------
+RUN apt-get install -y cmake
+
+# ---- Copy the source code into the container --------------------
+# The local directory 825bb04d4575f866_patch is placed under /tmp/src
+COPY 825bb04d4575f866_patch /tmp/src
+
+# ---- Build the project with Make ---------------------------------
+WORKDIR /tmp/src
+
+# Create an out‑of‑tree build directory and configure with CMake.
+RUN mkdir -p build && cd build && cmake .. 
+
+# Build the project (CMake will generate a Makefile)
+RUN cd build && make -j$(nproc)
+
+# ---- Run the test suite (Unity) ---------------------------------
+RUN cd build && make test || make check
+
+# ---- Optional: install the library into the image ----------------
+# Uncomment the next line if you want the built library to be installed
+# into the standard system locations inside the container.
+# RUN cd build && make install
+
+# ---- Clean up apt caches (size reduction) -----------------------
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# ---- Default command (keep container alive for inspection) -----
+CMD ["bash"]

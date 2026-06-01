@@ -1,0 +1,144 @@
+{
+  "chosen_layer_digest": "blobs/sha256/3c5612c88e2e933a8768d2c131bf9f279e560401d3b8c0771bd56d8947a6a3fb",
+  "chosen_layer_index": 8,
+  "elf_dir": "dark_smoke_one/cxx_compile/825bb04d4575f866/patch/trace/elfs/build",
+  "image_tag": "dark_cxx/20260531_234156_7d57/825bb04d4575f866/patch:v2",
+  "layers": [
+    {
+      "elf_candidates": 733,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/8bba68e7621928237aa6d6e2c680cb9572c942ee23c2adabd22016bb67cb938d",
+      "layer_index": 0,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 2,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/9ad5b933c2390a325505e86649f897aafa17cd0f8e7fd3e7ae122567aeaa3e3d",
+      "layer_index": 1,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 209,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/2a92dd3689bee54351100fe23de4ae5cdd7015adb7e0e7c8cdbcedc4cf85e198",
+      "layer_index": 2,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 241,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/824dca3ea8720f2f43efc18ef7f883d57df6b4d7264f7d49c826431416e840a7",
+      "layer_index": 3,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 1,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/4584bc24a15e639b72a2739fc5543a29e52a54741dd834c228ea216cd2742658",
+      "layer_index": 4,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 8,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/e4c8887f24fa5a2cc2281e7f09da69729754e58772d077c56de3d9a9a1bb1f52",
+      "layer_index": 5,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/7ef5803e83993f88b1589abfcdb15e101cb5148c88f0295cb3a4cb836ed4aab9",
+      "layer_index": 6,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 2,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/f038ed04f4cb94e271bb48a123378c48b4088b638a7e56c39dd12d57c5344d56",
+      "layer_index": 7,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 44,
+      "elf_paths": [
+        "tmp/src/build/CMakeFiles/cJSON_test.dir/test.c.o",
+        "tmp/src/build/CMakeFiles/cjson.dir/cJSON.c.o",
+        "tmp/src/build/cJSON_test",
+        "tmp/src/build/fuzzing/CMakeFiles/fuzz_main.dir/cjson_read_fuzzer.c.o",
+        "tmp/src/build/fuzzing/CMakeFiles/fuzz_main.dir/fuzz_main.c.o",
+        "tmp/src/build/fuzzing/fuzz_main",
+        "tmp/src/build/libcjson.so.1.7.18",
+        "tmp/src/build/tests/CMakeFiles/cjson_add.dir/cjson_add.c.o",
+        "tmp/src/build/tests/CMakeFiles/compare_tests.dir/compare_tests.c.o",
+        "tmp/src/build/tests/CMakeFiles/minify_tests.dir/minify_tests.c.o",
+        "tmp/src/build/tests/CMakeFiles/misc_tests.dir/misc_tests.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_array.dir/parse_array.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_examples.dir/parse_examples.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_hex4.dir/parse_hex4.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_number.dir/parse_number.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_object.dir/parse_object.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_string.dir/parse_string.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_value.dir/parse_value.c.o",
+        "tmp/src/build/tests/CMakeFiles/parse_with_opts.dir/parse_with_opts.c.o",
+        "tmp/src/build/tests/CMakeFiles/print_array.dir/print_array.c.o",
+        "tmp/src/build/tests/CMakeFiles/print_number.dir/print_number.c.o",
+        "tmp/src/build/tests/CMakeFiles/print_object.dir/print_object.c.o",
+        "tmp/src/build/tests/CMakeFiles/print_string.dir/print_string.c.o",
+        "tmp/src/build/tests/CMakeFiles/print_value.dir/print_value.c.o",
+        "tmp/src/build/tests/CMakeFiles/readme_examples.dir/readme_examples.c.o",
+        "tmp/src/build/tests/CMakeFiles/unity.dir/unity/src/unity.c.o",
+        "tmp/src/build/tests/cjson_add",
+        "tmp/src/build/tests/compare_tests",
+        "tmp/src/build/tests/minify_tests",
+        "tmp/src/build/tests/misc_tests",
+        "tmp/src/build/tests/parse_array",
+        "tmp/src/build/tests/parse_examples",
+        "tmp/src/build/tests/parse_hex4",
+        "tmp/src/build/tests/parse_number",
+        "tmp/src/build/tests/parse_object",
+        "tmp/src/build/tests/parse_string",
+        "tmp/src/build/tests/parse_value",
+        "tmp/src/build/tests/parse_with_opts",
+        "tmp/src/build/tests/print_array",
+        "tmp/src/build/tests/print_number",
+        "tmp/src/build/tests/print_object",
+        "tmp/src/build/tests/print_string",
+        "tmp/src/build/tests/print_value",
+        "tmp/src/build/tests/readme_examples"
+      ],
+      "kept": true,
+      "layer_digest": "blobs/sha256/3c5612c88e2e933a8768d2c131bf9f279e560401d3b8c0771bd56d8947a6a3fb",
+      "layer_index": 8,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/2122b8a24711c396e7ef367e289b8656a1c76bec5f9060b14869ebb4756b3d17",
+      "layer_index": 9,
+      "skipped": false
+    },
+    {
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/827b4359c05c12e9bb2bf2538cc62bca043a36a79628d7650fb11f7a6e435b61",
+      "layer_index": 10,
+      "skipped": false
+    }
+  ],
+  "mode": "last_elf_layer",
+  "total_elfs": 44,
+  "unique_elfs": 44
+}

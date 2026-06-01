@@ -8,19 +8,17 @@ recognising files that begin with the ELF magic header (``\\x7fELF``), we get
 a faithful trace of every binary the build emitted, attributed to the step
 that emitted it.
 
-The tracer:
+Two operating modes:
 
-1. Streams ``docker save <image>`` to a temp tarball.
-2. Reads ``manifest.json`` to find the ordered list of layer tarballs.
-3. For each layer, walks every regular file inside, peeks at the first 4
-   bytes, and if they match the ELF magic the file is written to
-   ``<out_dir>/elfs/layer_NNN/<path>`` and recorded in the manifest.
-4. Writes ``<out_dir>/elf_manifest.json`` with the per-layer list and the
-   image-wide dedup'd binary list.
-5. Cleans up the temp image tarball.
+* ``last_elf_layer`` (default): scan every layer in pass 1 to discover where
+  ELFs were added; pick the **last layer that actually added at least one
+  ELF** (this skips trailing metadata-only layers like ``CMD``/``ENV`` which
+  show up as empty diffs); then in pass 2 only physically extract the
+  binaries from that one layer to ``out_dir/elfs/build/``.
+* ``all``: extract every ELF from every layer to ``out_dir/elfs/layer_NNN/``.
 
-The image itself is **not** removed here; the orchestrator owns image
-lifecycle via ``cleanup.purge_image`` so failure modes stay separate.
+Either way the manifest at ``out_dir/elf_manifest.json`` records the
+per-layer summary so a later inspection can see what was skipped.
 """
 from __future__ import annotations
 
@@ -28,7 +26,7 @@ import json
 import logging
 import shutil
 import tarfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -46,12 +44,19 @@ ELF_MAGIC = b"\x7fELF"
 ELF_MAGIC_LEN = len(ELF_MAGIC)
 _MAX_PATH_COMPONENT = 200
 
+MODE_LAST_ELF_LAYER = "last_elf_layer"
+MODE_ALL = "all"
+VALID_MODES = (MODE_LAST_ELF_LAYER, MODE_ALL)
+
 
 @dataclass
 class TraceResult:
     image_tag: str
+    mode: str
     total_elfs: int
     unique_elfs: int
+    chosen_layer_index: int | None
+    chosen_layer_digest: str | None
     layers: list[dict[str, Any]]
     manifest_path: str
     elf_dir: str
@@ -59,8 +64,11 @@ class TraceResult:
     def to_dict(self) -> dict[str, Any]:
         return {
             "image_tag": self.image_tag,
+            "mode": self.mode,
             "total_elfs": self.total_elfs,
             "unique_elfs": self.unique_elfs,
+            "chosen_layer_index": self.chosen_layer_index,
+            "chosen_layer_digest": self.chosen_layer_digest,
             "layers": self.layers,
             "manifest_path": self.manifest_path,
             "elf_dir": self.elf_dir,
@@ -119,13 +127,91 @@ def _iter_layer_paths(manifest: list[dict[str, Any]]) -> Iterable[str]:
             yield entry
 
 
-def _peek_is_elf(stream) -> tuple[bool, bytes]:
-    head = stream.read(ELF_MAGIC_LEN)
-    return (head == ELF_MAGIC, head)
+def _scan_layer_for_elf_names(outer: tarfile.TarFile, layer_path: str) -> tuple[list[str], bool]:
+    """Return (elf_entry_names, skipped) for a single layer without writing."""
+    try:
+        layer_member = outer.getmember(layer_path)
+    except KeyError:
+        logger.warning("layer %s missing from image tar", layer_path)
+        return [], True
+    inner_fh = outer.extractfile(layer_member)
+    if inner_fh is None:
+        logger.warning("could not open layer %s", layer_path)
+        return [], True
+
+    elf_names: list[str] = []
+    try:
+        with tarfile.open(fileobj=inner_fh, mode="r|*") as inner:
+            for entry in inner:
+                if not entry.isfile():
+                    continue
+                data_fh = inner.extractfile(entry)
+                if data_fh is None:
+                    continue
+                head = data_fh.read(ELF_MAGIC_LEN)
+                if head == ELF_MAGIC:
+                    elf_names.append(entry.name)
+    finally:
+        try:
+            inner_fh.close()
+        except Exception:
+            pass
+    return elf_names, False
 
 
-def trace_elfs(image_tag: str, out_dir: Path) -> TraceResult:
-    """Extract every ELF produced by a Docker image, grouped by layer."""
+def _extract_layer_elfs(
+    outer: tarfile.TarFile,
+    layer_path: str,
+    expected_names: set[str],
+    dest_dir: Path,
+) -> list[str]:
+    """Pull only the ELFs whose names are in ``expected_names`` to ``dest_dir``."""
+    written: list[str] = []
+    if not expected_names:
+        return written
+    layer_member = outer.getmember(layer_path)
+    inner_fh = outer.extractfile(layer_member)
+    if inner_fh is None:
+        return written
+    try:
+        with tarfile.open(fileobj=inner_fh, mode="r|*") as inner:
+            remaining = set(expected_names)
+            for entry in inner:
+                if not entry.isfile() or entry.name not in remaining:
+                    continue
+                data_fh = inner.extractfile(entry)
+                if data_fh is None:
+                    continue
+                head = data_fh.read(ELF_MAGIC_LEN)
+                if head != ELF_MAGIC:
+                    continue
+                rel = _safe_relpath(entry.name)
+                dest_path = dest_dir / rel
+                dest_path.parent.mkdir(parents=True, exist_ok=True)
+                with dest_path.open("wb") as out_fh:
+                    out_fh.write(head)
+                    shutil.copyfileobj(data_fh, out_fh)
+                written.append(entry.name.lstrip("./"))
+                remaining.discard(entry.name)
+                if not remaining:
+                    break
+    finally:
+        try:
+            inner_fh.close()
+        except Exception:
+            pass
+    return written
+
+
+def trace_elfs(
+    image_tag: str,
+    out_dir: Path,
+    mode: str = MODE_LAST_ELF_LAYER,
+) -> TraceResult:
+    """Discover every ELF the build produced and extract the relevant subset."""
+    if mode not in VALID_MODES:
+        raise ValueError(f"unknown trace mode {mode!r}; expected one of {VALID_MODES}")
+
     out_dir.mkdir(parents=True, exist_ok=True)
     elf_root = out_dir / "elfs"
     elf_root.mkdir(parents=True, exist_ok=True)
@@ -134,73 +220,82 @@ def trace_elfs(image_tag: str, out_dir: Path) -> TraceResult:
     if image_tar_path.exists():
         image_tar_path.unlink()
 
-    layers_summary: list[dict[str, Any]] = []
-    unique_paths: set[str] = set()
-    total_elfs = 0
+    discovered: list[dict[str, Any]] = []  # one entry per layer, populated in pass 1
+    chosen_index: int | None = None
 
     try:
         _save_image(image_tag, image_tar_path)
-        with tarfile.open(image_tar_path, mode="r") as outer:
-            manifest = _read_manifest(outer)
+
+        # Pass 1 - discovery only. No bytes hit the output dir yet.
+        with tarfile.open(image_tar_path, mode="r") as outer_scan:
+            manifest = _read_manifest(outer_scan)
             for layer_index, layer_path in enumerate(_iter_layer_paths(manifest)):
-                layer_dir = elf_root / f"layer_{layer_index:03d}"
-                elf_paths_for_layer: list[str] = []
-                try:
-                    layer_member = outer.getmember(layer_path)
-                except KeyError:
-                    logger.warning("layer %s missing from image tar", layer_path)
-                    layers_summary.append(
-                        {
-                            "layer_index": layer_index,
-                            "layer_digest": layer_path,
-                            "elf_paths": [],
-                            "skipped": True,
-                        }
-                    )
-                    continue
-                inner_fh = outer.extractfile(layer_member)
-                if inner_fh is None:
-                    logger.warning("could not open layer %s", layer_path)
-                    layers_summary.append(
-                        {
-                            "layer_index": layer_index,
-                            "layer_digest": layer_path,
-                            "elf_paths": [],
-                            "skipped": True,
-                        }
-                    )
-                    continue
-                try:
-                    with tarfile.open(fileobj=inner_fh, mode="r|*") as inner:
-                        for entry in inner:
-                            if not entry.isfile():
-                                continue
-                            data_fh = inner.extractfile(entry)
-                            if data_fh is None:
-                                continue
-                            is_elf, head = _peek_is_elf(data_fh)
-                            if not is_elf:
-                                continue
-                            rel = _safe_relpath(entry.name)
-                            dest_path = layer_dir / rel
-                            dest_path.parent.mkdir(parents=True, exist_ok=True)
-                            with dest_path.open("wb") as out_fh:
-                                out_fh.write(head)
-                                shutil.copyfileobj(data_fh, out_fh)
-                            recorded = entry.name.lstrip("./")
-                            elf_paths_for_layer.append(recorded)
-                            unique_paths.add(recorded)
-                            total_elfs += 1
-                finally:
-                    try:
-                        inner_fh.close()
-                    except Exception:
-                        pass
-                layers_summary.append(
+                elf_names, skipped = _scan_layer_for_elf_names(outer_scan, layer_path)
+                discovered.append(
                     {
                         "layer_index": layer_index,
                         "layer_digest": layer_path,
-                        "elf_paths": elf_paths_for_layer,
+                        "elf_names": elf_names,
+                        "skipped": skipped,
+                    }
+                )
+
+        # Decide which layers we actually want to extract.
+        if mode == MODE_LAST_ELF_LAYER:
+            for entry in reversed(discovered):
+                if entry["elf_names"]:
+                    chosen_index = entry["layer_index"]
+                    break
+            keep_indices: set[int] = {chosen_index} if chosen_index is not None else set()
+        else:
+            keep_indices = {entry["layer_index"] for entry in discovered if entry["elf_names"]}
+
+        # Pass 2 - extraction (only the layers we marked to keep).
+        layers_summary: list[dict[str, Any]] = []
+        unique_paths: set[str] = set()
+        total_elfs = 0
+        if keep_indices:
+            with tarfile.open(image_tar_path, mode="r") as outer_extract:
+                for entry in discovered:
+                    layer_index = entry["layer_index"]
+                    elf_names: list[str] = entry["elf_names"]
+                    keep = layer_index in keep_indices
+                    written: list[str] = []
+                    if keep and elf_names:
+                        if mode == MODE_LAST_ELF_LAYER:
+                            dest_dir = elf_root / "build"
+                        else:
+                            dest_dir = elf_root / f"layer_{layer_index:03d}"
+                        dest_dir.mkdir(parents=True, exist_ok=True)
+                        written = _extract_layer_elfs(
+                            outer_extract,
+                            entry["layer_digest"],
+                            set(elf_names),
+                            dest_dir,
+                        )
+                        for path in written:
+                            unique_paths.add(path)
+                            total_elfs += 1
+                    layers_summary.append(
+                        {
+                            "layer_index": layer_index,
+                            "layer_digest": entry["layer_digest"],
+                            "elf_paths": written if keep else [],
+                            "elf_candidates": len(elf_names),
+                            "kept": keep,
+                            "skipped": entry.get("skipped", False),
+                        }
+                    )
+        else:
+            for entry in discovered:
+                layers_summary.append(
+                    {
+                        "layer_index": entry["layer_index"],
+                        "layer_digest": entry["layer_digest"],
+                        "elf_paths": [],
+                        "elf_candidates": len(entry["elf_names"]),
+                        "kept": False,
+                        "skipped": entry.get("skipped", False),
                     }
                 )
     finally:
@@ -210,21 +305,42 @@ def trace_elfs(image_tag: str, out_dir: Path) -> TraceResult:
         except Exception:
             pass
 
+    if mode == MODE_LAST_ELF_LAYER:
+        elf_dir_str = str(elf_root / "build")
+    else:
+        elf_dir_str = str(elf_root)
+
+    chosen_digest = None
+    if chosen_index is not None:
+        for entry in discovered:
+            if entry["layer_index"] == chosen_index:
+                chosen_digest = entry["layer_digest"]
+                break
+
     manifest_path = out_dir / "elf_manifest.json"
     manifest_payload: dict[str, Any] = {
         "image_tag": image_tag,
+        "mode": mode,
         "total_elfs": total_elfs,
         "unique_elfs": len(unique_paths),
+        "chosen_layer_index": chosen_index,
+        "chosen_layer_digest": chosen_digest,
         "layers": layers_summary,
-        "elf_dir": str(elf_root),
+        "elf_dir": elf_dir_str,
     }
-    manifest_path.write_text(json.dumps(manifest_payload, indent=2, sort_keys=True), encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(manifest_payload, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
 
     return TraceResult(
         image_tag=image_tag,
+        mode=mode,
         total_elfs=total_elfs,
         unique_elfs=len(unique_paths),
+        chosen_layer_index=chosen_index,
+        chosen_layer_digest=chosen_digest,
         layers=layers_summary,
         manifest_path=str(manifest_path),
-        elf_dir=str(elf_root),
+        elf_dir=elf_dir_str,
     )

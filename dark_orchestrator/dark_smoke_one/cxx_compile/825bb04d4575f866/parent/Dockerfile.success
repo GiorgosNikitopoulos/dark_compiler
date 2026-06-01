@@ -1,0 +1,96 @@
+# ------------------------------------------------------------
+# Base image – Ubuntu 22.04 (Jammy Jellyfish) – a recent LTS release
+# ------------------------------------------------------------
+FROM ubuntu:22.04
+
+# ------------------------------------------------------------
+# Make apt operations non‑interactive
+# ------------------------------------------------------------
+ENV DEBIAN_FRONTEND=noninteractive
+
+# ------------------------------------------------------------
+# Use a fast Chinese mirror (Aliyun)
+# ------------------------------------------------------------
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list
+
+# ------------------------------------------------------------
+# Update package lists and upgrade existing packages
+# ------------------------------------------------------------
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Core development tools required for building C projects with Make
+# ------------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Additional helper utilities
+# ------------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Runtime / build dependency: libjson‑c development headers
+# (provides the json‑c compatible headers / library)
+# ------------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y libjson-c-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Install tools needed to fetch the exact cJSON version the
+# project expects (v1.7.18).  The source files are later copied
+# into the project tree so that the legacy Makefile can compile
+# them into cJSON.o.
+# ------------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Clone the required cJSON release (v1.7.18)
+# ------------------------------------------------------------
+RUN git clone --depth 1 --branch v1.7.18 https://github.com/DaveGamble/cJSON.git /tmp/cJSON
+
+# ------------------------------------------------------------
+# Copy the project source tree into the image
+# ------------------------------------------------------------
+COPY ./825bb04d4575f866_parent /tmp/src
+
+# ------------------------------------------------------------
+# Bring the cJSON source files (cJSON.c / cJSON.h) into the
+# project directory so the original Makefile can find them.
+# ------------------------------------------------------------
+RUN cp /tmp/cJSON/cJSON.c /tmp/src/ && \
+    cp /tmp/cJSON/cJSON.h /tmp/src/
+
+# ------------------------------------------------------------
+# **Important fix** – pre‑compile cJSON.c into cJSON.o with PIC.
+# The legacy Makefile expects a ready‑made `cJSON.o` in the
+# source directory, so we build it explicitly before invoking
+# the project's own Makefile.
+# ------------------------------------------------------------
+RUN gcc -fPIC -c /tmp/src/cJSON.c -o /tmp/src/cJSON.o
+
+# ------------------------------------------------------------
+# Build the project using the legacy Makefile
+# ------------------------------------------------------------
+WORKDIR /tmp/src
+RUN make -j$(nproc)
+
+# ------------------------------------------------------------
+# (Optional) Install the built artefacts into the image.
+# If the Makefile supports a “make install” target, uncomment the line below.
+# ------------------------------------------------------------
+# RUN make install PREFIX=/usr/local
+
+# ------------------------------------------------------------
+# Default command – can be changed to suit the built program
+# ------------------------------------------------------------
+CMD ["/bin/bash"]

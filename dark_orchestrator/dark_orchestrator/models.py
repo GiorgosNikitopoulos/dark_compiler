@@ -55,6 +55,12 @@ class CXXCompileOutcome:
     elf_dir: str | None
     attempts: int = 1
     error: str | None = None
+    # Index of the layer whose ELFs we kept (None when none kept / mode=all).
+    chosen_layer_index: int | None = None
+    # "llm" when CXXCrafter generated the Dockerfile from scratch,
+    # "parent_reuse" when we re-used the parent's successful Dockerfile,
+    # "skipped" when we never attempted (e.g. clone failed).
+    built_via: str = "llm"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -78,6 +84,8 @@ class FunctionStatusRecord:
     repo_url: str
     parent_sha: str
     patch_sha: str
+    chosen_layer_index: int | None = None
+    built_via: str = "llm"
     timestamp: str = field(default_factory=utc_now)
 
     def to_dict(self) -> dict[str, Any]:
@@ -97,6 +105,8 @@ class CommitSummaryRecord:
     side_image_tags: dict[str, str | None]
     side_attempts: dict[str, int]
     compilation_status: str
+    side_built_via: dict[str, str] = field(default_factory=dict)
+    side_chosen_layer: dict[str, int | None] = field(default_factory=dict)
     timestamp: str = field(default_factory=utc_now)
 
     def to_dict(self) -> dict[str, Any]:

@@ -1,14 +1,14 @@
 {
   "compiled_functions": 0,
-  "completed_items": 0,
+  "completed_items": 1,
   "event": "shutdown",
-  "extracted_elfs": 1230,
+  "extracted_elfs": 48,
   "failed_functions": 0,
-  "failed_items": 1,
+  "failed_items": 0,
   "images_cleaned": 2,
   "images_failed_cleanup": 0,
   "skipped_items": 0,
-  "timestamp": "2026-06-01T03:05:59.753793+00:00",
+  "timestamp": "2026-06-01T03:52:16.422540+00:00",
   "total_changed_functions": 0,
   "total_items": 1
 }
