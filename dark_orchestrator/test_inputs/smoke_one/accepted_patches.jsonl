@@ -1,0 +1,1 @@
+{"repo": "DaveGamble/cJSON", "parents": ["76be8fcf15677ca7f6db7c770f5ae6bf8b41d78f"], "sha": "acc76239bee01d8e9c858ae2cab296704e52d916", "patch_ref": "v1.7.18", "query": "build smoke", "target_cwe": "smoke", "notes": "tiny single-file CMake C JSON lib; fastest end-to-end smoke"}

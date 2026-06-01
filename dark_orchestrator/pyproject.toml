@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dark-orchestrator"
+version = "0.1.0"
+description = "Run CXXCrafter over extractor commit-pair results with per-layer ELF tracing, image lifecycle management, and Ctrl+C teardown"
+requires-python = ">=3.10"
+dependencies = [
+    "docker>=6.1",
+]
+
+[project.scripts]
+dark-orchestrator = "dark_orchestrator.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
