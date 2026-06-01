@@ -1,0 +1,225 @@
+{
+  "chosen_layer_digest": "blobs/sha256/e8d407123f777a441de540a9fef70dfab0942385230aae836883bb4b28d7d85c",
+  "chosen_layer_index": 12,
+  "elf_dir": "dark_smoke_realistic/cxx_compile/a930b70ecf273061/parent/trace/elfs",
+  "image_tag": "dark_cxx/20260601_021730_957e/a930b70ecf273061/parent:v1",
+  "layers": [
+    {
+      "binaries": [],
+      "elf_candidates": 733,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/8bba68e7621928237aa6d6e2c680cb9572c942ee23c2adabd22016bb67cb938d",
+      "layer_index": 0,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 2,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/765cdbf645e4cda252f5257c0cbb618f67c77e8d268804548081f3f4e7468d36",
+      "layer_index": 1,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 209,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/3e06e6d0e4b1ed380df65e6d0e3acd345395f76c360fc80583704dd9d2ae00d1",
+      "layer_index": 2,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 241,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/8effea6d164100b727ee76b8df4c184e606007ce4c44c5c6ebd5c8aababff728",
+      "layer_index": 3,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 8,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/74eb2fbcddb921508d0bef78bbd3c1b9dc96e59638d55197c91c8e3cf57d6fc8",
+      "layer_index": 4,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 1,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/00b345a94d1e8c3257b89b4c4753a090001311699dda1aef87cb4a60ea098a5b",
+      "layer_index": 5,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/8d28aba2a182e22c7bcbe2a37152c30a95ba2c1dceb3883478b6a2cde6e2493a",
+      "layer_index": 6,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 2,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/71812058206d007d3647624202962ec18b2325847094a25301d1a00c989c41bf",
+      "layer_index": 7,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/477ef55c21c406cc317e7e6bfc423dda732b93f9cc2a360e4b3d242bec183cbf",
+      "layer_index": 8,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/0b1c23f8d48491da53b5ebdd601e7049f084174f7efcbf92174ecb81b6d048d9",
+      "layer_index": 9,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 0,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/71fed03020c135fb3d389e886ff2a0e008cb0fe933f3bc6e57ea15e2e8273a20",
+      "layer_index": 10,
+      "skipped": false
+    },
+    {
+      "binaries": [],
+      "elf_candidates": 2,
+      "elf_paths": [],
+      "kept": false,
+      "layer_digest": "blobs/sha256/3d21b5cff3d7929994ad5522cbf0a12119280487c8c9ca14d03ec74bdc67d790",
+      "layer_index": 11,
+      "skipped": false
+    },
+    {
+      "binaries": [
+        {
+          "name": "ucl_emitter.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_emitter.c.o"
+        },
+        {
+          "name": "ucl_emitter_streamline.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_emitter_streamline.c.o"
+        },
+        {
+          "name": "ucl_emitter_utils.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_emitter_utils.c.o"
+        },
+        {
+          "name": "ucl_hash.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_hash.c.o"
+        },
+        {
+          "name": "ucl_msgpack.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_msgpack.c.o"
+        },
+        {
+          "name": "ucl_parser.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_parser.c.o"
+        },
+        {
+          "name": "ucl_schema.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_schema.c.o"
+        },
+        {
+          "name": "ucl_sexp.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_sexp.c.o"
+        },
+        {
+          "name": "ucl_util.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/CMakeFiles/ucl.dir/src/ucl_util.c.o"
+        },
+        {
+          "name": "test_basic.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/CMakeFiles/test_basic.dir/test_basic.c.o"
+        },
+        {
+          "name": "test_generate.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/CMakeFiles/test_generate.dir/test_generate.c.o"
+        },
+        {
+          "name": "test_msgpack.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/CMakeFiles/test_msgpack.dir/test_msgpack.c.o"
+        },
+        {
+          "name": "test_schema.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/CMakeFiles/test_schema.dir/test_schema.c.o"
+        },
+        {
+          "name": "test_speed.c.o",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/CMakeFiles/test_speed.dir/test_speed.c.o"
+        },
+        {
+          "name": "test_basic",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/test_basic"
+        },
+        {
+          "name": "test_generate",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/test_generate"
+        },
+        {
+          "name": "test_msgpack",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/test_msgpack"
+        },
+        {
+          "name": "test_schema",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/test_schema"
+        },
+        {
+          "name": "test_speed",
+          "src_path": "tmp/a930b70ecf273061_parent/build/tests/test_speed"
+        }
+      ],
+      "elf_candidates": 19,
+      "elf_paths": [
+        "ucl_emitter.c.o",
+        "ucl_emitter_streamline.c.o",
+        "ucl_emitter_utils.c.o",
+        "ucl_hash.c.o",
+        "ucl_msgpack.c.o",
+        "ucl_parser.c.o",
+        "ucl_schema.c.o",
+        "ucl_sexp.c.o",
+        "ucl_util.c.o",
+        "test_basic.c.o",
+        "test_generate.c.o",
+        "test_msgpack.c.o",
+        "test_schema.c.o",
+        "test_speed.c.o",
+        "test_basic",
+        "test_generate",
+        "test_msgpack",
+        "test_schema",
+        "test_speed"
+      ],
+      "kept": true,
+      "layer_digest": "blobs/sha256/e8d407123f777a441de540a9fef70dfab0942385230aae836883bb4b28d7d85c",
+      "layer_index": 12,
+      "skipped": false
+    }
+  ],
+  "mode": "last_elf_layer",
+  "total_elfs": 19,
+  "unique_elfs": 19
+}

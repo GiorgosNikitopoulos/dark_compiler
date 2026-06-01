@@ -10,9 +10,19 @@ Two-stage strategy per pair:
    ::
 
        FROM <parent_image_tag>
-       RUN rm -rf /tmp/src
-       COPY ./<patch_basename> /tmp/src
-       <every step from the parent's Dockerfile that came after its source COPY>
+       RUN rm -rf <parent_dest>
+       COPY ./<patch_basename> <parent_dest>
+       <every step from the parent's Dockerfile that came after its source COPY,
+        with parent_sha rewritten to patch_sha>
+
+   ``<parent_dest>`` is whatever destination the LLM chose for parent's
+   ``COPY ./<basename>_parent <dst>`` - we *must* reuse it verbatim,
+   otherwise the patch source lands in a directory the build never
+   touches and the inherited parent source (still pristine on the
+   ``FROM`` image) gets compiled instead, producing parent-identical
+   binaries. Any ``git checkout <parent_sha>`` style command in the
+   tail is rewritten so it pins to ``patch_sha`` instead of silently
+   reverting our COPY.
 
    This skips the whole apt-update / dependency install / system bootstrap
    for patch (typically ~95% of the wall-clock for small projects, even
@@ -33,6 +43,7 @@ do we ``rmi`` everything for that pair.
 from __future__ import annotations
 
 import logging
+import re
 import shutil
 import subprocess
 import sys
@@ -129,41 +140,117 @@ def _parent_playground_dockerfile(parent_basename: str) -> Path:
     return Path("~/.cxxcrafter/dockerfile_playground").expanduser() / parent_basename / "Dockerfile"
 
 
-def _post_source_steps(dockerfile_text: str, source_basename: str) -> list[str]:
-    """Return the lines of ``dockerfile_text`` after the source ``COPY``.
+def _post_source_steps(
+    dockerfile_text: str,
+    source_basename: str,
+) -> tuple[str | None, list[str]]:
+    """Locate the source ``COPY`` and return ``(destination, tail_lines)``.
 
-    Locates the ``COPY ./<source_basename>`` (or bare ``COPY <source_basename>``)
-    instruction, then returns every subsequent line verbatim. Multi-line
-    ``COPY`` continuations (lines ending with backslash) are skipped.
+    ``destination`` is the path the source was copied to (the second
+    positional argument of the ``COPY`` instruction). ``tail_lines``
+    contains every Dockerfile line after the ``COPY`` (and after any
+    backslash-continuations of it).
 
-    Returns ``[]`` when the source COPY can't be found - the caller should
-    treat that as a hard failure rather than guessing.
+    Multi-line ``COPY`` instructions are joined into one logical line
+    before tokenisation so source/dest detection still works when the
+    LLM splits them across newlines.
+
+    Returns ``(None, [])`` when the source ``COPY`` can't be found -
+    the caller must treat that as a hard failure (we have no idea where
+    to drop the patch source).
     """
     lines = dockerfile_text.splitlines()
-    copy_idx: int | None = None
-    for i, ln in enumerate(lines):
-        stripped = ln.strip()
+
+    # Build (start_index, end_index_inclusive, joined_text) per logical
+    # instruction so we can match a COPY whose source/dest spans
+    # backslash-continuation lines.
+    logical: list[tuple[int, int, str]] = []
+    i = 0
+    while i < len(lines):
+        start = i
+        buf = lines[i].rstrip()
+        while buf.endswith("\\") and i + 1 < len(lines):
+            buf = buf[:-1] + " " + lines[i + 1].strip()
+            i += 1
+        logical.append((start, i, buf))
+        i += 1
+
+    for _start, end, joined in logical:
+        stripped = joined.strip()
         if not stripped.upper().startswith("COPY "):
             continue
-        # First non-flag positional argument after COPY is the source.
         tokens = stripped.split()[1:]
-        for tok in tokens:
-            if tok.startswith("--"):
-                continue
-            head = tok.lstrip("./").split("/")[0]
-            if head == source_basename:
-                copy_idx = i
-            break  # only inspect the first positional arg
-        if copy_idx is not None:
-            break
+        positional = [t for t in tokens if not t.startswith("--")]
+        if len(positional) < 2:
+            continue
+        src_tok = positional[0]
+        head = src_tok.lstrip("./").rstrip("/").split("/")[0]
+        if head != source_basename:
+            continue
+        destination = positional[-1]
+        return destination, lines[end + 1:]
 
-    if copy_idx is None:
-        return []
+    return None, []
 
-    end_idx = copy_idx
-    while lines[end_idx].rstrip().endswith("\\") and end_idx + 1 < len(lines):
-        end_idx += 1
-    return lines[end_idx + 1:]
+
+_REFETCH_PATTERNS = (
+    "git clone",
+    "git fetch",
+    "git pull",
+    "wget ",
+    "curl ",
+    "apt-get source",
+)
+
+
+def _rewrite_parent_sha(
+    tail: list[str],
+    parent_sha: str,
+    patch_sha: str,
+) -> tuple[list[str], list[str]]:
+    """Rewrite ``parent_sha`` -> ``patch_sha`` (full and 7-char short form)
+    everywhere in ``tail`` and surface any commands that look like an
+    upstream re-fetch.
+
+    Without this rewrite, a parent tail of the form
+
+    ::
+
+        RUN git checkout <parent_sha>
+
+    would silently revert our COPY back to parent's source after the
+    patch was already in place, so parent and patch would compile from
+    the same tree and produce byte-identical binaries.
+
+    Returns ``(rewritten_tail, refetch_warnings)``. ``refetch_warnings``
+    is a list of stripped tail lines that hit one of the refetch
+    patterns; the caller should log them but we still attempt the build
+    because most refetches are harmless (e.g. ``apt-get`` for tooling).
+    """
+    rewritten: list[str] = []
+    warnings: list[str] = []
+
+    short_parent = parent_sha[:7] if parent_sha and len(parent_sha) >= 7 else None
+    short_patch = patch_sha[:7] if patch_sha and len(patch_sha) >= 7 else patch_sha
+
+    short_pattern = (
+        re.compile(rf"(?<![0-9a-fA-F]){re.escape(short_parent)}(?![0-9a-fA-F])")
+        if short_parent
+        else None
+    )
+
+    for ln in tail:
+        new = ln
+        if parent_sha and parent_sha in new:
+            new = new.replace(parent_sha, patch_sha)
+        if short_pattern is not None:
+            new = short_pattern.sub(short_patch, new)
+        rewritten.append(new)
+        low = ln.lower()
+        if any(p in low for p in _REFETCH_PATTERNS):
+            warnings.append(ln.strip())
+
+    return rewritten, warnings
 
 
 def _skipped_outcome(side: str, error: str) -> CXXCompileOutcome:
@@ -299,13 +386,16 @@ def _build_patch_from_parent(
     The synthesized Dockerfile is ::
 
         FROM <parent_image_tag>
-        RUN rm -rf /tmp/src
-        COPY ./<patch_basename> /tmp/src
-        <every step from parent Dockerfile after its source COPY>
+        RUN rm -rf <parent_dest>
+        COPY ./<patch_basename> <parent_dest>
+        <parent's post-source steps with parent_sha rewritten to patch_sha>
 
     Build context is a freshly created dir holding the patch source under
-    ``<patch_basename>/``. No mutation of parent's commands - whatever
-    worked for parent is replayed verbatim against the patch source.
+    ``<patch_basename>/``. ``<parent_dest>`` is read off the parent's
+    working Dockerfile so the patch source overwrites the same path the
+    rest of the build expects to read from. SHA references in the tail
+    are rewritten so any ``git checkout`` / ``git fetch`` step pins to
+    the patch SHA instead of silently reverting our COPY.
     """
     _ensure_cxxcrafter_importable()
     from cxxcrafter.execution_module.docker_manager import (  # type: ignore[import-not-found]
@@ -315,11 +405,21 @@ def _build_patch_from_parent(
     parent_basename = f"{pair.item_id}_parent"
     patch_basename = f"{pair.item_id}_patch"
 
-    tail = _post_source_steps(parent_dockerfile_text, parent_basename)
-    if not tail:
+    parent_dest, tail = _post_source_steps(parent_dockerfile_text, parent_basename)
+    if parent_dest is None or not tail:
         return _skipped_outcome(
             "patch",
             "patch_from_parent_failed: could not locate parent source COPY in Dockerfile",
+        )
+
+    tail, refetch_warnings = _rewrite_parent_sha(
+        tail, pair.parent_sha or "", pair.patch_sha or "",
+    )
+    for warn in refetch_warnings:
+        logger.warning(
+            "patch_from_parent[%s]: parent's tail contains a likely upstream "
+            "fetch step which may revert your patch source: %r",
+            pair.item_id, warn,
         )
 
     elfs_out_dir = side_dir / "trace"
@@ -337,8 +437,8 @@ def _build_patch_from_parent(
 
     dockerfile_text = (
         f"FROM {parent_image_tag}\n"
-        "RUN rm -rf /tmp/src\n"
-        f"COPY ./{patch_basename} /tmp/src\n"
+        f"RUN rm -rf {parent_dest}\n"
+        f"COPY ./{patch_basename} {parent_dest}\n"
         + "\n".join(tail).rstrip()
         + "\n"
     )

@@ -1,0 +1,15 @@
+{
+  "compiled_functions": 4,
+  "completed_items": 2,
+  "event": "processed",
+  "extracted_elfs": 370,
+  "failed_functions": 0,
+  "failed_items": 0,
+  "images_cleaned": 4,
+  "images_failed_cleanup": 0,
+  "item_id": "a930b70ecf273061",
+  "skipped_items": 0,
+  "timestamp": "2026-06-01T06:28:54.346044+00:00",
+  "total_changed_functions": 2,
+  "total_items": 5
+}
