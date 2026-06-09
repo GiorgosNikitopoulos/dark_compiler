@@ -135,6 +135,17 @@ def _src_dir_for(side_dir: Path, item_id: str, side: str) -> Path:
     return side_dir / f"{item_id}_{side}"
 
 
+def _cleanup_clone_src(src_dir: Path, *, item_id: str, side: str) -> None:
+    """Remove a per-side git checkout after the Docker build no longer needs it."""
+    if not src_dir.is_dir():
+        return
+    try:
+        shutil.rmtree(src_dir)
+        logger.info("removed clone source %s (%s/%s)", src_dir.name, item_id, side)
+    except Exception as exc:
+        logger.warning("failed to remove clone source %s: %s", src_dir, exc)
+
+
 def _parent_playground_dockerfile(parent_basename: str) -> Path:
     """Path where CXXCrafter wrote the working Dockerfile for parent."""
     return Path("~/.cxxcrafter/dockerfile_playground").expanduser() / parent_basename / "Dockerfile"
@@ -143,19 +154,20 @@ def _parent_playground_dockerfile(parent_basename: str) -> Path:
 def _post_source_steps(
     dockerfile_text: str,
     source_basename: str,
-) -> tuple[str | None, list[str]]:
-    """Locate the source ``COPY`` and return ``(destination, tail_lines)``.
+) -> tuple[str | None, list[str], str | None]:
+    """Locate the source ``COPY`` and return ``(destination, tail_lines, workdir)``.
 
     ``destination`` is the path the source was copied to (the second
     positional argument of the ``COPY`` instruction). ``tail_lines``
     contains every Dockerfile line after the ``COPY`` (and after any
-    backslash-continuations of it).
+    backslash-continuations of it). ``workdir`` is the ``WORKDIR`` in
+    effect at that ``COPY`` (not the final ``WORKDIR`` in the file).
 
     Multi-line ``COPY`` instructions are joined into one logical line
     before tokenisation so source/dest detection still works when the
     LLM splits them across newlines.
 
-    Returns ``(None, [])`` when the source ``COPY`` can't be found -
+    Returns ``(None, [], None)`` when the source ``COPY`` can't be found -
     the caller must treat that as a hard failure (we have no idea where
     to drop the patch source).
     """
@@ -175,8 +187,12 @@ def _post_source_steps(
         logical.append((start, i, buf))
         i += 1
 
+    current_workdir: str | None = None
     for _start, end, joined in logical:
         stripped = joined.strip()
+        if stripped.upper().startswith("WORKDIR "):
+            current_workdir = stripped.split(None, 1)[1].strip()
+            continue
         if not stripped.upper().startswith("COPY "):
             continue
         tokens = stripped.split()[1:]
@@ -188,40 +204,29 @@ def _post_source_steps(
         if head != source_basename:
             continue
         destination = positional[-1]
-        return destination, lines[end + 1:]
+        return destination, lines[end + 1:], current_workdir
 
-    return None, []
-
-
-def _last_workdir(dockerfile_text: str) -> str | None:
-    """Return the final ``WORKDIR`` from a Dockerfile, if any."""
-    workdir: str | None = None
-    for line in dockerfile_text.splitlines():
-        stripped = line.strip()
-        if stripped.upper().startswith("WORKDIR "):
-            workdir = stripped.split(None, 1)[1].strip()
-    return workdir
+    return None, [], None
 
 
 def _patch_preamble_lines(
     parent_image_tag: str,
     parent_dest: str,
     patch_basename: str,
-    parent_dockerfile_text: str,
+    copy_workdir: str | None,
 ) -> list[str]:
     """Build ``FROM`` / optional ``WORKDIR`` / clear / ``COPY`` for patch replay.
 
     When the parent's source ``COPY`` target is ``.`` or ``./``, ``rm -rf .``
     is rejected by coreutils inside Docker. Clear directory *contents* instead
-    and pin ``WORKDIR`` from the parent Dockerfile when we know it.
+    and pin ``WORKDIR`` to where the parent ``COPY`` ran.
     """
     dest = parent_dest.strip()
     lines = [f"FROM {parent_image_tag}"]
 
     if dest in (".", "./"):
-        workdir = _last_workdir(parent_dockerfile_text)
-        if workdir:
-            lines.append(f"WORKDIR {workdir}")
+        if copy_workdir:
+            lines.append(f"WORKDIR {copy_workdir}")
         lines.append("RUN find . -mindepth 1 -maxdepth 1 -exec rm -rf {} +")
     else:
         lines.append(f"RUN rm -rf {parent_dest}")
@@ -541,7 +546,9 @@ def _build_patch_from_parent(
     parent_basename = f"{pair.item_id}_parent"
     patch_basename = f"{pair.item_id}_patch"
 
-    parent_dest, tail = _post_source_steps(parent_dockerfile_text, parent_basename)
+    parent_dest, tail, copy_workdir = _post_source_steps(
+        parent_dockerfile_text, parent_basename,
+    )
     if parent_dest is None or not tail:
         return _skipped_outcome(
             "patch",
@@ -586,7 +593,7 @@ def _build_patch_from_parent(
                 parent_image_tag,
                 parent_dest,
                 patch_basename,
-                parent_dockerfile_text,
+                copy_workdir,
             )
         )
         + "\n"
@@ -674,9 +681,11 @@ def run_cxx_compile(
     side_dir = output_dir / "cxx_compile" / pair.item_id / side
     side_dir.mkdir(parents=True, exist_ok=True)
     src_dir = _src_dir_for(side_dir, pair.item_id, side)
-    return _run_cxxcrafter_side(
+    outcome = _run_cxxcrafter_side(
         pair, side, side_dir, src_dir, run_id, keep_images, elf_mode,
     )
+    _cleanup_clone_src(src_dir, item_id=pair.item_id, side=side)
+    return outcome
 
 
 def run_pair_compile(
@@ -707,6 +716,7 @@ def run_pair_compile(
         run_id, keep_images, elf_mode,
         defer_image_purge=True,
     )
+    _cleanup_clone_src(parent_src, item_id=pair.item_id, side="parent")
 
     try:
         if not parent_outcome.success or not parent_outcome.image_tag:
@@ -774,5 +784,6 @@ def run_pair_compile(
                 logger.exception(
                     "deferred parent image purge failed for %s", pair.item_id,
                 )
+        _cleanup_clone_src(patch_src, item_id=pair.item_id, side="patch")
 
     return parent_outcome, patch_outcome
