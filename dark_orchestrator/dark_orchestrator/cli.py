@@ -5,6 +5,7 @@ import logging
 import sys
 from pathlib import Path
 
+from .cxx_adapter import reset_cxxcrafter_playground
 from .metrics import MetricsTracker
 from .pipeline import run_pipeline
 from .tracer import MODE_LAST_ELF_LAYER, VALID_MODES
@@ -43,6 +44,16 @@ def _add_common_run_args(parser: argparse.ArgumentParser) -> None:
             "ELF tracer mode. last_elf_layer (default) keeps only the last "
             "image layer that produced ELFs (skips trailing CMD/ENV layers); "
             "all extracts ELFs from every layer."
+        ),
+    )
+    parser.add_argument(
+        "--reset-cxx-cache",
+        action="store_true",
+        help=(
+            "Wipe ~/.cxxcrafter/dockerfile_playground/ before the run so "
+            "stale cached Dockerfiles (e.g. ones carrying the old aliyun "
+            "APT-mirror sed) do not survive. Forces CXXCrafter to "
+            "regenerate every parent Dockerfile from scratch."
         ),
     )
 
@@ -122,6 +133,12 @@ def main() -> None:
                 "[dark-orchestrator] note: --resume is deprecated and a no-op; "
                 "auto-resume is now the default. Use --fresh to opt out.",
                 file=sys.stderr,
+            )
+        if getattr(args, "reset_cxx_cache", False):
+            n = reset_cxxcrafter_playground()
+            logger.info(
+                "reset_cxx_cache: wiped %d cached CXXCrafter project dir(s) "
+                "under ~/.cxxcrafter/dockerfile_playground/", n,
             )
         run_pipeline(
             input_results_dir=Path(args.input_results_dir),

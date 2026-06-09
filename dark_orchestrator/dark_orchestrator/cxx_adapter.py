@@ -193,6 +193,43 @@ def _post_source_steps(
     return None, []
 
 
+def _last_workdir(dockerfile_text: str) -> str | None:
+    """Return the final ``WORKDIR`` from a Dockerfile, if any."""
+    workdir: str | None = None
+    for line in dockerfile_text.splitlines():
+        stripped = line.strip()
+        if stripped.upper().startswith("WORKDIR "):
+            workdir = stripped.split(None, 1)[1].strip()
+    return workdir
+
+
+def _patch_preamble_lines(
+    parent_image_tag: str,
+    parent_dest: str,
+    patch_basename: str,
+    parent_dockerfile_text: str,
+) -> list[str]:
+    """Build ``FROM`` / optional ``WORKDIR`` / clear / ``COPY`` for patch replay.
+
+    When the parent's source ``COPY`` target is ``.`` or ``./``, ``rm -rf .``
+    is rejected by coreutils inside Docker. Clear directory *contents* instead
+    and pin ``WORKDIR`` from the parent Dockerfile when we know it.
+    """
+    dest = parent_dest.strip()
+    lines = [f"FROM {parent_image_tag}"]
+
+    if dest in (".", "./"):
+        workdir = _last_workdir(parent_dockerfile_text)
+        if workdir:
+            lines.append(f"WORKDIR {workdir}")
+        lines.append("RUN find . -mindepth 1 -maxdepth 1 -exec rm -rf {} +")
+    else:
+        lines.append(f"RUN rm -rf {parent_dest}")
+
+    lines.append(f"COPY ./{patch_basename} {parent_dest}")
+    return lines
+
+
 _REFETCH_PATTERNS = (
     "git clone",
     "git fetch",
@@ -201,6 +238,105 @@ _REFETCH_PATTERNS = (
     "curl ",
     "apt-get source",
 )
+
+# Third-party APT mirrors we never want the LLM-generated Dockerfile to
+# rewrite ``/etc/apt/sources.list`` to. CXXCrafter's seed template used to
+# include a ``sed -i ... mirrors.aliyun.com`` line that the LLM faithfully
+# copied; we now strip any such RUN block defensively so stale playground
+# Dockerfiles and any future regression don't route apt through these hosts.
+_CN_MIRROR_HOSTS = (
+    "mirrors.aliyun.com",
+    "mirrors.tuna.tsinghua.edu.cn",
+    "mirrors.huaweicloud.com",
+    "mirrors.cloud.tencent.com",
+    "mirrors.ustc.edu.cn",
+    "mirrors.bfsu.edu.cn",
+    "mirrors.163.com",
+    "mirror.sjtu.edu.cn",
+)
+
+
+def _strip_cn_apt_mirrors(text: str) -> tuple[str, list[str]]:
+    """Drop any Dockerfile ``RUN`` block that rewrites ``sources.list`` to a CN mirror.
+
+    Walks the Dockerfile line-by-line, joining backslash continuations into
+    one logical instruction (same logic as :func:`_post_source_steps`). If a
+    logical RUN block mentions both ``sources.list`` and one of
+    ``_CN_MIRROR_HOSTS``, the whole block (every source line that
+    contributed to it) is removed; everything else is preserved verbatim so
+    the rest of the build is byte-identical.
+
+    Returns ``(scrubbed_text, dropped_logical_lines)``. ``dropped_logical_lines``
+    is what the caller should log at WARNING so we can see in CI when the
+    LLM tried to backslide.
+    """
+    if not text:
+        return text, []
+
+    src_lines = text.splitlines(keepends=False)
+    out_lines: list[str] = []
+    dropped: list[str] = []
+
+    i = 0
+    while i < len(src_lines):
+        start = i
+        buf = src_lines[i].rstrip()
+        # Join backslash-continuation block into one logical instruction
+        # without losing the original source-line slice for emission.
+        while buf.endswith("\\") and i + 1 < len(src_lines):
+            buf = buf[:-1] + " " + src_lines[i + 1].strip()
+            i += 1
+        end = i  # inclusive
+
+        joined_low = buf.lower()
+        instr = buf.lstrip().upper()
+        is_run = instr.startswith("RUN ") or instr.startswith("RUN\t")
+        hits_cn = (
+            is_run
+            and "sources.list" in joined_low
+            and any(host in joined_low for host in _CN_MIRROR_HOSTS)
+        )
+        if hits_cn:
+            dropped.append(buf.strip())
+        else:
+            out_lines.extend(src_lines[start : end + 1])
+        i = end + 1
+
+    scrubbed = "\n".join(out_lines)
+    # Preserve trailing newline behaviour: re-add a single trailing \n iff
+    # the original text had one, so callers that compare bytes don't see
+    # spurious newline drift.
+    if text.endswith("\n") and not scrubbed.endswith("\n"):
+        scrubbed += "\n"
+    return scrubbed, dropped
+
+
+def _log_cn_mirror_drops(context: str, item_id: str, dropped: list[str]) -> None:
+    for ln in dropped:
+        logger.warning(
+            "%s[%s]: dropped CN-mirror APT rewrite from Dockerfile: %r",
+            context, item_id, ln,
+        )
+
+
+def reset_cxxcrafter_playground(playground_root: Path | None = None) -> int:
+    """Remove every cached Dockerfile under ``~/.cxxcrafter/dockerfile_playground/``.
+
+    CXXCrafter caches working Dockerfiles per project basename; a stale
+    cache from a previous run can still carry the old aliyun ``sed`` line
+    even after the template fix. Wiping the cache forces a fresh LLM-
+    generated Dockerfile on the next build. Returns the number of project
+    cache dirs removed so the caller can log it.
+    """
+    root = playground_root or (Path("~/.cxxcrafter/dockerfile_playground").expanduser())
+    if not root.is_dir():
+        return 0
+    n = 0
+    for child in root.iterdir():
+        if child.is_dir():
+            shutil.rmtree(child, ignore_errors=True)
+            n += 1
+    return n
 
 
 def _rewrite_parent_sha(
@@ -422,6 +558,15 @@ def _build_patch_from_parent(
             pair.item_id, warn,
         )
 
+    # Even after the template fix, the LLM may regenerate a
+    # ``RUN sed -i ... mirrors.aliyun.com`` block. Strip any such block
+    # from the tail so the patch build never re-points apt at a CN mirror,
+    # then split back into the line-oriented form the assembler expects.
+    scrubbed_tail_text, dropped_tail = _strip_cn_apt_mirrors("\n".join(tail))
+    if dropped_tail:
+        _log_cn_mirror_drops("patch_from_parent.tail", pair.item_id, dropped_tail)
+    tail = scrubbed_tail_text.splitlines()
+
     elfs_out_dir = side_dir / "trace"
 
     try:
@@ -436,9 +581,15 @@ def _build_patch_from_parent(
     shutil.copytree(src_dir, ctx_dir / patch_basename)
 
     dockerfile_text = (
-        f"FROM {parent_image_tag}\n"
-        f"RUN rm -rf {parent_dest}\n"
-        f"COPY ./{patch_basename} {parent_dest}\n"
+        "\n".join(
+            _patch_preamble_lines(
+                parent_image_tag,
+                parent_dest,
+                patch_basename,
+                parent_dockerfile_text,
+            )
+        )
+        + "\n"
         + "\n".join(tail).rstrip()
         + "\n"
     )
@@ -581,6 +732,20 @@ def run_pair_compile(
                     f"parent_dockerfile_unreadable: {exc}",
                 )
             else:
+                # Defensively strip any CN-mirror APT rewrite the LLM may
+                # have baked in. The patch build will FROM the parent image
+                # (those mirror sed steps already ran in the parent layers
+                # and we can't un-pull them), but we don't want them
+                # *replayed* via the tail, and we don't want the forensic
+                # ``Dockerfile.success`` snapshot to mislead anyone
+                # inspecting the build.
+                parent_dockerfile_text, dropped_parent = _strip_cn_apt_mirrors(
+                    parent_dockerfile_text,
+                )
+                if dropped_parent:
+                    _log_cn_mirror_drops(
+                        "parent_dockerfile", pair.item_id, dropped_parent,
+                    )
                 # Snapshot the parent's working Dockerfile next to the records
                 # so the synthesized patch Dockerfile can be diffed against it.
                 try:
