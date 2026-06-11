@@ -38,7 +38,9 @@ Each (item_id, side) clones into a uniquely-named directory
 across pairs or sides.
 
 Parent's image is kept alive until the patch build finishes; only then
-do we ``rmi`` everything for that pair.
+do we ``rmi`` everything for that pair. After each item, the CXXCrafter
+playground copy under ``~/.cxxcrafter/dockerfile_playground/`` is removed
+(logs under ``~/.cxxcrafter/logs/`` are kept).
 """
 from __future__ import annotations
 
@@ -146,9 +148,38 @@ def _cleanup_clone_src(src_dir: Path, *, item_id: str, side: str) -> None:
         logger.warning("failed to remove clone source %s: %s", src_dir, exc)
 
 
+def _playground_project_dir(project_basename: str) -> Path:
+    return Path("~/.cxxcrafter/dockerfile_playground").expanduser() / project_basename
+
+
+def _cleanup_playground(project_basename: str, *, item_id: str, side: str) -> None:
+    """Remove CXXCrafter's per-project playground (repo copy + Dockerfile history).
+
+    ``~/.cxxcrafter/logs/`` is left intact. Call only after the parent
+    Dockerfile has been read for patch synthesis (or the build failed).
+    """
+    playground_dir = _playground_project_dir(project_basename)
+    if not playground_dir.is_dir():
+        return
+    try:
+        shutil.rmtree(playground_dir)
+        logger.info(
+            "removed CXXCrafter playground %s (%s/%s)",
+            playground_dir.name,
+            item_id,
+            side,
+        )
+    except Exception as exc:
+        logger.warning(
+            "failed to remove CXXCrafter playground %s: %s",
+            playground_dir,
+            exc,
+        )
+
+
 def _parent_playground_dockerfile(parent_basename: str) -> Path:
     """Path where CXXCrafter wrote the working Dockerfile for parent."""
-    return Path("~/.cxxcrafter/dockerfile_playground").expanduser() / parent_basename / "Dockerfile"
+    return _playground_project_dir(parent_basename) / "Dockerfile"
 
 
 def _post_source_steps(
@@ -685,6 +716,11 @@ def run_cxx_compile(
         pair, side, side_dir, src_dir, run_id, keep_images, elf_mode,
     )
     _cleanup_clone_src(src_dir, item_id=pair.item_id, side=side)
+    _cleanup_playground(
+        f"{pair.item_id}_{side}",
+        item_id=pair.item_id,
+        side=side,
+    )
     return outcome
 
 
@@ -784,6 +820,11 @@ def run_pair_compile(
                 logger.exception(
                     "deferred parent image purge failed for %s", pair.item_id,
                 )
+        _cleanup_playground(
+            f"{pair.item_id}_parent",
+            item_id=pair.item_id,
+            side="parent",
+        )
         _cleanup_clone_src(patch_src, item_id=pair.item_id, side="patch")
 
     return parent_outcome, patch_outcome
