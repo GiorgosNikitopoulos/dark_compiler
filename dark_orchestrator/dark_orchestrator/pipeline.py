@@ -295,6 +295,7 @@ def run_pipeline(
                     }
                 )
                 metrics.flush({"item_id": pair.item_id, "event": "processed"})
+                cleanup.prune_dangling()
     finally:
         try:
             cleanup.cleanup_all()

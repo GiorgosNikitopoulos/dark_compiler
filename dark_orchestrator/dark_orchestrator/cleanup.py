@@ -250,6 +250,10 @@ def purge_all_for(run_id: str, item_id: str, side: str) -> None:
     _REGISTRY.purge_all_for(run_id, item_id, side)
 
 
+def prune_dangling() -> None:
+    _REGISTRY.prune_dangling()
+
+
 def cleanup_all() -> None:
     _REGISTRY.cleanup_all()
 
