@@ -1,0 +1,975 @@
+#	repo	sha	parent	cwe	file	patch_len	confidence	message
+1	delphix/grub2	1fabc5b85590	78018d5f8785	CWE-125	grub-core/fs/ext2.c	948	0.97	fs/ext2: Fix out-of-bounds read for inline extents
+2	Zebra2711/edid-decode	761357da7793	666d0e721b1e	CWE-125	parse-displayid-block.cpp	743	0.98	edid-decode: fix transfer characteristics buffer overread
+3	angstsmurf/spatterlight	9c8e3a736c2c	d61309eca5a2	CWE-125	terps/scott/load_ti99_4a.c	809	0.97	SCOTT: Fix out-of-bounds reads in TI99/4A code
+4	Bforartists/Bforartists	662d7e70b265	11fed118ef99	CWE-125	source/blender/draw/engines/overlay/overlay_next_private.hh	288	0.96	Fix #130903: Overlay-Next: Crash using asan in Relation drawing
+5	boolforge/scummvm-alis-experimental	3fbf77bbaba2	1bbb6b96dda3	CWE-125	engines/qdengine/minigames/3mice2_testo.h	327	0.97	QDENGINE: Fix potential out-of-bounds read. CID 1563752
+6	Elpitech/kernel	c8dc76406ccd	2fd7252a2652	CWE-125	drivers/gpu/drm/amd/amdgpu/df_v1_7.c	327	0.98	drm/amdgpu: Fix out-of-bounds read of df_v1_7_channel_number
+7	FuriLabs/linux-furiphone-radon	5ad420a27b04	f53ff2f57b20	CWE-125	drivers/acpi/battery.c	429	0.97	ACPI: battery: Fix missing NUL-termination with large strings
+8	Hasiergo/Lenovo_TB-X606F_kernel	f201fe3dc9ca	b7427a04818a	CWE-125	drivers/media/tuners/m88rs6000t.c	716	0.97	media: m88rs6000t: avoid potential out-of-bounds reads on arrays
+9	Kelsidavis/futura	8f89da5c65b9	d801d2d0a23f	CWE-125	kernel/sys_dup.c	3332	0.97	sys_dup: Add Phase 5 FD bounds validation
+10	librempeg/librempeg	43388d257a7b	ef8b4eb64555	CWE-125	libavcodec/vvc/ps.c	370	0.98	lavc/vvc: Prevent OOB access in subpic_tiles
+11	mehdikholoosi/FreeRDP-3	55aa202ff584	80c562d040b1	CWE-125	rdtk/librdtk/rdtk_font.c	273	0.98	[coverity] 1543037 Out-of-bounds read
+12	Limine-Bootloader/Limine	f769ce5a01c5	3db3f0971a54	CWE-125	common/fs/file.s2.c	395	0.98	fs/file: Add bounds check to fread() for memfiles
+13	vstakhov/libucl	ac8d76023386	71f16a847414	CWE-125	src/ucl_parser.c	524	0.97	ucl_lex_json_string: fix out-of-bounds read
+14	CTSRD-CHERI/cheribsd	d381f5470a01	3e4701023d5f	CWE-125	sys/dev/mii/dp83822phy.c	224	0.97	dp83822phy: Add missing MII_PHY_END to avoid buffer overread on probe
+15	EpilogLaserCorp/ghostscript	7642e51271ea	d2cacbed7189	CWE-125	xps/xpsfont.c	778	0.95	Bug 705608 : XPS interpreter
+16	GerbilSoft/rom-properties	c112e254b502	a2521dd5b29d	CWE-125	src/librptexture/fileformat/GodotSTEX.cpp	262	0.99	[librptexture] GodotSTEX::pixelFormat(): Fix off-by-one bounds check.
+17	Hasiergo/Samsung-SM-A307FN-kernel	44a322bed9e5	51fc1cc2e810	CWE-125	drivers/media/tuners/m88rs6000t.c	716	0.98	media: m88rs6000t: avoid potential out-of-bounds reads on arrays
+18	intel/quantum-intrinsics	abe269eabdb5	db93ab9d8c1a	CWE-125	clang/lib/Driver/OptTable.cpp	398	0.96	Fix invalid reads by memcmp.
+19	amd/Linux_ISP_Kernel	a545994f4030	e353546c962f	CWE-125	drivers/gpu/drm/amd/amdgpu/df_v1_7.c	327	0.98	drm/amdgpu: Fix out-of-bounds read of df_v1_7_channel_number
+20	Bennko/bachelor-thesis-contiki-ng-extention	82fa287d8d37	f638934358e0	CWE-125	os/net/mac/ble/ble-l2cap.c	1018	0.97	Added BLE L2CAP payload length checks to prevent out of bounds read
+21	boostorg/charconv	f1e1acb72b0a	f5f961b6b9b1	CWE-125	include/boost/charconv/detail/ryu/ryu_generic_128.hpp	533	0.95	Add bounds checks
+22	cacosc/ffmpeg	bf814387f42e	5ddab49d4834	CWE-125	libavcodec/jpegxl_parser.c	3230	0.97	avcodec/jpegxl_parser: fix OOB read regression
+23	chengpeng-wang/dynamips	6560b336b8fc	2a5884f9a475	CWE-125	common/dev_mpc860.c	455	0.96	Merge pull request #169 from flaviojs/fix-out-of-bounds-read-mpc860_spi_fetch_bd
+24	dariocastillo11/binutils-gdb-objdump-plugin	9874a6868ad9	ddfb56d84629	CWE-125	binutils/rddbg.c	335	0.97	PR28753, buffer overflow in read_section_stabs_debugging_info
+25	ekuiter/torte-linux	c76873337fd5	e45ef9f9ee8d	CWE-125	drivers/soc/qcom/mdt_loader.c	1999	0.97	soc: qcom: mdt_loader: Ensure we don't read past the ELF header
+26	Ezurio/wb-kernel	917a9d02182a	d1fd9ca65a8e	CWE-125	drivers/net/ethernet/qlogic/qede/qede_fp.c	879	0.98	net: qlogic/qede: fix potential out-of-bounds read in qede_tpa_cont() and qede_tpa_end()
+27	grivera64/libxml2-analysis	1061537efdf3	a6b9e55a9eb7	CWE-125	HTMLparser.c	699	0.96	malloc-fail: Fix buffer overread with HTML doctype declarations
+28	IntroversionSoftware/gamelibs-libarchive	981fd9afed9b	1b9c075735a6	CWE-125	libarchive/archive_read_support_format_7zip.c	470	0.97	Merge pull request #2604 from mmatuska/fix/7zipsfx
+29	lizr-arch/renderdoc-ai	6a89135890cd	beefd5b04483	CWE-125	renderdoc/driver/d3d12/d3d12_command_queue_wrap.cpp	674	0.96	Don't read out of bounds in descriptor heap when processing table
+30	mackyle/sqlite	4748f93eeea1	beca878471f6	CWE-125	ext/fts5/fts5_index.c	642	0.97	Fix a buffer overread in the fts5_structure virtual table (test code).
+31	MediaArea/MediaInfoLib	e7fd9f06f891	d0d9af7077c0	CWE-125	Source/MediaInfo/Audio/File_Aac_Main.cpp	471	0.97	Merge pull request #2117 from cjee21/AAC
+32	mmoeller86/snescdrombinutils	085b299b7172	1f01799f55cd	CWE-125	binutils/rddbg.c	335	0.97	PR28753, buffer overflow in read_section_stabs_debugging_info
+33	molkiya/clamav-macos-arm-fuzzing	d9a0f6ad871b	efcc0c63c301	CWE-125	libclamav/regex_suffix.c	6195	0.96	Fix possible stack overflow read when parsing WDB signatures
+34	nashmuhandes/VkDoom	f88decfd70c2	4bb61bed9748	CWE-125	src/playsim/p_3dmidtex.cpp	784	0.95	Add bounds checking to GetMidTexturePosition, add assert to P_GetMidTexturePosition
+35	NTUT-FUCK-PTSD/Fuck-PTSD	455ec45f88a0	5495dc87e3f7	CWE-125	src/Music/RhythmIndicator.cpp	466	0.95	Fix out of range index in RhythmIndicator::Update()
+36	parasetam0l/solis-kernel	e6d688ffd698	43c9df616b35	CWE-125	net/wireless/nl80211.c	462	0.97	cfg80211: Define nla_policy for NL80211_ATTR_LOCAL_MESH_POWER_MODE
+37	phantom-smith512wq/app-ethereum	58d65cdadea2	c20d3b407dfb	CWE-125	src_features/provideDynamicNetwork/network_dynamic.c	406	0.98	Merge pull request #676 from LedgerHQ/fix/apa/dynamic_networks_tlv_parser_oob
+38	yuanjun8033/diskfire	61a416760c88	f0e9e3bb6198	CWE-125	fs/f2fs.c	1265	0.98	fs/f2fs: Do not read past the end of nat journal entries
+39	7etsuo/tetsuo-pulse	f2e62df966a0	e5411c0d97a1	CWE-125	src/quic/SocketQUICTransportParams.c	929	0.95	fix(quic): add bounds checking to transport params getter (#2438)
+40	8dcc/minesweeper	2d12f7ec254f	7ff54666dac4	CWE-125	src/main.c	428	0.96	Add bounds check to check_bombs function as well
+41	a1ive/grub	df5731d64569	1657b46b471f	CWE-125	grub-core/disk/lvm.c	419	0.97	disk/lvm: Sanitize rlocn->offset to prevent wild read
+42	AliveTeam/alive_reversing	e87f658ddb7a	a14625183d5f	CWE-125	Source/AliveLibAO/GameAutoPlayer.cpp	1468	0.95	don't read past the end of the object list
+43	andyvand/kernel-xiaomi-sm6115	93337dab3776	a16cfbdc01cd	CWE-125	drivers/bus/mhi/core/mhi_main.c	382	0.96	mhi: core: Read transfer length from an event properly
+44	AnsonHooL/Gdelta	f2e5653dd312	dbe32faf210a	CWE-125	gdelta.cpp	1213	0.95	fix out of bounds read
+45	atrium-os/freebsd-src	3f707064a5f0	8de1a8131e42	CWE-125	sys/dev/mii/dp83867phy.c	226	0.96	dp83867phy: Add missing MII_PHY_END to avoid buffer overread on attach
+46	AxelSchneewind/euclidean-shopa-approximation	4f4532e76b1a	ddab207ca9e0	CWE-125	src/triangulation/fast_map_impl.h	376	0.92	add bounds check
+47	Blarse/grub	b8108e42754f	39ddc352e3e1	CWE-125	grub-core/fs/ntfs.c	642	0.98	fs/ntfs: Fix out-of-bounds read
+48	BlueDream0911/kakoune	8dd04a60bb19	0f3acc92d4ea	CWE-125	src/command_manager.cc	1524	0.96	Fix buffer overflow in parse_quoted
+49	calamity-inc/Soup	d331cea20bb0	c23328122074	CWE-125	soup/xml.cpp	271	0.96	Fix possible out-of-bounds read
+50	camtisocial/p2p-chess	f0aef121913a	900795228e4e	CWE-125	chessPiece.cpp	3269	0.96	added bounds checking within the getLegalMoves function for pawns
+51	ccxtechnologies/linux-ccx-lts-6.1	2d3bd386e38c	fe7c362005a7	CWE-125	drivers/usb/core/config.c	630	0.98	usb: core: config: Prevent OOB read in SS endpoint companion parsing
+52	chrisant996/clink	c66914eaa32b	370ef6b45084	CWE-125	readline/readline/complete.c	848	0.96	Fix potential buffer overread when inserting a quoted match.
+53	Coolaid003/pcsx2	8164f2b2db69	d0c54de3300d	CWE-125	pcsx2/CDVD/CDVD.cpp	1976	0.98	CDVD: Fix an out of bounds read exploit in MG SCMD handlers
+54	Daft-Freak/DaftBoy32	79a2637b15e9	a79dc6b9a33a	CWE-125	core/AGBDisplay.cpp	785	0.97	Fix out-of-bounds read in object window handling
+55	dzaima/CBQN	94e61683196c	5d660cbf1902	CWE-125	src/builtins/select.c	656	0.95	don't read past the end of array even if the value isn't used
+56	embrace-io/embrace-android-sdk	7f6044ed8ea6	bb22694ea6c3	CWE-125	embrace-android-sdk/src/main/cpp/sampler/stacktrace_sampler.c	1309	0.97	Merge pull request #624 from embrace-io/bounds-check
+57	etemesi254/ffmpeg-ht	64f5ced40705	f9e046bdc610	CWE-125	libavcodec/jpeg2000htdec.c	933	0.96	avcodec/jpeg2000: Ensure refilling never reads past array end.
+58	fwupd/fwupd	1f79620a57ff	901b3cb1b762	CWE-125	plugins/algoltek-usb/fu-algoltek-usb-device.c	395	0.96	algoltek-usb: Fix a buffer overread when reading the version number
+59	GNS3/dynamips	37eb85383fe5	6560b336b8fc	CWE-125	common/dev_mpc860.c	462	0.97	Merge pull request #170 from flaviojs/fix-out-of-bounds-read-mpc860_scc_fetch_bd
+60	grommunio/gromox	c126a405087e	bb7d002b8ecb	CWE-125	lib/mapi/idset.cpp	1097	0.97	mapi_lib: check for buffer overread during idset_decode_globset
+61	HAPPYS1NGH/signet-ledger-eth-app	81cb59a53f5a	1a373e61e475	CWE-125	src_features/provideDynamicNetwork/network_dynamic.c	406	0.98	Merge pull request #676 from LedgerHQ/fix/apa/dynamic_networks_tlv_parser_oob
+62	itbird2020/squid_7_4	1df2a7226a41	63022fd37a4f	CWE-125	src/dns/rfc1035.cc	809	0.97	Improve bounds checking in rfc1035NameUnpack (#1725)
+63	jeffmerkey/linux	502ddcc405b6	6ef0e1c10455	CWE-125	drivers/staging/rtl8723bs/core/rtw_mlme_ext.c	887	0.98	staging: rtl8723bs: fix out-of-bounds read in OnBeacon ESR IE parsing
+64	JGRennison/OpenTTD-patches	0c6426cb2d18	0f1ef96ca1ce	CWE-125	src/newgrf_station.cpp	707	0.97	Fix: Out-of-bounds read, if NewGRF stations provided no spritesets.
+65	johncurley/ShaderTranslator	8afdd593c696	029f5ec43d93	CWE-125	src/playsim/p_3dmidtex.cpp	784	0.96	Add bounds checking to GetMidTexturePosition, add assert to P_GetMidTexturePosition
+66	JoysKo/HYBRID_CAF_kernel	564f294f1aec	4991e1eb70a1	CWE-125	drivers/acpi/battery.c	429	0.97	ACPI: battery: Fix missing NUL-termination with large strings
+67	katef/libfsm	18816b1e1fe6	f40c58acaf78	CWE-125	src/adt/queue.c	313	0.96	Merge pull request #467 from katef/sv/fix-queue-memmove-overrun
+68	kbinani/je2be	e4007117fcae	2c3396fd58ea	CWE-125	include/je2be/toje/block-property-accessor.hpp	350	0.95	fix: Fix index out of range in BlockPropretyAccessor
+69	kbinani/je2be-core	b23efd5c108a	910c5e7db9de	CWE-125	include/je2be/toje/block-property-accessor.hpp	350	0.95	fix: Fix index out of range in BlockPropretyAccessor
+70	kbsonlong/OpenCloudOS-Kernel	a9daa2009a54	82b7832a2776	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+71	KczBen/rs-linux-autoconnect	3011295c7924	6c9b6175b59b	CWE-125	main.c	6886	0.96	Merge pull request #3 from KczBen/fix-oob
+72	LeeroysHub/Momentum-Apps	9a3f707cf518	7f2db8ce0b7f	CWE-125	actions/action.c	1631	0.96	Fix link files buffer overread
+73	libressl/openbsd	11625944db6a	4ccf2baba3b7	CWE-125	src/lib/libssl/ssl_ciph.c	467	0.97	ssl_cipher_process_rulestr: don't read outside rule_str buffer
+74	linux-surface/kernel	c0d93d69e147	aac80e912de3	CWE-125	drivers/staging/rtl8723bs/core/rtw_ieee80211.c	506	0.98	staging: rtl8723bs: fix out-of-bounds read in rtw_get_ie() parser
+75	lmchale/linux	df191dd9f4c7	573b07d2e3d4	CWE-125	drivers/staging/rtl8723bs/core/rtw_ieee80211.c	506	0.98	staging: rtl8723bs: fix out-of-bounds read in rtw_get_ie() parser
+76	LouisMary008/Five	cfaa28168a07	6d56dfd6ef13	CWE-125	libarchive/archive_read_support_format_zip.c	415	0.96	ZIP reader: fix possible out-of-bounds read in zipx_lzma_alone_init()
+77	MahmoudWali/HalconDev	6c611b376c67	7c9ae1c8d1e3	CWE-125	EdgeExtraction/TestApp/EdgeExtraction.cpp	1569	0.86	fix index out of range
+78	MahStudio/WSLackware-kernel	220e1c43c5a3	57946ad966da	CWE-125	crypto/rsa-pkcs1pad.c	280	0.99	crypto: rsa-pkcs1pad - fix buffer overread in pkcs1pad_verify_complete()
+79	Mellvik/TLVC	5f5b59e76216	f1838c227f88	CWE-125	elks/arch/i86/drivers/char/pty.c	337	0.95	Merge pull request #1110 from ghaerr/pty
+80	MentorEmbedded/linux-flex-imx	22edc9fdb718	492c4f7e391b	CWE-125	crypto/rsa-pkcs1pad.c	280	0.98	crypto: rsa-pkcs1pad - fix buffer overread in pkcs1pad_verify_complete()
+81	Miloas/emacs-mac	fe60f5bbd055	a4fb829ed0e0	CWE-125	src/json.c	325	0.9	Initialize state->error_buffer_read
+82	MolecularMatters/raw_pdb	6e6455a27e43	dfb2b5819f0d	CWE-125	src/PDB_ModuleLineStream.h	1581	0.97	Fixed out of bounds read when looping over InlineeSourceLines (S_INLINEELINES)
+83	MrE-Fog/openbsdf	a6623718c021	285d69724521	CWE-125	src/lib/libssl/ssl_ciph.c	467	0.97	ssl_cipher_process_rulestr: don't read outside rule_str buffer
+84	MrE-Fog/wolfssl33	2fe473cf9f3c	327692b09fa8	CWE-125	wolfcrypt/src/asn.c	360	0.97	Fix out-of-bounds read in CRL parsing
+85	n-stott/x64emulator	39f2f2558ecf	44d3292859db	CWE-125	emulator/src/kernel/linux/fs/fs.cpp	862	0.92	FS: make sure dup{2,3} don't read past the end
+86	nik012003/ark-kernel-nabu	faf1a5f41772	2b25de552f8a	CWE-125	fs/bcachefs/chardev.c	326	0.97	bcachefs: Fix out of bounds read in fs usage ioctl
+87	odamex/odamex	755ab713e0de	f9d2f47a4fe2	CWE-125	common/p_acs.cpp	344	0.97	Merge pull request #1520 from elf-alchemist/out_of_bounds_read_fix
+88	OliW07/concept-kernel	896f1a2493b5	8e0a754b0836	CWE-125	drivers/net/ethernet/qlogic/qede/qede_fp.c	879	0.98	net: qlogic/qede: fix potential out-of-bounds read in qede_tpa_cont() and qede_tpa_end()
+89	oneapi-src/unified-memory-framework	eec4f1356fce	7727ad184e03	CWE-125	src/provider/provider_tracking.c	583	0.95	fix for potential out-of-bounds read in tracker
+90	OpenMW/openmw	d148bd1cde43	a57c350c0892	CWE-125	components/contentselector/model/contentmodel.cpp	450	0.92	Add bounds check
+91	OSGeo/gdal	9d59cbe0d056	ed8dd9b4ee23	CWE-125	frmts/wcs/wcsutils.cpp	373	0.96	WCS: avoid out-of-bounds read
+92	outscale-mgo/zabbix	9c9c433d15fc	3100cd0c9139	CWE-125	src/libs/zbxsysinfo/common/dns.c	454	0.97	...G...... [DEV-2702] fixed buffer overread in DNS response
+93	particle-iot/tachyon-ubuntu-24.04-kernel	3222ae2b2779	f0f6098f26fb	CWE-125	sound/soc/qcom/qdsp6/topology.c	568	0.96	ASoC: qcom: topology: validate the max_op_port value
+94	piraterna/aurix	40d4ee88eb56	0cbd54ee2ec6	CWE-125	boot/common/lib/string.c	190	0.97	Merge pull request #2 from yubelgg/fix/security-buffer-overflow-fixes
+95	PouyaShe/VeraMP-2	59e0e38d4732	9f45d7f6bb72	CWE-125	code/components/citizen-server-impl/src/InitConnectMethod.cpp	332	0.95	fix(server/impl): initConnect addition overflow
+96	rbm01/OpenBSD-src	8d6afaed705c	bec4b1aae166	CWE-125	lib/libssl/ssl_ciph.c	467	0.97	ssl_cipher_process_rulestr: don't read outside rule_str buffer
+97	Reversive/android-reclass-server	27704c960b57	0cb30cea7e68	CWE-125	network/server/server.cpp	644	0.96	fix: add bounds check for handler dispatch
+98	robinnewhouse/athena	ca4435e44f75	c2c71ddd34dc	CWE-125	Control/CxxUtils/test/ConcurrentPtrSet_test.cxx	345	0.92	CxxUtils: Fix potential out-of-bounds read in test.
+99	rtissera/libchdr	6259d92990d9	62e41f380a6e	CWE-125	src/libchdr_chd.c	359	0.96	chd: Fix potential buffer overread in hunk_read_compressed()
+100	ruby/prism	d3f99ec283fe	05e1dafa1cfa	CWE-125	src/prism.c	483	0.97	Merge pull request #3765 from ruby/out-of-bounds-parser_lex_magic_comment
+101	scummvm/scummvm	524ce3761417	7643cccc5481	CWE-125	engines/scumm/script_v5.cpp	1586	0.97	SCUMM: Add some bounds-checking to o5_stringOps() (bug #15884)
+102	SKyletoft/hip-templates	51bce39dbff1	fb3789018a6c	CWE-125	gpu_2d.hpp	1139	0.96	gpu_2d: Add bounds checks when on host
+103	Source-Authors/Obsoletium	b124ba3ba0fc	80daa1803ace	CWE-125	public/studio_virtualmodel.cpp	340	0.97	[public] Prevent out-of-bounds read for bone in virtualmodel_t::AppendBonemap
+104	StrikerX3/Ymir	5308b39bbc46	a396c3de5765	CWE-125	libs/ymir-core/src/ymir/hw/cdblock/cdblock.cpp	545	0.95	fix(CDBlock): Defend against potential out-of-bounds reads from the internal transfer buffer array
+105	Toteya/alx-low_level_programming	46bd1ced1eb3	b09d0f1079ec	CWE-125	0x14-bit_manipulation/2-get_bit.c	142	0.95	Task2: get the bit of a number at a given index, fix for: index out of range 32bits
+106	Trevohack/R0DDY	8a3beecaf0b7	f7b1441a9a80	CWE-125	src/roddy.c	2402	0.95	Merge pull request #1 from humzak711/patch-1
+107	vinumdoc/vinum	062b4584f4a5	9e30c8a73676	CWE-125	subprojects/vunit/vunit.c	411	0.97	Merge pull request #45 from vinumdoc/push-yprvwumyspqn
+108	weiss/c99-snprintf	0a7caccb890a	42b6e73c188e	CWE-125	snprintf.c	323	0.97	Fix second out of bounds read in fmtstr
+109	wetrynagetgames/26rickard	dd81bea9ef6a	001abbcd6686	CWE-125	Userland/Libraries/LibGfx/ImageFormats/JPEGLoader.cpp	326	0.96	LibGfx: Don't read past EOF in JPEGLoader
+110	yeabat8tcap/firedancer-apple	3269d1985f69	9289bbc7330f	CWE-125	src/ballet/sbpf/fd_sbpf_loader.c	495	0.97	ballet: fix out-of-bounds read in sbpf loader
+111	yusufarslanturk/zabbix-bgmot-2fa	03b6de5a6059	5db6661c813d	CWE-125	src/libs/zbxsysinfo/common/dns.c	454	0.96	...G...... [DEV-2702] fixed buffer overread in DNS response
+112	yusufarslanturk/zabbix_44x_next	fa25737e1f3d	2b915e5642eb	CWE-125	src/libs/zbxsysinfo/common/dns.c	6012	0.98	Merge pull request #48 from CHERTS/ZBX-23855
+113	01mu/jump-to-a-word	c934e74db17a	f2d25bad0bfe	CWE-125	src/shortcut_common.c	782	0.93	add bounds check
+114	0x09/resdet	b95b56a1de3f	36636cc00568	CWE-125	lib/image/mjpegtools.c	415	0.95	Fix reading of multiple y4m frames
+115	0x16000/rv6	f19283fbd3c5	d35acbc302ed	CWE-125	mkfs/mkfs.c	2549	0.92	fix(mkfs): add bounds checking and improve error handling
+116	2384447291/rv1106-kernel	d0513357599b	593f004953f7	CWE-125	drivers/usb/gadget/configfs.c	265	0.97	UPSTREAM: usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+117	299Soul/AliOS-Things	0c261a67dc6a	f9f871518954	CWE-125	solutions/linksdk_gateway_demo/subdev_basic_demo.c	891	0.85	remove linksdk_gateway_demo's private info. (#1446)
+118	3lackrukh/atlas-low_level_programming	93246527e122	e2a0c31d4b6f	CWE-125	doubly_linked_lists/7-insert_dnodeint.c	657	0.92	added final check for idx value out of bounds.
+119	3liteking148/CSC612M-SIMD-Project	7219d0bc9247	5463bd595e1f	CWE-125	CSC612M-SIMD-Project/main.c	1177	0.85	add bounds checking
+120	49bitcat/nileswan-medem	6203a47cce4a	4dd80d1bdcdc	CWE-125	mednafen/src/wswan/memory.cpp	195	0.92	wswan: fix out of bounds SRAM reads
+121	aa32555/YDBOcto	aef6edafed98	8c43e2f928d7	CWE-125	src/rocto/test_read_cancel_request.c	1367	0.95	[ASAN] Fix two memory errors in test_read_cancel_request.c
+122	aabc/ipt-netflow	0a7967dbdb59	faf869ce600f	CWE-125	ipt_NETFLOW.c	568	0.95	Fix possible out-of-bounds read in tcp_options fix
+123	aatif-aistack/opensips-core	4ae414049e05	4f1bd4d199cb	CWE-125	modules/aaa_diameter/dm_impl.c	768	0.95	aaa_diameter: Fix out-of-bounds read
+124	abkour/mirage	9843b45739e2	800e2d436d8c	CWE-125	mirage/vecmath.hpp	1421	0.9	Added bounds checking for Vector2/3/4
+125	ablab/stringdecomposer	7e556019fd01	c75f12ec2360	CWE-125	stringdecomposer/src/main.cpp	255	0.96	Fix out of range index
+126	acachathuranga/mmpf_explore	4c416fa86f61	6c4c5c2b5bc3	CWE-125	src/mmpf.cpp	859	0.95	Added map bounds checking
+127	AcademySoftwareFoundation/OpenImageIO	23235c98512f	c85b5d77682d	CWE-125	src/dds.imageio/ddsinput.cpp	737	0.98	Fix heap overflow in DDS input (#3542)
+128	AdamHassan338/TimelineV2	b0cabdca63cd	58b8d23c8085	CWE-125	src/timelinemodel.cpp	451	0.92	fix fakeindex causing index out of range in data call
+129	adrianlopezroche/dirchanges	d6834142e72d	e50ee21e2d0b	CWE-125	dirchanges.c	585	0.95	Guard against possible out-of-bounds read/write in string function.
+130	adunstan/test-pq	a956bd3fa9d9	aea599cfc06b	CWE-125	src/backend/utils/activity/backend_status.c	444	0.82	Avoid memory size overflow when allocating backend activity buffer
+131	afritz1/OpenTESArena	507c65ec879c	be73972eee2d	CWE-125	OpenTESArena/src/Assets/ExeData.cpp	1130	0.95	Added bounds check to initStringArrayNullTerminated().
+132	ahmedizzat207/alx-low_level_programming	3270521bc9f1	6140d8f78e47	CWE-125	0x14-bit_manipulation/2-get_bit.c	229	0.92	Task2:Fix: index is out of range
+133	ahmedriaz12/opensips-core	8917f4d0eedf	fb4120e4ae0f	CWE-125	modules/aaa_diameter/dm_impl.c	768	0.95	aaa_diameter: Fix out-of-bounds read
+134	akazachk/vpc	40a84688561b	26168b8b3dea	CWE-125	include/CglVPC.hpp	342	0.95	Added bounds check for getVarNBIndex
+135	albertgoncalves/bla	d0c8fa7bf3fb	844726efc93c	CWE-125	src/vm/main.cpp	415	0.95	add missing bounds check
+136	AleksanderZdunek/read_bits	1bb2d89b88c7	3b5ccf56e946	CWE-125	main.c	2631	0.95	Add read out of bounds assert
+137	Aleph-One-Ltd/yaffs2	0bec1194ef29	2d08154e2402	CWE-125	core/yaffs_guts.c	343	0.92	Fix benign warning with -Wstringop-overread
+138	alex-lentz/iptsd	46c0fcf62466	1abd3e2352d9	CWE-125	src/common/reader.hpp	1724	0.92	common: Differentiate between empty buffer and out of bounds read
+139	alex31/chibios_enac_various_common	f5ebbd697534	1e3e8e6ebd1e	CWE-125	UAVCAN/persistantParam.cpp	866	0.95	fix getset to not UB when tge given index is out of range
+140	alexandercao22/GameEngine-A3	160b633e8653	18707af6ddc9	CWE-125	GEMemory/GEMemory/PackageManager.cpp	922	0.95	Fixed a read out of bounds error when loading assets
+141	alexanderduring/hexapod-servo-motor-control	8832bd0bfdd1	7d62ab3d4d57	CWE-125	src/main.cpp	1679	0.97	Added bounds checking in getJointType() and getServoNumber().
+142	alexmurray/linux	4259bd822ef2	d9bc23e41967	CWE-125	drivers/usb/core/config.c	630	0.98	usb: core: config: Prevent OOB read in SS endpoint companion parsing
+143	aligrudi/neatroff	da594d271101	740248616842	CWE-125	reg.c	259	0.98	reg: fix out of bounds read when register '.' is accessed
+144	alkimiadev/ladybug	f43edccd5292	7d04f9f6ebab	CWE-125	src/storage/buffer_manager/buffer_manager.cpp	533	0.85	Fix undefined behaviour in the Buffer Manager after failure (#4246)
+145	allkern/psxe	30783ba715c4	55738fca55b0	CWE-125	psx/dev/cdrom.c	2280	0.92	Add CdlReadN bounds checking
+146	alpinebuster/meshsdk	34256202078a	c1210e39b171	CWE-125	source/MRMesh/MREmbedTerrainStructure.cpp	463	0.95	Fix embedded structures out of bounds read 2
+147	alpinelinux/apk-tools	b9483c46bdf9	b7c6b0b468d7	CWE-125	src/app_fetch.c	401	0.95	fetch: fix APK_BLOB_STRLIT used with char argument
+148	alternative-intelligence-cp/nitpick	1502e68dc532	f1fe4709fa3b	CWE-125	src/frontend/lexer.cpp	419	0.97	Fix lexer peekNext boundary check
+149	amcastro-tri/CENIC	b31b995a2584	6074263b7cf5	CWE-125	planning/trajectory_optimization/gcs_trajectory_optimization.cc	534	0.95	[trajopt] Add missing bounds checks (#21980)
+150	andrei-kochin/openvino	b9a48f12c8b5	8b66b35bf77a	CWE-125	src/plugins/intel_cpu/src/graph.cpp	1005	0.97	[CPU] Prevent out of bounds read inside Graph::InferDynamic (#16067)
+151	AndrePatri/moving_horizon_jnt_calib	5f9c44ca1125	91f2649fea1f	CWE-125	src/calib_traj_replayer_rt.cpp	672	0.9	added missing checks on qp upper and lower bounds
+152	AOSC-Tracking/ghostpdl	06842573ee3a	6dc53eafb98b	CWE-125	base/gdevm8.c	1086	0.96	Graphics library - fix heap-buffer overflow in 8-bit memory device
+153	apaillier-ledger/app-ethereum	51bc8b25a923	1a373e61e475	CWE-125	src_features/provideDynamicNetwork/network_dynamic.c	406	0.96	Fix potential out-of-bounds read by up to 2 bytes during TLV parsing
+154	apereo/mod_auth_cas	630f39a85aad	c6422481be29	CWE-125	src/mod_auth_cas.c	1226	0.9	Revert ap_cookie_read() cookie parsing (#207)
+155	apexmiguel9-hub/blender-android-compile	e42416d06757	69f94df026e3	CWE-125	source/blender/draw/engines/overlay/overlay_next_private.hh	288	0.96	Fix #130903: Overlay-Next: Crash using asan in Relation drawing
+156	apolye666/DirectXTK	5ca7356f862a	f960d93eb1e8	CWE-125	Audio/WAVFileReader.cpp	3927	0.96	Fix out-of-bounds read bug in WAVFileReader (#358)
+157	Appelpitje/openmohaa-discord-feature	78f0072c592d	1022ce531abe	CWE-125	code/client/snd_mem_new.cpp	767	0.95	Update the SFX datasize when downsampling
+158	aquacommander/SDK-ZEPHYR	68eb494e185f	5100b24a91e9	CWE-125	drivers/charger/charger_axp2101.c	257	0.96	charger: axp2101: Guards against out-of-bounds read
+159	aquahubtest34/ruby	7dd2afbe3a14	34a43d59721b	CWE-125	addr2line.c	421	0.97	Fix global-buffer-overflow when outputting C backtrace
+160	arbruijn/DirectXTex	dd6904b708db	976ec533be8a	CWE-125	DirectXTex/DirectXTexHDR.cpp	617	0.9	Fix for HDR codec to avoid buffer overread for some malformed files (#471)
+161	arcana-lab/memoir	a1b3b09b4022	99ea33aa435d	CWE-125	compiler/memoir/transforms/utilities/src/MutateType.cpp	2441	0.88	[compiler][transforms][utilities] Added bounds checks
+162	arieder/ifgf	4a2f4f184cc7	f375a148d0e4	CWE-125	ifgfoperator.hpp	967	0.95	fix out-of-bounds error when trying to read one too many target points
+163	ArkToria/ACross	980a8540f2f1	af1025f4e5ff	CWE-125	src/view_models/nodemodel.cpp	243	0.95	fix index out of range in `NodeModel::data`
+164	arnovandash/FT_Retro	44017877c062	8c0c865f0b91	CWE-125	src/Sprite.cpp	1039	0.92	added bounds checking to sprite class
+165	arttumiettinen/pi2	5a7d6b777c00	932f1759356e	CWE-125	itl2/image.h	840	0.96	Added possibility for release build bounds checking to image.h
+166	ArunMCHP/microchip-zephyr	2bb7fcc5df6a	18aa6c890144	CWE-125	drivers/charger/charger_axp2101.c	257	0.96	charger: axp2101: Guards against out-of-bounds read
+167	ascheepe/tools	04082ded9c92	7889038c915d	CWE-125	shuffle.c	939	0.96	avoid out of bounds reads
+168	ashley-hawkins/Little-CMS-CMake	1f6a2adbc885	c529dd437cc5	CWE-125	utils/jpgicc/jpgicc.c	182	0.97	Fix an out of bounds read
+169	AsilHQ/asil-core	6dc0774f1055	1097c09692f2	CWE-125	components/ai_chat/browser/ai_chat_tab_helper.cc	454	0.9	Added bounds check to history vector when building prompt (#19812)
+170	AsteroidOS/qml-asteroid	8064c16dff56	13aa3b76b7f1	CWE-125	src/utils/src/deviceinfo.cpp	451	0.85	Don't keep reading os-release file past end
+171	Atoptool/atop	f4de7972767d	77e658ea04f4	CWE-125	atop.c	183	0.96	Fix memory-unsafe and buggy argv[0] string comparison
+172	babelfish-for-postgresql/postgresql_modified_for_babelfish	f1cf1bc62505	d88e9f0ffcb0	CWE-125	src/backend/utils/misc/injection_point.c	1002	0.96	Fix two memcpy() bugs in the new injection point code
+173	bareos/bareos	868d79173a5b	b7ce29256cc7	CWE-125	core/src/win32/compat/glob.cc	513	0.97	glob: fix out of bounds read
+174	bcr/x16	46e24a0162d8	afc161a1f185	CWE-125	DerpiCalc/ui.c	2737	0.82	Add more bounds checking for active cell movement
+175	benlewisss/ARM_Linker_Loader	bac22bd4643e	fcd36177cb1b	CWE-125	src/pass1.c	2340	0.95	Added bounds checking for symbol section indexes
+176	beyond-all-reason/RecoilEngine	ea5d42d2b2c1	7343beef3fb1	CWE-125	rts/Sim/Path/TKPFS/PathEstimator.cpp	2040	0.95	added missing bounds check in starting block search
+177	BFrizzleFoShizzle/RE_Kenshi	ebcee89607c1	82adca612609	CWE-125	HeightmapHook.cpp	623	0.95	Bugfix for out-of-bounds read at map corner
+178	bianbu-maker/edk2-platforms	22416dc7a93e	201514e6f5b3	CWE-125	Features/Ext4Pkg/Ext4Dxe/Directory.c	997	0.99	Ext4Pkg: Fix out-of-bounds read in Ext4ReadDir
+179	bioc/iscream	e7d923e075d7	fde0158a886c	CWE-125	src/parsers.cpp	1028	0.96	fix(parsers): throw errors for non numeric/out_of_range index
+180	Bitcoin-ABC/bitcoin-abc	1eee3d94846d	8e6e45c18e94	CWE-125	src/streams.h	2208	0.95	streams: Fix read-past-the-end and integer overflows
+181	Bittium1/Lightning	48a24cd51b30	9708ee316646	CWE-125	closingd/closingd.c	848	0.85	closingd: Fix buffer overread build error with some cross build
+182	bldrs-ai/conway-geom	10565feb4670	e3aa976b29e5	CWE-125	conway_geometry/operations/mesh_utils.h	1004	0.92	* Added bounds check to TriangulateCylindricalSurface
+183	blocksds/libnds	34df337dfdf1	7b39e41871d9	CWE-125	source/arm9/libc/dirent.c	263	0.96	libc: fix bug in readdir()
+184	BlueSCSI/BlueSCSI-v2	faf7cdb54cc6	b54db7c68607	CWE-125	src/ROMDrive.cpp	789	0.92	RP2350: Fix crash when loading ROM drive
+185	bobrossrtx/demi	054e12958e05	27f539366790	CWE-125	src/vhardware/devices/file_device.hpp	5450	0.92	security: Complete buffer boundary fixes for file device operations
+186	boostorg/decimal	34cd7f3b4c0f	e4a8d6fdabe9	CWE-125	include/boost/decimal/charconv.hpp	1627	0.97	Add bounds checks before memcpy and memmove
+187	BradB132/MaPL	432f28f50869	3627a5d132d4	CWE-125	Generator/MaPLGenerator/MaPLGeneratorCollections.h	334	0.96	Adding bounds checking to array subscripts in MaPLGenerator.
+188	bradshjg/tom7-misc-backup	3ba7353518f6	629fcc5008ac	CWE-125	cc-lib/image.h	1781	0.96	Treat out-of-bounds reads for ImageA and ImageF. Use faster bounds check
+189	Brandon-T/RemoteInput	09fb6fed2d54	f05905a28fa4	CWE-125	RemoteInput/Plugin/ControlCenter.cxx	2291	0.95	Add bounds checking for dimensional arrays
+190	brechtopstaele/MasterproefQUIC	3e0aa8f5432b	28b53e47d319	CWE-125	src/inspectors/sip.c	351	0.95	sip: dont read past end of buffer
+191	Brian-Magnuson/niter	c5e8169fe2ac	ee62be9301cd	CWE-125	src/scanner/scanner.cpp	222	0.95	Add bounds checking for advance func in scanner
+192	BroccoliRaab/brzo	86d6096ed8be	2c7b7a2f0fac	CWE-125	src/re_stack.c	827	0.92	Fix read out of bounds
+193	broesler/CppSparse	0e0bc7fb4cf2	6d700db295a2	CWE-125	src/coo.cpp	1649	0.96	Add bounds checking to COOMatrix constructor.
+194	cadaver/turso3d	befd3ada0573	aa5f65ec4795	CWE-125	ThirdParty/STB/stb_vorbis.h	3608	0.97	Fix seven bugs discovered and fixed by ForAllSecure:
+195	cahirwpz/demoscene	02fe5aa7efa0	05dd2dfc337f	CWE-125	lib/lib3d/UpdateFaceVisibility.c	318	0.9	UpdateFaceVisibility: fix index going out of range and triggering random Blitter writes
+196	calref/cboe	cd8f73344ffa	a416368e0d5e	CWE-125	src/scenario/town.cpp	552	0.95	Tiny cleanup, add a bounds check
+197	Cars0419/LUG-Server	484488e47d51	72c93c891395	CWE-125	dScripts/02_server/Map/AG/AgMonumentRaceGoal.cpp	704	0.92	add bounds check to prevent crashing (#992)
+198	CathyYang-maker/cathy	e140e6ef789b	cdabbc126fb1	CWE-125	Parser/lexer/lexer.c	605	0.95	[3.13] gh-132769: Refactor possible read-out-of-bounds in `lexer.c` (GH-132770) (#132788)
+199	CESNET/UltraGrid	8e4378f8baef	cce89ad3a677	CWE-125	src/video_codec.c	430	0.97	video_codec: Fix potential out of bounds read
+200	chegueveraJ/oneDNN	415abe0933d8	bd49ed6dc1e2	CWE-125	src/gpu/jit/gemm/gen_gemm_kernel_generator.cpp	1919	0.95	gpu: jit: gemm: fix out-of-bounds reads with dpasw kernels
+201	chenglongshe/openEuler	3832db9d09e2	a069154a5b50	CWE-125	drivers/usb/core/config.c	630	0.96	!18173  usb: core: config: Prevent OOB read in SS endpoint companion parsing
+202	chubnastia/PyDyssol	b107eb5a0bb8	c32503fdbe0e	CWE-125	Utilities/ContainerFunctions.h	466	0.95	fix: Prohibit out of bounds read
+203	cisco/openh264	986bd65b7111	008465e956f3	CWE-125	codec/decoder/plus/src/welsDecoderExt.cpp	823	0.97	Fix for out of bounds read issue by introducing bounds check on iPicBuffIdx in CWelsDecoder::ReleaseBufferedReadyPicture
+204	cl91/NeptuneOS	3efde7def2ef	f56c1498208a	CWE-125	private/ntos/src/io/file.c	1105	0.95	ntos/io: Don't read past the end of file
+205	Clouds-of-Eternity/Astral.Core	40083493bed8	7c6a5e1a6f20	CWE-125	Astral.Core/hash.hpp	630	0.97	Murmur3 is no longer reads memory out of bounds
+206	cntools/rawdraw	e086673b09a3	1c46357d6856	CWE-125	CNFGEGLDriver.c	455	0.9	add bounds checking in CNFGEGLDriver.c
+207	CodeLinaro-mirror/yocto-mirrors_github_redis_hiredis	28ea80cc5a6a	65cd85c4f6fe	CWE-125	test.c	427	0.95	Fix buffer overflow in tests.
+208	colbyjanecka/SynthiaLight	32ed6cafc10e	9db1022b9dd2	CWE-125	wled00/FX_fcn.cpp	2628	0.96	ledmap parser robustness improvements
+209	ColleagueRiley/RGFW	df73daaf592d	b72f34d41a14	CWE-125	RGFW.h	378	0.96	add more bounds checking to RGFW_eventQueuePop
+210	CompilerNexus/pacc-2	84beffdd9467	300b34cf02b0	CWE-125	src/tokenizer.c	1743	0.97	fix some out of bounds reads in the tokenizer
+211	comradelukmanov/c_array_t	9a0794564411	fcaf817d1a29	CWE-125	c_array_t.c	358	0.92	Added bounds check to c_arr_set
+212	ConquerOS/vendor_qcom_opensource_commonsys_system_bt	0116c50710ce	f6b208d109bc	CWE-125	stack/avrc/avrc_pars_ct.cc	1936	0.96	Fix potential interger overflow when parsing vendor response
+213	coolbutuseless/yyjsonr	fd1d2f5e845a	fcf484ddc98f	CWE-125	src/geojson-parse.c	610	0.95	prevent read past end of raw
+214	CorePySystems/pytorch	e31a3aa596a0	83d28408152b	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+215	CorsixTH/CorsixTH	0f3353488f13	abde2e0a1083	CWE-125	CorsixTH/Src/th_map.cpp	347	0.85	Merge pull request #3165 from TheCycoONE/oob_map_editor
+216	cosmos72/schemesh	ddefb6e0a991	42fff36a036d	CWE-125	posix/endpoint.h	930	0.96	add a bounds check to C function c_endpoint_set_port()
+217	couchbase/couchbase-cxx-client	eee07b290c93	517fe129b5fa	CWE-125	couchbase/io/mcbp_parser.cxx	586	0.96	CXXCBC-135: Don't read past end of buf in mcbp_parser (#153)
+218	Cpp1022/idf-analysis	bbcc13be8b38	64726df15e87	CWE-125	components/esp_http_client/lib/http_auth.c	1428	0.96	fix(esp_http_client): prevent out-of-bounds read in Digest auth
+219	cppalliance/int128	470a0138762c	b7cc6bdd8c38	CWE-125	include/boost/int128/iostream.hpp	730	0.95	Reduce buffer size and ensure we don't overread
+220	cu-ecen-aeld/assignments-3-and-later-IvanVeloz	baf613afe718	77e206fa1e73	CWE-125	aesd-char-driver/main.c	419	0.95	Added write_cmd bounds check
+221	cvanaret/Uno	4682f7aa7725	52f87906b198	CWE-125	uno/tools/Range.hpp	839	0.85	Added runtime checks of Range bounds
+222	cy2016-1/tensorflow	741777a876c4	3420fe2ae819	CWE-125	tensorflow/c/ops.cc	926	0.96	Fix out of range index error.
+223	Czar-Hardiman/multistream	bf334028452c	26d8f09400c2	CWE-125	src/protocols.cpp	364	0.95	fix crash caused memory read overflow.
+224	dachoa1005/suricata	97f97dd72a3d	93055383098b	CWE-125	src/app-layer-ssl.c	958	0.95	tls: fix buffer overread
+225	damurimon/pytorch	1003dbcf60cd	378e348e55a2	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+226	danadrianmirea/netpanzer	36bbaef17e7e	3331eb555f08	CWE-125	src/Lib/ArrayUtil/BitArray.cpp	598	0.95	Adding Bounds Check for Heap Buffer Overflow
+227	danyloveselyi/my-meshtastic-fork	482f7410188c	09bf73ab7d01	CWE-125	src/modules/DeviceStatsModule.cpp	6115	0.95	Fix critical embedded safety issues in DeviceStatsModule
+228	daryll-panaligan/toy-robot-challenge	4d3666b4dc86	7e1947ebc455	CWE-125	src/robot.cpp	669	0.92	Add bounds checking for `move`
+229	datagore/hive-ft_irc	da3346ce60f8	b96fec2d28e8	CWE-125	src/handlers/mode.cpp	330	0.97	Fix out-of-bounds read caught by valgrind
+230	DavidAce/xDMRGpp	96ac27e4b9f9	bed9ef9fbfda	CWE-125	source/io/hdf5_types.h	539	0.95	Fix read out of bounds when calculating offset
+231	ddnet/ddnet	e026bce50fa2	b955d68efdb9	CWE-125	src/engine/client/client.cpp	573	0.97	Fix out of bounds read in checksum stuff
+232	DeadWacko/VFDDisplay	32d6c1099919	e1bb3980c651	CWE-125	src/display_content.c	2872	0.96	fix(content): Handle INT32_MIN safely to prevent UB/OOB read (v1.2.2)
+233	DeekshithaShankar/BlenderAssignment	33367b7d0c6e	afa66fc62886	CWE-125	source/blender/io/usd/intern/usd_reader_curve.cc	646	0.95	Fix: Assert in USD curves reader offset creation
+234	DeekshithaShankar/Object_582	79b1eacba9c3	ca32ba33ae6a	CWE-125	source/blender/sequencer/intern/strip_time.cc	951	0.95	Fix #113890: Buffer overread when rendering after strip content range
+235	DeepShield-AI/zeek	bccf1a9253a2	a5b94f04fdf0	CWE-125	src/packet_analysis/protocol/ieee802_11/IEEE802_11.cc	364	0.97	IEEE802_11: Fix buffer-overflow due to not accounting for the amsdu header
+236	denis-kolchev/City-Building-Card-Game	3c1c21069880	50ad23930e50	CWE-125	mainwindow.cpp	1430	0.86	fix: attempt to fix index out of range
+237	deus369/zoxel	e11761dd34bc	5e3e4f1e75b4	CWE-125	src/core/apps/util/sdl_util.c	482	0.88	Added bounds check for sdl size
+238	devosoft/Empirical	d34e95a56e11	e7508788bc77	CWE-125	include/emp/Evolve/Systematics.hpp	611	0.95	Add bounds checking
+239	devovh/turtle-core	4e0dbf9307d0	bbc6a9caf576	CWE-125	src/game/Anticheat/Warden/WardenModuleMgr.cpp	585	0.96	Fix read out of bounds if filename is < 4
+240	dexter-psychometrics/dexterMST	f1e5503545a1	d92d3f48d140	CWE-125	src/elsym.cpp	5148	0.96	resolved out of bounds read in valgrind
+241	Dialpuri/NucleoFind	2758048d76a5	b51cfb0d2b34	CWE-125	package/src/cpp/nautilus-target.cpp	821	0.93	Added bounds check to link
+242	dijkstrw/symon	d068be4c6b91	3f3968594920	CWE-125	lib/data.c	1120	0.96	symux: do proper bounds checking on type field
+243	DISOhda/DiscreteTests	e31f5b778518	f1c1109c3450	CWE-125	src/mann_whitney.cpp	754	0.95	Add checks for index to stay inside bounds
+244	djmdjm/openssh-wip	c0b516d7c80c	b6bc9e9006e7	CWE-125	hostfile.c	677	0.97	fix a out-of-bounds read if the known_hosts file is truncated
+245	dloebl/cgif	4029236b4759	fe74a4c707ba	CWE-125	src/cgif.c	1060	0.96	add bounds check to pixel compare function
+246	dmikushin/cufft-oss	f8369bf46e41	750aa244dedc	CWE-125	library/src/device/transpose.cpp	829	0.97	transpose: don't read past the end of outStride
+247	Dormant1337/overseer-c	89bfb367d998	78a3b0ade297	CWE-125	src/client/tui/interface.c	2119	0.92	Merge pull request #14 from MateiIonutEduard/main (Issue #6: fix(tui): Insufficient Bounds Checking)
+248	DOSCOWN/CodeMagic-DolphinIOS-SkylanderPortal	bae715f396b1	cb350aed5342	CWE-125	Source/Core/DiscIO/VolumeVerifier.cpp	270	0.9	Merge pull request #10838 from AdmiralCurtiss/volume-verifier-out-of-bounds-read
+249	douchevannam/pytorch	3253169cfd34	fe3e0050f33e	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+250	doyaGu/NeMo2	95de0b83c97e	bcb2735c7952	CWE-125	src/CKStateChunk.cpp	2601	0.95	Add additional null and bounds checks in ManagerRemapper function
+251	DRcarmona/pytorch	6150eb67235a	146c973f0bfd	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+252	dreamhigh0525/tensorflow	44b29a5871d1	7ff76fa279ca	CWE-125	tensorflow/c/ops.cc	926	0.95	Fix out of range index error.
+253	drpriver/dndc	0dc238ef3c0f	ecefe417941f	CWE-125	Utils/parse_numbers.h	1343	0.96	fix out of bounds read in parse_numbers (masked by null termination)
+254	ds-sloth/mbediso	1b088429117e	946323da7bce	CWE-125	src/internal/fs.c	409	0.95	fs.c: fix out-of-bounds read
+255	DucM1n/5GSec-ANSA	54dda0412110	39618c7a6718	CWE-125	src/hss/hss-cx-path.c	438	0.96	[HSS] Fix stack buffer over-read when logging AK in Cx-MAR handler
+256	DyfalAI/blender-sl-docs-rag	d23e3b386351	0e5a5ade323f	CWE-125	source/blender/blenkernel/intern/scene.cc	926	0.96	Fix invalid blend-file writing logic in "Add color jitter support"
+257	dylan-lom/bin	b84e5652d24a	2d08dd3ee7bd	CWE-125	scratch.c	597	0.85	Don't construct command string when scratch is in dry mode
+258	eaburns/BoyOhBoy	11838d3cffb3	797eab5bce72	CWE-125	src/debug.c	399	0.95	Add missing bounds check on accessing disassembly lines.
+259	ebf-hue/crossy-commave	42e279aa4fba	8f2c8cfa4f4c	CWE-125	main.c	453	0.85	add quick loop bounds check
+260	Eggplant891/SonicSpintool	70da8ac28cdb	8ae90b6bc7f8	CWE-125	src/ui/ui_tile_layout_viewer.cpp	444	0.96	Crash fix where tab index could sometimes be out of range
+261	ehaas/dyncall	d4851534ce56	bd13e7a0a3aa	CWE-125	test/suite_aggrs/main.c	371	0.8	added missing nullptr check to access bounds guard
+262	EL-OUARDY/alx-low_level_programming	452327b818d3	80a88f7b9d96	CWE-125	0x14-bit_manipulation/2-get_bit.c	188	0.95	Bit manipulation - Task 2 - fix index out of range
+263	ElectronSpark/v6-glib	7f4726d151a6	e979fd9a1576	CWE-125	glib/gunidecomp.c	1740	0.97	g_utf8_normalize: don't read past the end of the buffer
+264	ELETTRA-SincrotroneTrieste/cumbia-libs	9ce9d80690cd	56c3c4d8fcf4	CWE-125	cumbia-qtcontrols/src/qulabel.cpp	400	0.97	fix index out of range in setEnumDisplay within qulabel's m_configure
+265	Ellym57f/AO2-CharIniMaker	0487bd9448b9	65265f7c8046	CWE-125	src/widgets/interactions.cpp	421	0.9	Fix index out of range when deleting first emote in list
+266	embeddedTS/prototype-linux-imx93	dec85f2f15b6	b9e280a49360	CWE-125	drivers/media/platform/mxc/capture/ov5640_mipi.c	654	0.97	LF-5735 media: ov5640: Fix Coverity Issue: 21141306 Out-of-bounds read
+267	EmmanuelAkpabio/alx-low_level_programming	71609ca84029	0478fcc75bba	CWE-125	0x14-bit_manipulation/2-get_bit.c	222	0.92	fix out-of-range index
+268	Emon3469/SHE_X_Mini-Operating-System	c6e230f99bd4	42f04e8e03fc	CWE-125	kernal/driver/dadio.c	297	0.92	Printing: terminate hex buffer before monitor_puts to avoid overread
+269	emtee40/blakestone-src	707cf1423def	eb7aaf0671aa	CWE-125	src/id_ca.cpp	625	0.86	Fix sprite extraction error "Sprite page index out of range."
+270	engicam-stable/linux-engicam-imx-6	2382eae66b19	e46d3be714ad	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+271	EngineersBox/PSX-Minecraft	0b403b12b486	8d4bd7ffce37	CWE-125	src/game/world/world.c	1431	0.9	Fixed out of bounds read to stack allocated array
+272	EPITECH-IT-2028/R-Type	db3b4e4f1db8	18afe9a23d70	CWE-125	client/packets/PacketHandler.cpp	530	0.96	fix(client): ensure player_name is null-terminated
+273	espressif/esp-idf	93cfbb8522c8	597fc6e5c1b4	CWE-125	components/bt/host/bluedroid/stack/l2cap/l2c_ble.c	2513	0.97	fix(ble/bluedroid): Fix out-of-bounds read in l2cble_process_sig_cmd
+274	espressif/openocd-esp32	3b51661ece50	7985ac13e744	CWE-125	src/target/target.c	1729	0.95	target: fix wrap-around detection for read_memory/write_memory
+275	evil-cheetah-edu/american-river-college	a8c3ceb1c5ab	e3ee3fa0b46f	CWE-125	CISP 430 - Data Structures/9. Sort Search/main.cpp	315	0.95	fix(): index out of range
+276	Exiv2/exiv2	337fe1854ff1	7a92e1bd0f8a	CWE-125	src/quicktimevideo.cpp	831	0.96	fix(quicktimevideo) avoid out of bounds read, closes #2340
+277	external-mirrors/mt6735-mainline-linux	c4a7dc9523b5	8247bf1db92a	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+278	external-mirrors/mt6785-mainline-linux	23fefef859c6	6a634dc4f3a3	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.95	drm/amdgpu: fix ucode out-of-bounds read warning
+279	fabeklou/alx-low_level_programming	13fd32add462	35bed29fdc58	CWE-125	0x1E-search_algorithms/103-exponential.c	504	0.95	fix: swap condition in while loop to avoid index out of range
+280	facebook/fresco	a3ba9523aea7	06b958102669	CWE-125	static-webp/src/main/jni/static-webp/webp_bitmapfactory.cpp	339	0.97	Fix out of bounds read in readStreamFully
+281	facebook/igl	9cdbcc8e92e8	509c29a72740	CWE-125	src/igl/vulkan/RenderCommandEncoder.cpp	549	0.92	igl | vulkan | Bounds checking
+282	facsimiles/ctx	3b019849aa0e	825cbc0732cb	CWE-125	src/composite.c	1346	0.95	composite: add bounds checking to another yuv420 case
+283	falcosecurity/libs	6c5659b814f7	b1b10eff787d	CWE-125	userspace/libscap/engine/source_plugin/source_plugin.c	1658	0.96	fix(userspace/libscap): avoid a possible read past end of buffer.
+284	fansipantek/kismet-server	a4759a42fe3a	a7dd46e3fc75	CWE-125	phy_80211_dissectors.cc	755	0.95	dot11_dissector: fix crash on corrupted data packets
+285	FAST-Imaging/FAST	595b1c89810c	6056af62e919	CWE-125	source/FAST/Algorithms/RegionProperties/RegionProperties.cpp	695	0.95	Added a missing out of bounds check in RegionProperties
+286	fberst/xcsoar_a	49c47c12405e	442a528bf6a9	CWE-125	src/ui/canvas/custom/Cache.cpp	567	0.9	ui/canvas/custom/Cache: move GL_UNPACK_ALIGNMENT setup out of the ctor
+287	febiosoftware/FEBioStudio	5b07d92dfe2b	82d6d242125c	CWE-125	FEBioStudio/ImageMapTool.cpp	893	0.95	Added additional out of bounds check to ImageMapTool
+288	Felspar/memory	1ce4f8da195c	5b56c9b5406f	CWE-125	include/felspar/memory/small_vector.hpp	934	0.9	Add bounds checking `at` member
+289	fenugrec/hpgl_reorder	ba531d3458dd	26b1b706845f	CWE-125	reorder.c	707	0.95	fix dumb sizeof(char *) mistake
+290	fftune/fftune	e1acde4d2cf1	349273945d18	CWE-125	src/fft/bin.cpp	1050	0.97	Fix out of bounds read
+291	fgsfdsfgs/perfect_dark	9bffab7e3e01	a040b29d402c	CWE-125	src/game/pak.c	452	0.96	port: do not read past the end of EEPROM when scanning for headers
+292	Field-Robotics-Lab/dave	0825450d30ae	3a1dcf9dc2bc	CWE-125	gazebo/dave_gazebo_world_plugins/src/ocean_current_world_plugin.cc	385	0.95	Fix out of bounds read in ocean current world plugin
+293	flarn2006/SparketteVCV	ea93429218b0	2a94530fb687	CWE-125	src/Integrator.cpp	461	0.86	Add bounds checking to Integrator DMA
+294	flintlib/flint	52aa023262ff	9dab57678d5a	CWE-125	src/nmod_poly/interpolate_geometric_nmod_vec.c	294	0.96	Fix read out of bounds in interpolate_geometric_nmod_vec
+295	FlopKernel-Series/flop_s5e8825_kernel	72ae5a88df69	2d6e4b6725a0	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.95	drm/amdgpu: fix ucode out-of-bounds read warning
+296	fluent/fluent-bit	a24c72c5a28b	efac89c2909e	CWE-125	plugins/in_collectd/netprot.c	920	0.95	in_collectd: fixed out of bounds read
+297	fo76utils/fo76utils	b4d52b5b2bdd	9c96609ef46f	CWE-125	src/ddstxt.cpp	777	0.96	Fixed read past end of 24-bit RGB texture data
+298	fogwizard/xfplayer	3832bd502998	7c8b209bf208	CWE-125	src/main.cpp	845	0.95	fix index out of range issue
+299	folet14/IOT	43fffcd74f83	8e902bdf5da0	CWE-125	drivers/mtd/mtd.c	2821	0.95	drivers/mtd: add bounds checking
+300	fragglet/wadptr	a16b46a2e31e	d619f7f110fb	CWE-125	graphics.c	666	0.96	Add bounds checking for S_IsGraphic().
+301	framegraph/ffmpeg	0066e79c9eca	d1f7a44e89fa	CWE-125	libavcodec/libopenh264dec.c	775	0.96	avcodec/libopenh264dec: Increase array sizes, fix stack-buffer overread
+302	ftmalloc/sigprintf	0d11ec3a07d9	d057633b81f5	CWE-125	sigprintf.c	220	0.95	check for out of bounds read
+303	fuhsnn/slimcc	d5f097d16d09	e59dc88b0b54	CWE-125	codegen.c	3477	0.85	Fix out of bounds read
+304	g-fb/mangareader	9514e41d9a6d	29ee90e868ac	CWE-125	src/view.cpp	494	0.9	fix: prevent index out of range crash
+305	Gabinou/Codename_FireSaga	023f47af2ec9	5610cc5c7a81	CWE-125	src/nstr.c	3365	0.96	[add] checking BOUNDS
+306	GambitBSM/gambit	abdd59bec9d3	760fcf13b7cf	CWE-125	Utils/src/util_functions.cpp	1500	0.86	Added bounds check on path buffers in util_functions.cpp
+307	Garhoogin/NitroPaint	0ec6b31e17ff	c1c496d47d2e	CWE-125	NitroPaint/nsbtxviewer.c	2765	0.95	Fix some out of bounds reads
+308	gavlooth/purple_c	6903e471add2	89fa4205658b	CWE-125	main.c	1121	0.95	Add bounds check to prevent buffer overflow in back-edge detection
+309	getzeed/multipath-tools	7ac0f9c7f781	3db6872d9a41	CWE-125	multipathd/uxlsnr.c	399	0.96	multipathd: fix read past end of of buffer in sending reply
+310	GH057W47CH3R/CS121_Project	a80de0465895	0712df49278b	CWE-125	src/core/ptr_array.hpp	2867	0.95	Added bounds checking and comments
+311	GhoStZA-debug/curl-bof	934125c215fc	8b112d8eed68	CWE-125	SRC/entry.c	5523	0.95	Fix critical memory safety and buffer overflow issues in curl-bof
+312	Gildedter/godot	e35e97f0273f	7691c5fccdcd	CWE-125	core/string/translation.cpp	2277	0.92	[Pseudolocalization] Prevent out of bounds reads.
+313	GitMirroring/pspp	0b8b85706437	4b2f21a89f74	CWE-125	src/libpspp/u8-line.c	267	0.97	u8-line: Fix read past end of buffer in u8_line_find_pos().
+314	Gl1tsh/42_cube3D	6f127985cee6	bf826374a4f8	CWE-125	src/map_checking.c	2184	0.93	add check bounds for map
+315	glaretechnologies/glare-core	4f2f3a49e91c	8dff1d2d93db	CWE-125	graphics/FormatDecoderGLTF.cpp	4426	0.96	Added check skin.skeleton node index is in-bounds.
+316	GM82Project/gm82dx9	73cc897bfb0a	957f7d9eff56	CWE-125	source/shaders.cpp	1369	0.95	add bounds check when loading shader
+317	GNOME/gegl	51d6fe4c43a6	018c0847f440	CWE-125	gegl/property-types/gegl-path.c	405	0.99	Fix out of bounds variadic argument read in gegl_path_list_append
+318	golioth/golioth-firmware-sdk	0e788217ab4b	57eac06617bc	CWE-125	src/coap_blockwise.c	323	0.96	blockwise: fix out-of-bounds read
+319	gonetz/GLideN64	95484364beb2	575f3814e478	CWE-125	src/GraphicsDrawer.h	674	0.97	Fix vertices array out of bounds read.
+320	GothicKit/ZenKit	d187b7f239b7	f6efbe2c1fab	CWE-125	tools/pxscrdmp/decompiler.cc	1466	0.97	tools: pxscrdump decompiler: don't read past `end_ptr` in `extract_statement`
+321	Gottox/smu	b18e5fe83ff8	2a8d5b1a6bd8	CWE-125	smu.c	1289	0.97	Prevent against OOB read write
+322	Gottox/sqsh-tools	6b5cb3e17a33	c07e65734a2a	CWE-125	lib/archive/inode_map.c	720	0.95	inode_map: fix out of bounds write/read
+323	gpdaniels/gtl	1cbf242ba987	634e1fc32d28	CWE-125	tests/vision/feature/refinement/quadratic_fitting.test.cpp	1011	0.85	Fixing out of bounds read in quadratic fitting tests.
+324	gpg/gpgol	731018ea8ef9	4df9c11f95a8	CWE-125	src/rfc2047parse.c	349	0.96	tests: Fix out of bounds read.
+325	GPUOpen-Tools/GPU-Reshape	8c5565592469	f65d9d95a07f	CWE-125	Source/Backends/DX12/Layer/Source/Compiler/DXIL/Blocks/DXILPhysicalBlockMetadata.cpp	420	0.95	[DX12] Fixed out of bounds legacy cbuffer read
+326	Grazen0/rv32-emu	550447033bd3	758819215db2	CWE-125	src/cpu.c	1453	0.92	fix(cpu): fix possible overflows when cheking memory read/write addresses
+327	GreatGameDota/mdec-decompression	84d16761d74b	b4cb0dc63ecd	CWE-125	decoder.cpp	3909	0.97	Add bounds check
+328	greearb/ofono-ct	e6d8d526d507	11b0628a68d8	CWE-125	drivers/qmimodem/sms.c	1309	0.95	qmi: sms: Fix possible out-of-bounds read
+329	GreengageDB/greengage	9b3900cdb734	22b2e6e9df54	CWE-125	src/backend/postmaster/pgstat.c	434	0.92	Avoid memory size overflow when allocating backend activity buffer
+330	GrieferAtWork/KOSmk4	f2380050a1e1	95c1d0b5e3d4	CWE-125	kos/src/kernel/core/memory/mman/mfile-misaligned.c	380	0.92	Fix misaligned file block init near the end of the file
+331	guard3/GreekBot	89b7798f55b1	138b454adea5	CWE-125	Database/Database.cpp	519	0.97	Fix out of bounds read
+332	guyllaumedemers/UE-AVVM	224a1f6ad710	2d604d482070	CWE-125	Plugins/GameFeatures/InventorySample/Source/InventorySample/Private/ActorInventoryComponent.cpp	426	0.85	@gdemers : Adding missing bounds check within the OnDrop function
+333	gwbtc/vere	5300baa3024f	abee94dde10c	CWE-125	pkg/ur/bitstream.c	370	0.95	u3: fix buffer-overread in bitstream-writer (off-by-one, flagged by ASan)
+334	H-XX-D/ZetaZero	aaa8c2793bbb	6468a575ae23	CWE-125	llama.cpp/tools/zeta-zero/zeta-graph-git.h	1832	0.95	fix: Add bounds validation for current_branch_idx in git-graph functions
+335	hades-os/mlibc	0039575936c6	1eef3c66f466	CWE-125	options/rtld/generic/main.cpp	880	0.96	options/rtdl: add missing bounds check in `_dl_find_object`
+336	Hagbard-Celin/galileo	fbd1219ca841	23b84f77e667	CWE-125	Source/Modules/update.c	983	0.95	Fix checks added in commit 802961d could read out-of-bounds on very short files.
+337	haidragon/moz-libwebrtc-third-party	f14a7b42091e	145a1e9b33b8	CWE-125	blink/renderer/core/html/parser/html_document_parser_fastpath.cc	2037	0.97	blink: ensures html fast path parser doesnt read past end
+338	Halley826/DSVIEW_NET	75f9acebc4c0	a8ef173e0842	CWE-125	DSView/pv/data/decoderstack.cpp	530	0.95	fix: app crashed when it used an out of range sample index from cursor
+339	Hancock33/dolphin-triforce	96ab55791c4f	fc46dda2a868	CWE-125	Source/Core/DiscIO/VolumeVerifier.cpp	270	0.9	Merge pull request #10838 from AdmiralCurtiss/volume-verifier-out-of-bounds-read
+340	handingslider/PigguVerse-Hyper	8981927ebc6c	32915dc909ff	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.96	drm/amdgpu: fix ucode out-of-bounds read warning
+341	hansielneff/levox	25ac7d9ae4a2	ab1e8ca92017	CWE-125	src/toolbox.cpp	1099	0.95	Add check that voxel is within bounds
+342	hansmersch/cpython	92d4aeafd5c6	16a305f15242	CWE-125	Python/optimizer.c	337	0.96	GH-142629: JIT: Fix out of bounds memory read in lltrace (GH-142821)
+343	hazzaclark/lib68k	594293123c0a	6becb27c477a	CWE-125	src/68KMEM.c	1464	0.96	added bounds check
+344	hazzaclark/lib68k_mem	1f9f4b56e342	d3953e4590a4	CWE-125	main.c	953	0.85	added invalid address bounds checks
+345	hdert/2023	ec7ca36537e8	48221fa4ca3b	CWE-125	C/LinkedList/src/LinkedList.c	5109	0.95	add comments to indicate output and extra bounds check
+346	hellobertrand/zxc	985545ffea9a	c59050d00b89	CWE-125	src/lib/zxc_decompress.c	450	0.95	Adds bounds check for bits value
+347	HerculesWS/Hercules	fab1b8393d43	601e52ee5cef	CWE-125	src/test/test_chunked.c	701	0.95	fix a possible buffer overread in chunked test
+348	HewlettPackard/shs-libcxi	039f9b0f9157	89956c442af4	CWE-125	retry_handler/ordered.c	1025	0.95	rh: Add bounds check for retry_interval_values_us
+349	Hippasusss/Otto	ff9c65c5647a	0b73f7d43f01	CWE-125	Source/RingBuffer.h	386	0.9	added bounds checking to the RingBufferAudio
+350	houzhanwu/fltk1.4	e15cd9d5bb5e	3fbbce0654a2	CWE-125	src/drivers/Cairo/Fl_Cairo_Graphics_Driver.cxx	539	0.96	Fix: fl_draw_image() with horizontal flip reads out of bounds (#1112)
+351	hukeyue/jsoncpp	3c2205cd9783	0a9b9d9c6ea0	CWE-125	src/lib_json/json_reader.cpp	666	0.97	Fix out-of-bounds read. (#1503)
+352	hydrabus/hydrafw	34e3d6318976	09ac8502ccdf	CWE-125	src/hydrabus/hydrabus_mode.c	388	0.92	Add bounds check for read command
+353	hzj0611/11	13d48ed315fe	ca29c3a422de	CWE-125	dlls/kernelbase/path.c	2588	0.95	kernelbase: Do not use isalnum() with Unicode characters.
+354	ianh/omsim	1e4e210cd874	efed9f4cba2f	CWE-125	decode.c	599	0.97	fix an out-of-bounds read for tracks with no hexes
+355	ibm-s390-linux/s390-tools	708abbf380e9	28dbec093bf1	CWE-125	dasdfmt/dasdfmt.c	474	0.96	dasdfmt: fix buffer overread warning
+356	Icedude907/gbadisasm	b89b4e578666	ed03b75ea214	CWE-125	disasm.c	520	0.85	fix out-of-bounds read
+357	idlesummer/STDISCM_P3	dea6bf839578	91ece4989e12	CWE-125	src/game/tetris/TetrisShapes.hpp	708	0.95	Refactor: Add bounds checking method to TetrominoData
+358	Idowu-David/alx-low_level_programming01	efe28be8f683	c2c7838cd2f2	CWE-125	0x17-doubly_linked_lists/5-get_dnodeint.c	205	0.95	 fix: out of range index
+359	ifduyue/musl	523d9b965df6	d0b7f9768df1	CWE-125	src/network/getnameinfo.c	293	0.96	fix potential read past end of buffer in getnameinfo host name lookup
+360	ILLGrenoble/takin	fed3a0d2941e	e799fe264417	CWE-125	tlibs2/libs/magdyn.h	496	0.95	magdyn: added a bounds check
+361	imd-tec/renesas-rz-linux-cip	13e4e5f8a9e9	c5baf6662864	CWE-125	sound/soc/sh/rcar/core.c	608	0.95	sound: soc: sh: rcar: Fix out-of-range array index access
+362	Indev450/SRB2Kart-Saturn	82407c356098	f1a82106634f	CWE-125	src/r_plane.cpp	376	0.95	add missing plane bounds check to R_DrawSkyPlane
+363	Instituto-Iracema/iracema_charts	4ef66196e8e6	2f3e76f5d61a	CWE-125	iracemalineseries.cpp	287	0.95	fix: index out of range on peak labels
+364	intel/lms	1fd445e448fe	787cb16234bf	CWE-125	WsmanClient/AuditLogWSManClient.cpp	1415	0.92	LMS: WsmanClient: AuditLogWSManClient: limit read records number
+365	intel/mOS	bdde972d9c27	d54741291570	CWE-125	crypto/rsa-pkcs1pad.c	280	0.98	crypto: rsa-pkcs1pad - fix buffer overread in
+366	iposup-a2-intern/FreeBSD-src-JACOSShield	9286d46a794f	24339377490f	CWE-125	crypto/heimdal/lib/gssapi/krb5/decapsulate.c	225	0.95	heimdal: CVE-2022-41916: Check for overflow in _gsskrb5_get_mech()
+367	isledecomp/SIEdit	c2456a489e9c	70e97e88c0ea	CWE-125	lib/file.cpp	806	0.97	file: prevent out of bounds reads with memory buffer
+368	IvanVnucec/tf-a-stm32mp	0b06ea7b1801	779d1fbcdaa5	CWE-125	drivers/auth/auth_mod.c	1075	0.96	Merge "fix(auth): avoid out-of-bounds read in auth_nvctr()" into lts-v2.8
+369	iztanpy/static-code-analyser	773451d6a980	6bafbcae5f9a	CWE-125	Team16/Code16/src/spa/src/qps/query_parser/query_tokenizer/query_tokenizer.cpp	1223	0.92	Fix get clause index out of range error
+370	ja2-stracciatella/ja2-stracciatella	bc7d28d8b3f9	44a2f3e3601d	CWE-125	src/game/TacticalAI/AIUtils.cc	783	0.95	Merge pull request #2127 from momoko-h/FixBuildingsOOB
+371	jackerschott/athena	31fd0248ee39	e7ab3358fde7	CWE-125	MuonSpectrometer/MuonDetDescr/MuonGeoModel/src/MuonDetectorFactoryLite.cxx	2120	0.97	MuonGeoModel: Fix out-of-bounds array access.
+372	jacobvosmaer/adsimg	69924aa035f3	de43b4fccb3b	CWE-125	split.c	1391	0.95	split: add bounds check
+373	jaguapard/Doom-Renderer	35f263134722	135c1689b25a	CWE-125	ZBuffer.cpp	266	0.95	Added bounds checking for Z buffer
+374	jaimeadf-ufsm/elc1068-pod	5fec161a18c6	549da45c037b	CWE-125	trabalhos/t2/quicksert.h	363	0.95	refactor(trabalhos/t1): add checks for array bounds in quicksort partition
+375	jakeiswritingcode/ConsoleConnect4	15d0139a1123	477e3779f5ed	CWE-125	src/AI/Q-Learning/Function Approximators/linear_regression.cpp	861	0.95	add function approximator bounds checking
+376	JaMo42/system_monitor	f8ea7a4c118c	780ecc6e5ce2	CWE-125	src/ui.c	612	0.97	don't read array out of bounds
+377	jconsidi/dfa-games	d78c0cb65c82	2896b591d1b6	CWE-125	src/FixedDFA.cpp	366	0.9	+ FixedDFA: added bounds checking assert
+378	jdho123/Mars-Memory-Allocator	75db6378c019	2dea329f9690	CWE-125	allocator.c	2050	0.92	(allocator.c): Added additional bounds checks
+379	Jeanlbj/teste-seguranca-informacao-corgea	d7d5e877c9be	76b2e621a609	CWE-125	refs/ref-cache.c	635	0.98	Merge pull request #6 from Jeanlbj/corgea_fix_c2ca2d8b
+380	Jerr-914/descent3	6b175cc74713	35ba4f15bbf7	CWE-125	Descent3/object.cpp	284	0.95	Add precautionary bounds check in ObjFree
+381	jfboys/nginx	eec047c93634	2b5024685888	CWE-125	src/http/modules/ngx_http_proxy_module.c	895	0.97	Proxy: fixed segfault in URI change.
+382	JFreegman/toxic	22ca3704d2de	fdfaaf953f81	CWE-125	src/line_info.c	1071	0.96	Use a small hack to get around an ncurses buffer overread
+383	jizhuoran/EasyFHE	457b0b42fef8	f0e55d9c02cb	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+384	jkrafczyk/Fizzbuzz	99fd1f429d45	580cf28178c5	CWE-125	hyperfizz.c	1151	0.9	Fix out-of-bounds read.
+385	jmattspartacus/hfc	5d161ee7c916	a594ef8fd0f9	CWE-125	src/GEB_HFC.cpp	287	0.96	Fix: out of bounds read in argv
+386	jmriesen/rust-RSM	a2a8f68d3e20	41419dacdb5b	CWE-125	ffi/C/symbol/util.c	4737	0.95	Adding bounds checks to C code
+387	jo-hannes/Aqua-mixtura	d21467d654cf	58cecbc67776	CWE-125	src/water/water.cpp	525	0.95	Water: Fix out of bounds read and write
+388	JodhnPent/pytorch	65e57d49a0ee	24e09c8e7b91	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+389	johnpgarry/qemu	799f7f0104a3	78e619cbd5d5	CWE-125	hw/sd/sdhci.c	1228	0.95	hw/sd/sdhci: Prohibit DMA accesses to devices
+390	jonahcragun/CS4380-emulator-assembler	0b76a0d30246	4ab1bf102743	CWE-125	src/emu4380.cpp	2661	0.92	added init function for stack pointers. Added out of bounds checks for stack functions
+391	joncampbell123/dosbox-x	82c6f3511c51	686364c0e828	CWE-125	src/output/output_opengl.cpp	516	0.9	Fix OpenGL libgallium crash on mode change. Instead of allocating EXACTLY the buffer size required for the texture, allo
+392	jonmason/linux-yocto	a24611ea356c	d3481accd974	CWE-125	crypto/rsa-pkcs1pad.c	280	0.98	crypto: rsa-pkcs1pad - fix buffer overread in pkcs1pad_verify_complete()
+393	JoostHouben/Euwe-chess-engine	e84274daf73d	892c683d7426	CWE-125	chess-engine-lib/Eval.cpp	717	0.92	Fix out of bounds read in move ordering
+394	JoseFC3000/RetroArch_Kylton	ef12e4352210	f33f5e2b87e1	CWE-125	gfx/gfx_widgets.c	383	0.95	Fix reading past the end of an allocated buffer. (#15713)
+395	JoshWM1977/ghostpdl	920fae688705	c370d28e0799	CWE-125	psi/zbfont.c	427	0.95	Bug 708131: Fix confusion between bytes and shorts
+396	jrmarino/fetch-freebsd	9e7b3b291835	7779e1b517ad	CWE-125	ftp.c	376	0.95	Fix libfetch out of bounds read. (#5)
+397	juanmasg/rockbox	56442f6b7f18	67cb2e3cdc94	CWE-125	lib/rbcodec/codecs/libffmpegFLAC/decoder.c	2158	0.97	rbcodec: Fix FLAC out of bounds read
+398	juur/Cataclysm-DDA-UI	f85703b790fe	e46c67923cb2	CWE-125	src/widget.cpp	473	0.96	Fix potential out-of-bounds read in widget::layout() (#59959)
+399	ka9q/ka9q-radio	a65597bcb374	2e39c7a12418	CWE-125	src/filter.c	2300	0.95	add bounds checking to window functions
+400	Kanavb2/the-island	98880534aeb0	c107593d6259	CWE-125	src/engine.cc	287	0.96	add bounds checking for GetItemFromIndex
+401	KangkanGoswami/TRD_update	e9b6e044c09f	67058f9ace6d	CWE-125	GPU/GPUTracking/Base/GPUReconstruction.cxx	846	0.85	GPU: Add bounds-check for nTPCClustererLanes
+402	karelbilek/ghostpdl	de900010a6f2	f97b4f82336e	CWE-125	psi/zbfont.c	427	0.95	Bug 708131: Fix confusion between bytes and shorts
+403	Katya-Kom/CPythonMy	ea8ec95cfadb	8516343d3aeb	CWE-125	Parser/lexer/lexer.c	605	0.95	gh-132769: Refactor possible read-out-of-bounds in `lexer.c` (#132770)
+404	kavia-common/git-311190	c4c9089584d0	a9990f8ec0e7	CWE-125	cache-tree.c	1512	0.96	cache-tree: avoid strtol() on non-string buffer
+405	kay-ws/xserver-kitty	a4399b0cd439	e0e2aab21192	CWE-125	hw/xfree86/dri2/dri2ext.c	372	0.95	dri2: integer overflow in ProcDRI2GetBuffers() [CVE-2014-8094]
+406	Kazade/simulant-engine	723fce51ff4c	6a312a9abd23	CWE-125	simulant/loaders/gltf_loader.cpp	2338	0.92	Fix out of bounds reads
+407	kbinani/libminecraft-file	2647b8068084	6a8654263f76	CWE-125	include/mcfile/je/chunk.hpp	347	0.95	fix: Index out of range error on Chunk ctor
+408	KDE/kclock	b96c454f249c	5adb2f9fbaad	CWE-125	src/kclock/savedlocationsmodel.cpp	320	0.95	SavedLocationsModel: Add bounds check in data
+409	KDE/parley	8316f23ffb88	6e99460cb793	CWE-125	src/practice/configure/blockoptions.cpp	636	0.95	Fix out of bounds read
+410	KDE/tokodon	85c9a503eba9	3903e30fe78c	CWE-125	src/followrequestmodel.cpp	3542	0.96	Add bounds checking to FollowRequestModel
+411	keatonLiu/unbound	1c85901cc4c0	b1c707e55193	CWE-125	util/data/msgparse.c	514	0.97	- Fix out of bounds read in parse_edns_options_from_query, it would read
+412	Kelsidavis/Mesa3d	011cacd9826e	e10202fdf4e2	CWE-125	src/freedreno/decode/replay.c	744	0.96	fd/replay: Clamp dumped wrbuf to buffer size
+413	Kelsidavis/System7	fe3e688a1642	bda4360b55b7	CWE-125	src/Finder/desktop_manager.c	1351	0.95	Fix FSSpec.name string format in alias creation
+414	kevin-rn/VolVis	73036a61f234	b299e2fabb16	CWE-125	src/volume/gradient_volume.cpp	510	0.95	Added out of bounds check to gradient linear interpolation
+415	KFTrack/KinKal	3e08f734a828	c81299b4d44a	CWE-125	Fit/Track.hh	436	0.86	Add bounds check
+416	Kipkiruie/linux	8944acd0f9db	f683f24093dd	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.97	drm/amdgpu: fix ucode out-of-bounds read warning
+417	koder77/l1vm	85df63ba7080	0495052d90e2	CWE-125	vm/modules/file/file.c	462	0.92	VM: file module bounds check added
+418	konard/VisageDvachevsky-StoryGraph	33111fa435d3	d1b9911ddd7d	CWE-125	engine_core/src/scripting/interpreter.cpp	2385	0.95	fix(interpreter): add bounds checking for memcpy operations and overflow protection
+419	koverstreet/bcachefs-tools	dcc028e5ab00	b03db6ecbd5c	CWE-125	fs/btree_update.h	371	0.96	bcachefs: Add extra padding in bkey_make_mut_noupdate()
+420	kyodaisuu/basmat	f2f0125b6618	74c0d9255986	CWE-125	basmat.c	466	0.97	Fix out-of-bounds access when checking S[l + 1 + n * nr]
+421	l2kl/ASAPP	f6898f378e5c	098a93382121	CWE-125	ASAPP/source/interfaces/hud.cpp	1657	0.9	added a removed bounds check
+422	LadybugDB/ladybug	d1ce38020b83	9a0fb5dae0c5	CWE-125	src/storage/buffer_manager/buffer_manager.cpp	533	0.85	Fix undefined behaviour in the Buffer Manager after failure (#4246)
+423	Lastpickle/Elo_kernel	e2351546e29e	ceaf01863fc1	CWE-125	drivers/usb/gadget/configfs.c	265	0.96	usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+424	laurenthuberdeau/dasher	fd725b7a7583	20549a1a32cc	CWE-125	src/expand.c	379	0.98	expand: Fix buffer overread caused by passing array of chars as string in pmatch
+425	LD-RW/text-editor	7b4d7e0a1b7f	1f18c44699f5	CWE-125	kilo.c	509	0.9	Add boundary checks for cursor movement to prevent out-of-bounds errors
+426	LedgerHQ/app-ont	d9b64613a07a	0d2a1477e855	CWE-125	src/transaction/deserialize.c	3126	0.96	add stricter bounds checks for bytecode parsing (#6)
+427	leggiateajo/pytorch	e15174d16563	347a6567e866	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+428	libcdio/libcdio	bf22730722fc	1919a84fb284	CWE-125	lib/iso9660/iso9660_fs.c	797	0.9	Add bounds checking for directory buffer size and total size calculation
+429	LibreCAD/LibreCAD	e829bce1d8b8	258fef917814	CWE-125	librecad/src/lib/engine/rs_mtext.cpp	1674	0.96	fixed possible out of bounds read with MText entities
+430	LibreSprite/LibreSprite	cba84ff2017e	a678ddf8952a	CWE-125	src/app/ui/status_bar.cpp	605	0.92	Fix freeze and out-of-bounds memory read with : in layer names #503
+431	libretro/ps2	7d13945f17c8	17dcc937c956	CWE-125	pcsx2/CDVD/GzippedFileReader.cpp	366	0.97	Backport
+432	libssh2/libssh2	2dae3024897e	31ec5a8b55cc	CWE-125	src/sftp.c	3577	0.96	Update sftp_symlink to avoid out of bounds read on malformed packet #1705 (#1717)
+433	Libvisual/libvisual	063b6096a0c9	346bba14ef3c	CWE-125	libvisual-plugins/plugins/actor/infinite/display.c	1936	0.97	Plugins (infinite): Fix out-of-bounds reads in _inf_compute_surface
+434	LightSys/centrallix	2e5f47f8acfa	e8d835efc14d	CWE-125	centrallix/osdrivers/objdrv_report_v3.c	2500	0.95	Fixed an out of bounds read
+435	lighttransport/tinyusdz	9a2618811a95	facb9239f015	CWE-125	src/crate-reader.cc	4468	0.95	Add some bounds check.
+436	Linkenreefefedas/CNDA	8fdbb5cceb93	9192136e3a90	CWE-125	include/cnda/contiguous_nd.hpp	7060	0.95	fix: add bounds checking for operator() overloads in ContiguousND
+437	linux-application-whitelisting/fapolicyd	009bd69d5fc2	ec24ea5be097	CWE-125	src/library/file.c	1436	0.97	Add bounds checking after whitespace skip in detect_text_format
+438	lithiumox-codam/minishell	872b3e667a00	5ebe1ca79b1e	CWE-125	src/checker/index.c	3002	0.9	added bounds checking
+439	lluciiiia/EEET2490_Embedded-Systems_Operating-System_Interfacing_A2	f08a7d927997	706422dca4a7	CWE-125	kernel/kernel.c	1425	0.96	fix: out of range of history index
+440	lnw/artificial-panos	539c5d5bc8f3	6960d704ccb9	CWE-125	canvas.cc	1102	0.9	fix one out of bounds read
+441	logrotate/logrotate	2db348e851af	1acec43d2c62	CWE-125	config.c	462	0.95	Avoid out-of-bounds read in custom strndup() implementation
+442	losnoco/Cog	014f136b7e3b	26966c46a2ea	CWE-125	Visualization/ThirdParty/deadbeef/analyzer.c	1347	0.97	Visualization: Protect against out of bounds read
+443	lukelawlor/soupdl	57d85125c5d7	4a192fb95449	CWE-125	src/editor/editor.c	1070	0.86	added resizing void rectangles in editor + moving & resizing bounds checking
+444	lukemartinlogan/gpu-io-libs	71d1206aff2c	d5730fad9c0e	CWE-125	implementation/src/util/string.h	944	0.95	Add bounds checking to ReadNullTerminatedString
+445	LuongLuyen/zabbix	e97e363d7fe3	46c304b25f35	CWE-125	src/libs/zbxsysinfo/common/dns.c	5626	0.96	...G...... [DEV-2702] fixed buffer overread in DNS response
+446	lupnis/openJackal	8351ac59182d	b91af4c89348	CWE-125	jmfnode/TaskRunner.cpp	399	0.95	bug fix: index out of range @ TaskRunner.cpp
+447	machineware-gmbh/vcml	5e68718cb558	a2ae06f3db13	CWE-125	src/vcml/models/pci/device.cpp	930	0.96	fix: read_tbl may read table msix_table out of bounds without raising an error (#148)
+448	macroquest/macroquest	aa5146c0ed51	56df9d06f632	CWE-125	src/plugins/autologin/MQ2AutoLogin.cpp	742	0.95	added bounds check to character class detection
+449	madebr/h2incc	e49d714e8d0f	2ff8ae0e35b9	CWE-125	source/incfile.c	254	0.95	Fix out-of-bounds read at start of parsing file
+450	maliknajjar/blenderNewExpressionNode	c1c0473a7efb	82fe475f06b3	CWE-125	source/blender/gpencil_modifiers/intern/lineart/lineart_cpu.c	299	0.97	Fix out of bounds read in LineArt if there are only interestion edges
+451	ManuCoding/abysh	98fe64a38eec	a82842c0a1db	CWE-125	main.c	410	0.97	Fixed history read past end of buffer issue
+452	marcsingleton/AALV	2633f9a7bc9d	b0f8db81e84b	CWE-125	src/input.c	1057	0.86	Added bounds checking for cursor position
+453	MarcusAaltonen/CRS_uC	62d828cdda76	85a87b3a03de	CWE-125	CRS RC Car uC UFQ 32-pin/Core/Src/main.c	877	0.97	Merge pull request #1 from MarcusAaltonen/fix/out-of-bounds-read
+454	marekpistorius/xfce-nameday-plugin	fbee6299d805	83537c8c87ea	CWE-125	panel-plugin/nameday-plugin.c	429	0.96	Return NULL for out-of-range index in nameday plugin
+455	mariadb-corporation/MaxScale	f9f77eb521ce	1c0a0b1a01d5	CWE-125	server/modules/routing/readwritesplit/rwsplit_causal_reads.cc	1347	0.96	MXS-4172: Improve correct_packet_sequence()
+456	martanne/vis	3aa3501aa6d9	992804cb2799	CWE-125	text-iterator.c	739	0.97	text-iterator: fix one byte over-read in codepoint iterator
+457	MaskRay/binutils-gdb	0d2f72332c76	77be7257442b	CWE-125	bfd/ecoff.c	1937	0.96	_bfd_ecoff_slurp_symbol_table buffer overflow
+458	mass-124/ffmpeg-gopromax	d33c630b2a84	bfa43447fae1	CWE-125	libavcodec/yuv4enc.c	1511	0.97	avcodec/yuv4enc: do not read past end of input in case of odd height
+459	matrixlabiisc/NCSOC-FE	3c71e40518d4	ceb05e33618b	CWE-125	src/dft/initElectronicFields.cc	1862	0.9	added assert check for wavefunctions storage size exceeding integer bounds
+460	mattf4171/KattisProblemSolving	926618e4dbc9	05dae68beac4	CWE-125	hackerRankProblems/prodArrayExceptSelf.cpp	906	0.85	Fix, index out of range err
+461	mawww/kakoune	22b1d4ec4a3d	a85b81e08ad1	CWE-125	src/buffer_utils.cc	896	0.92	Try to fix crash due to fifo read regression
+462	maxchisto/darktable	11c46a579155	524b3da47958	CWE-125	src/develop/masks/masks.c	493	0.95	masks: Do not read past the history end.
+463	maximilianbiebl/OpenBoard	ee7c92ae3c67	1ca6f5be57e6	CWE-125	src/gui/UBBoardThumbnailsView.cpp	364	0.96	fix: index range check for thumbnails
+464	maxmalek/ugreg	9aff8e5cfdee	f996a216ec44	CWE-125	src/maiden/mxsearchalgo.cpp	412	0.95	maiden: fix possible out-of-bounds read
+465	Maxppddcsz/qemu	d43f2a9725a1	aa8cca502d7b	CWE-125	hw/usb/hcd-xhci.c	402	0.98	usb/hcd-xhci: check slotid in  xhci_wakeup_endpoint()
+466	mchehab/rasdaemon	e79b48c555c6	f26e33999349	CWE-125	ras-events.c	531	0.95	ras-events: fix buffer overflow in add_event_handler read
+467	mCRL2org/mCRL2	553f0004963f	a887a23391c5	CWE-125	libraries/lps/include/mcrl2/lps/lps_summand_group.h	563	0.95	Prevent out-of-bounds read of the copy vector.
+468	MegaZeux/megazeux	5d9069b10294	b7801b34d06d	CWE-125	src/intake.c	1061	0.93	Fix intake Ctrl+left out-of-bounds read.
+469	mehdikholoosi/src	cce5ad9f407e	3cba56066040	CWE-125	lib/libssl/ssl_ciph.c	467	0.97	ssl_cipher_process_rulestr: don't read outside rule_str buffer
+470	Mei666666/new-pdb2pdbqt	0f1e30e9bcdd	cb2939e78d4e	CWE-125	unidock/src/main/simulation_container.h	320	0.96	Fix: array index out of range (#86)
+471	mfreimueller/goo	ebff8f3bb311	63de2faea655	CWE-125	src/Reporter.cpp	1411	0.95	add index out of bounds check for reporter
+472	michaelitindi/alx-low_level_programming	37fcc4787dad	dda203419bc2	CWE-125	0x14-bit_manipulation/2-get_bit.c	234	0.9	added check for index out of bounds
+473	Michelle-Wang0/lab3_pytorch_copy_demo	1a6d50d40799	7f28c03fac11	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+474	microsoft/DirectXTK12	69ede4ccce8b	a89b5b73e84f	CWE-125	Audio/WAVFileReader.cpp	3927	0.95	Fix out-of-bounds read bug in WAVFileReader (#151)
+475	microsoft/mu_basecore	171335e34ea9	fadf4f377e86	CWE-125	UefiCpuPkg/Library/MtrrLib/UnitTest/Support.c	276	0.97	UefiCpuPkg/MtrrLib: Fix unit test read overflow
+476	microsoft/mu_silicon_intel_tiano	a859f4fc0397	909849be87a7	CWE-125	MdePkg/Library/UefiDevicePathLib/DevicePathToText.c	461	0.96	MdePkg: Fix a buffer overread.
+477	milkmull/Vertex	d92594d1819d	5d1fa95297e9	CWE-125	test/src/vertex_test/os/child_process.cpp	217	0.85	fixed read out of bounds error in child process
+478	minetest/irrlicht	6f4f7c4d75c9	103ab16679a4	CWE-125	source/Irrlicht/CXMeshFileLoader.cpp	296	0.95	CXMeshFileLoader: fix buffer overreads with text format
+479	misa-md/potential	3909a891be2b	3676537e86a5	CWE-125	src/container/linear_array.hpp	1068	0.9	fix(pot-table): fix index out of range in calculation caused by the incorrect size in table bcast
+480	misconstrue/customized-qemu	b73d7eff1eed	37ee17eebb93	CWE-125	hw/scsi/scsi-disk.c	312	0.95	scsi: fix allocation for s390x loadparm
+481	mmwillet/TTS.cpp	bb14390b5b47	27173f3af26a	CWE-125	src/kokoro_model.cpp	2327	0.95	kokoro_model: Fix output tensor read buffer overflow
+482	mobxprjkt/kernel-common-android13-5.15	bdbe483da21f	3ab056814cd8	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+483	MontaVista-OpenSourceTechnology/linux-mvista	640600a5e77f	d6305e0f8213	CWE-125	crypto/rsa-pkcs1pad.c	280	0.97	crypto: rsa-pkcs1pad - fix buffer overread in pkcs1pad_verify_complete()
+484	morfuse/morfuse	c57890018563	261a39d08fe7	CWE-125	include/morfuse/Container/Container.h	218	0.96	fix(container): fix RemoveObject accepting an out of range index
+485	moritzbuhl/opendict	5534a4feca41	d73529837d19	CWE-125	database.c	262	0.95	Fix buffer overread in case of a corrupt index file.
+486	moucheh/SP-cpp	970394228dc3	fb298ab5cb82	CWE-125	vjezba/WorldCities/main.cpp	788	0.95	added argv out of bounds check
+487	moveit/mujoco_ros2_control	d20a84acc9de	465f5041ce07	CWE-125	mujoco_ros2_control/src/mujoco_system.cpp	777	0.92	Fix out-of-range error in register_sensors by replacing incorrect index access with .back()
+488	mraliscoder/frr-tunnel-next-hop	133b0b5a7e22	bb1d52b3c095	CWE-125	zebra/zebra_fpm_netlink.c	269	0.95	Merge pull request #12659 from opensourcerouting/fpm-cs
+489	mrsobakin/riscv	2dd873bc9cf7	3a1496507253	CWE-125	memory.c	734	0.95	Add bounds checking in memory access
+490	mruby/mruby	dee72daf97cc	01ab2ffc29a1	CWE-125	mrbgems/mruby-sprintf/src/sprintf.c	314	0.97	mruby-sprintf: prevent buffer overread in named format parsing; fix #6648
+491	MSRevive/MSR-ReHLDS	b88b93e4dfc9	e1fd948356a1	CWE-125	engine/r_studio.cpp	518	0.95	GetBonePosition: Added bone index bounds check
+492	mtrojnar/osslsigncode	efbe570f27cf	fef65536f621	CWE-125	msi.c	579	0.85	Fix out-of-bounds read, CID 1519383
+493	Muggle345/testrepo	385c5a4507cc	59d060bc1645	CWE-125	src/shader_recompiler/backend/spirv/emit_spirv_atomic.cpp	453	0.86	fix: Add missing OpSelectionMerge in bounds check.
+494	Multipacker/framed	f133bab4d50a	a5f54a9633cc	CWE-125	src/framed/framed_main.c	6814	0.95	Dev(Framed): Added bounds checking when parsing packets.
+495	MUON-III/muon-casm	3ff2deba2f5a	be5dd22f16c0	CWE-125	src/emulate.cpp	570	0.92	Added memory bounds checks
+496	mupen64plus/mupen64plus-core	6ede8b8687de	a20c7760bdbb	CWE-125	src/device/cart/cart_rom.c	394	0.96	Add bounds checking to read_cart_rom() (#1164)
+497	mveety/es	1261ae5f307d	f83fc9bc9c55	CWE-125	editor.c	1412	0.95	fix leak and potential out-of-bounds reads
+498	mvr/barrister	55a97abedee2	2de316cbab22	CWE-125	Barrister.cpp	587	0.97	Don't read past the end of the row in the summary
+499	MyBlackHole/bcachefs-tools	f060d0c57393	04d80927e4e6	CWE-125	fs/chardev.c	326	0.97	bcachefs: Fix out of bounds read in fs usage ioctl
+500	mylove90/SM-N7502	c1200704faa3	1c3cd87d3bea	CWE-125	drivers/staging/prima/CORE/HDD/src/wlan_hdd_cfg80211.c	703	0.96	prima: Avoid overread when configuring MAC addresses
+501	mysterymath/nesrender	2a8d969330c3	6b9556318133	CWE-125	perspective.cc	1502	0.86	Add bounds checking to draw_wall.
+502	N7Alpha/UnrealLibretro	eb977185d0b6	3be3cbbb2ef7	CWE-125	Source/UnrealLibretro/Private/sam2.h	1296	0.94	Add an out-of-bounds check
+503	NAMAN-TOMAR/C-Data-Analysis-System	d7e8f163ea7b	694001a9745e	CWE-125	src/data_input.c	5178	0.92	Implement bounds checks in data input functions
+504	nanocirs/etlegacy-dredge	2fe1dbf22d6f	1dbff3cf8519	CWE-125	src/ui/ui_main.c	2744	0.9	ui: prevent Out-of-bounds read
+505	NathanJColbert/ModifiedDPP	3f34d9d28d94	63c00d8aca04	CWE-125	src/dpp/httpsclient.cpp	608	0.97	fix: out-of-bounds read of MIME types (#1104)
+506	NatLabRockies/SolTrace	e2352afeb20c	0ec3487fafc0	CWE-125	coretrace/simulation_runner/native_runner/treemesh.cpp	285	0.95	Fix out-of-bounds access in st_tree_node::m_proc
+507	NBlood/NBlood	82da7cd057ea	9cca6d50564d	CWE-125	source/audiolib/src/tsf.h	4029	0.95	Fix possible out of bounds read of SF2 instruments
+508	ndv/bitcoin	f7a8d199fba9	ef84133b5ede	CWE-125	src/index/addrindex.cpp	198	0.9	fix out-of-range array index
+509	negrroo/LawRun_xiaomi_sdm845_CAF	c69be16a07ef	8280838a4795	CWE-125	drivers/staging/qcacld-3.0/core/wma/src/wma_utils.c	997	0.97	qcacld-3.0: Fix out-of-bounds in tx_stats
+510	Neopallium/openjp2	c33e3d4af33a	ee58d7704786	CWE-125	src/lib/openjp2/t2.c	456	0.95	opj_t2_skip_packet_data(): avoid out-of-bounds reads on truncated images in non-strict mode (fixes #1459)
+511	neovim/neovim	ff7832ad3fce	988482d9422b	CWE-125	src/nvim/shada.c	756	0.97	fix(coverity/497355): shada_read_when_writing out of bounds read #30665
+512	netfoundry/zfw	cc46f270fba6	dd7042209de0	CWE-125	src/zfw_tc_ingress.c	308	0.95	added tuple bounds check
+513	NexoMMORPG/RUpdate	dc085b3e68d8	f6d53e6fe692	CWE-125	src/char/char_clif.cpp	1173	0.92	[ Update ] Added a missing bounds check
+514	nextgis-borsch/lib_openssl	291685ed9a21	77e0423ebf0f	CWE-125	crypto/bio/bss_dgram.c	3660	0.95	bss_dgram.c: Fix potential buffer overread and remove asserts
+515	nfroggy/openmadoola	c6fba6c8c862	ed47ab8b2aab	CWE-125	src/save.c	637	0.97	fixed out-of-bounds files array read
+516	nginx/nginx	bcb41c919390	6446f99107ff	CWE-125	src/http/modules/ngx_http_proxy_module.c	895	0.97	Proxy: fixed segfault in URI change.
+517	NguyenVanLim/Xteink-Crosspoint	73d1839dddde	cc86533e8674	CWE-125	lib/Epub/Epub.cpp	1680	0.95	fix: add bounds checks to Epub getter functions (#82)
+518	Nick-Nuon/test-repo	b9d19562c0e8	0551e8e7a89f	CWE-125	crypto/bio/bss_dgram.c	3660	0.96	bss_dgram.c: Fix potential buffer overread and remove asserts
+519	NightAverage112/Fallout-1	3e94285e3bc6	6cb5ad2fdbb0	CWE-125	src/game/pipboy.cc	492	0.97	Fix pipboy hotline buttons buffer overread
+520	nilfs-dev/nilfs2-kmod8	4bdb331f99a6	67425b4081e6	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+521	Ninesquared81/bude	613ba60acbd5	56bf895ac0c7	CWE-125	src/ir.c	1653	0.95	Add more bounds checking to the read and overwite functions
+522	Nio123321/alibaba-AliOS-Things	d494644b1ce4	3630a5c4e08e	CWE-125	solutions/linksdk_gateway_demo/subdev_basic_demo.c	891	0.85	remove linksdk_gateway_demo's private info. (#1446)
+523	NIRALUser/ShapePopulationViewer	f6428efaa319	90fa9629d713	CWE-125	src/ShapePopulationBase.cxx	619	0.95	BUG: Fix vector out_of_range error
+524	NNayle24/Go	de886da06b86	a43c56bdc305	CWE-125	board.c	1291	0.92	Added memset, IsValidPosition now check for bounds
+525	norwd/tom7misc-svn	b2c3a5b12b5a	b65b4b4de98c	CWE-125	cc-lib/image.h	1781	0.96	Treat out-of-bounds reads for ImageA and ImageF. Use faster bounds check
+526	NovaSquirrel/PrincessEdit2	817638693ad3	57b028645e52	CWE-125	src/gui.c	6790	0.97	Add safety checks to prevent out-of-bounds map access
+527	nr-rmeena/yugabyte-yugabyte-db	cd6fb92e8bcb	4910c79722d7	CWE-125	convert.c	250	0.95	Merge pull request #183 from shinderuk/to-single-byte-oob-read
+528	ntpsec/ntpsec	5cffe91b8ba6	60ed6470bd1e	CWE-125	ntpd/nts_server.c	1271	0.92	Out of bounds read in nts_ke_process_receive() in nts_server.c
+529	NVIDIA/MatX	52109dffb892	1a1ed4ff57e9	CWE-125	include/matx/executors/kernel.h	1325	0.97	Prevent potential oob read in matxOpTDKernel (#586)
+530	nxp-imx/imx-atf	4959b12cf768	70794785352d	CWE-125	plat/imx/imx9/imx94/imx94_m7.c	1172	0.96	LF-15061-03 fix(imx94): fix the out of bound access
+531	nxp-imx/imx-audio-framework	1ca21b232ee9	29dced1ab55a	CWE-125	dsp_wrapper/src/dsp_wrap.c	231	0.96	LF-13596-2: coverity 39529968: out of bounds read
+532	oberdfr/google-modules_gpu	fb192812bb0f	1896a2b4ea75	CWE-125	mali_kbase/platform/pixel/pixel_gpu_slc.c	1624	0.97	mali_kbase: platform: Add missing bounds check
+533	OE4T/linux-noble-nvidia-tegra	74c6e2c29b58	8e8838e91bed	CWE-125	drivers/usb/gadget/configfs.c	265	0.95	usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+534	OHoiOKEA/equinor-ert	869519729d2e	fcc1be73269c	CWE-125	libres/lib/python/enkf_fs_keyword_data.cpp	1528	0.96	Add a out of bounds check
+535	oknenavin/cxon	8bf5f446e0e2	0fb76c83dcda	CWE-125	src/cxon/lang/common/cio/char.hxx	1807	0.96	- cxon: bad escape handling (input iterator past-the-end read)
+536	olell/CoinMatrix	8ee26d96ea56	71de285a22c3	CWE-125	firmware/src/charlie.c	557	0.85	Added out of bounds check
+537	omnetpp/omnetpp	f182adf4e8da	79b3850baf46	CWE-125	src/nedxml/sourcedocument.cc	1924	0.95	nedxml: SourceDocument: added bounds checking for lines/cols
+538	onetrueawk/awk	9666b77b369e	0575fbc687f4	CWE-125	b.c	877	0.85	todd miller's fix for big-endian systems, and out of bounds read
+539	onionmixer/openMSX	00c413df8c27	8e739392e689	CWE-125	src/sound/ResampleHQ.cc	712	0.97	ResampleHQ: fixed out-of-bound read (off-by-one)
+540	open-rk3588/linux	fb10c7a84661	98091a826873	CWE-125	drivers/char/hw_random/core.c	456	0.96	hwrng: core - Add WARN_ON for buggy read return values
+541	OpenAWE-Project/OpenAWE	d677d73d6e12	a160a14b07b2	CWE-125	src/common/memreadstream.cpp	317	0.97	Fix out of bounds case in memory read stream
+542	openbsd/src	332698a89856	63effc5474a6	CWE-125	usr.bin/ssh/hostfile.c	677	0.97	fix a out-of-bounds read if the known_hosts file is truncated
+543	OpenDataPlane/odp-dpdk	1ed2c2bcd6c3	7c979901be09	CWE-125	platform/linux-generic/example/ml/mnist.c	319	0.95	linux-gen: example: ml: mnist: terminate example digit string
+544	openkylin/libwebp	53af2e101457	2dc9d7ed3dca	CWE-125	src/dec/vp8l_dec.c	1248	0.85	Fix invalid incremental decoding check.
+545	OpenMPT/openmpt	9725dc7a6fdd	77292e28cae0	CWE-125	soundlib/Load_symmod.cpp	479	0.96	[Fix] SymMOD: Potential heap out-of-bounds read or write past sample end with malformed sustain loops.
+546	OpenSIPS/opensips	603e40a61b7c	e44cf7ee0b84	CWE-125	modules/aaa_diameter/dm_impl.c	768	0.95	aaa_diameter: Fix out-of-bounds read
+547	OpenXiangShan/difftest	d62250c6f670	c0ed9401d3a5	CWE-125	src/test/csrc/common/compress.cpp	883	0.97	fix(compress): fix out-of-bounds access in loop (#768)
+548	orangecalculator/OrangeOS	5afb257e54fd	dbf705580935	CWE-125	src/display/terminal.c	2833	0.85	Add bounds check in terminal print routine.
+549	orangice1997/cgi-io	901b0f0463c9	98cef9dda636	CWE-125	main.c	842	0.97	main: fix two one-byte overreads in header_value()
+550	OrioPrisco/minishell	35c2da6dccfe	302a5f78c375	CWE-125	srcs/parser/merge_tokens.c	960	0.95	merge_tokens fix valgrind error
+551	ossimlabs/ossim-plugins	f09873decd8a	1fbc7b40ab00	CWE-125	aws/src/ossimS3StreamBuffer.cpp	516	0.95	Fix S3 stream reading past end of buffer.
+552	otienojoseph/alx-low_level_programming	dffd0eb54c4a	2a0963796d09	CWE-125	0x17-doubly_linked_lists/8-delete_dnodeint.c	229	0.9	fix: Add check for out of range index
+553	ovistore/tic-80-symbian-gitclone	324d04d3d1f8	9ed15297f600	CWE-125	src/ext/png.c	1317	0.95	#2311: fixed crash when steganography code reads out of bounds
+554	oyansmlilo/pytorch	81e5ac57e797	e76cab245e69	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+555	ozgurozkan01/TPS_Game	ba47f5cae089	c6d94f3293b5	CWE-125	Source/TPS_Game/Private/HUD/Item/InventoryWidget.cpp	3783	0.85	fix index out of range bug
+556	ozzysmithjones/entity-component-system	ed1417965c86	fdd8307839cb	CWE-125	entity_component_system/entity_component_system/entity_component_system.h	583	0.9	Added out of bounds checks in debug
+557	PalmNeko/CPP	5a086a8a35c1	eb61923e7cbd	CWE-125	src/CPP00/submit/ex01/main.cpp	365	0.92	fix: no out of range when empty index selection.
+558	Paxheim/FFMPEG_EBUR	fcf74c5ebc52	f49950307380	CWE-125	libavcodec/vvc/dec.c	463	0.97	lavc/vvc: Fix buffer overread in CABAC
+559	pbelecky/libdeflate	3f21ec9d6121	5be041247e52	CWE-125	lib/deflate_decompress.c	2282	0.96	deflate_decompress: error out if overread count gets too large
+560	PenNameLuXun/xen	cba90ddee086	7897492d8082	CWE-125	xen/common/bitmap.c	617	0.96	xen: fix buffer over-read in bitmap_to_xenctl_bitmap()
+561	pgsql-jp/jpug-doc	75f31a3f2674	a06efbc3ac72	CWE-125	src/backend/utils/activity/backend_status.c	444	0.82	Avoid memory size overflow when allocating backend activity buffer
+562	phma/quadlods	6337cce0e4ce	ac1c73002ab1	CWE-125	pairpoint.cpp	2094	0.85	Check that k and l have the same index
+563	pitkana/company-and-conquer	3d97454ab1bc	d10d4fc72bb1	CWE-125	src/backend/helper_tools.hpp	4259	0.92	Added CHECK_MATRIX_BOUNDS back and added [[nodiscard]] flags
+564	pkoshevoy/aeyae	94d826c04642	45bed12d14c2	CWE-125	yae/thread/yae_ring_buffer.cpp	566	0.9	Avoid RingBuffer out-of-bounds read/writer after it's closed
+565	pnhpokv/pytorch	0912371b5f56	41696ba3df25	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+566	PolyCam/open3d	79a607e58f63	1f84a1126521	CWE-125	open3d/io/file_format/FileGLTF.cpp	1657	0.96	Adding out of bounds safety checks in the reference_texture_if_needed and read_material lambdas in io::ReadTriangleMeshF
+567	praydog/REFramework	a43bf2eac4a3	72f19d96f949	CWE-125	shared/sdk/SystemArray.cpp	1268	0.96	SystemArray: Add out-of-bounds checks
+568	PREET-1999/CS744-Project-OMR	1d6268571b63	56cb81f5e264	CWE-125	compiler/optimizer/VirtualGuardHeadMerger.cpp	1764	0.95	Prevent VGHM from moving guards in the presence of shadow symrefs
+569	Pribess/OpenBSD	7cbc902d6f02	3bce11378f30	CWE-125	lib/libcrypto/rsa/rsa_oaep.c	1919	0.96	Fix a buffer overread in OAEP padding removal
+570	Project-Flexo/vendor_qcom_opensource_commonsys_system_bt	bef300d6fc48	c32efb488cbf	CWE-125	bta/av/bta_av_aact.cc	5579	0.93	Fix read out of bounds in BtifAvEvent::DeepCopy
+571	projectceladon/linux-intel-lts2023	f2b7a9f3839e	f9267972490f	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.95	drm/amdgpu: fix ucode out-of-bounds read warning
+572	projectzerodev/flanterm	cf304a78f400	9cb38e203eba	CWE-125	flanterm.c	542	0.96	Bound col256 accesses to avoid out-of-bounds read
+573	proxy-wasm/proxy-wasm-cpp-host	33b2e7596d4a	c3c1a8ff02ce	CWE-125	src/exports.cc	908	0.97	Don't overread buffers. (#303)
+574	ps2dev/ps2sdk	d68615d24ebf	8902a6bac78d	CWE-125	iop/system/iomanx/src/iomanX.c	267	0.95	add: iomanX add bounds check to device name length
+575	purduedb/OpenAurora	f91c87b31463	baeb8542c1cc	CWE-125	src/backend/utils/activity/backend_status.c	444	0.85	Avoid memory size overflow when allocating backend activity buffer
+576	Puxtril/Warframe-Exporter	4a46c501420b	17122af59df3	CWE-125	src/model/ModelReader.cpp	1343	0.92	Added more array bounds-checking
+577	qt/qtconnectivity	d8be9e550752	9ef2307c34f7	CWE-125	src/bluetooth/bluez/hcimanager.cpp	308	0.95	HciManager::_q_readNotify(): return early when no data is read
+578	qt/qtquick3d	2b864158355c	f02df7ff2abb	CWE-125	src/runtimerender/rendererimpl/qssglightmapper.cpp	1702	0.97	blendLine(): fix out of bounds read/write
+579	Quantx/sbtools	9a061b941456	c9daa1188a5e	CWE-125	src/sbhitbox.c	1047	0.95	Added bounds check
+580	QuartermindGames/ape	b522b477c47a	3c06971e033f	CWE-125	src/forge/forge_editor_world.cpp	512	0.95	Add bounds check.
+581	QubesOS/qubes-pecheck	aed84d00fc94	689cce787673	CWE-125	winpe.c	494	0.88	Add internal assertion
+582	r-caso/QMLParser	39525d57051d	061822794113	CWE-125	qml-parser/src/parser.cpp	271	0.96	Add bounds check for advance()
+583	raceintospace/raceintospace	697dd4840069	26bd4f45d446	CWE-125	src/game/mc2.cpp	494	0.95	Fix out-of-bounds access in future missions screen
+584	rakeshbb108/Xn-Handover-2026.w10	dbfb806afa30	f1fb797ff67f	CWE-125	openair2/LAYER2/NR_MAC_gNB/gNB_scheduler_ulsch.c	387	0.9	Scheduler: Avoid out-of-bounds read/write
+585	RallyHereInteractive/unreal-plugins	5a593d9cf096	a6861c6b692a	CWE-125	RallyHereIntegration/Source/RallyHereIntegration/Private/Common/RH_AsyncWeb.cpp	606	0.95	Fix compressed data overread due to not truncating buffer.
+586	randrew/uxn32	5a227759a4a2	602518678221	CWE-125	uxn32.c	2200	0.95	Fix possible read out of bounds in original uxnemu audio code
+587	rapidfuzz/RapidFuzz	5537f9ce25ee	33a2e8f95d0e	CWE-125	src/rapidfuzz/process_cpp.hpp	432	0.95	fix out of bounds read
+588	raspbian-packages/openssl	6346c35ce198	7781078f8978	CWE-125	crypto/x509/t_x509.c	513	0.98	Fix a read buffer overrun in X509_aux_print().
+589	ravynsoft/drm-kmod	f87072c75dcd	7ff5c06dc4ed	CWE-125	drivers/gpu/drm/radeon/ci_dpm.c	309	0.95	drm/radeon: fix array out-of-bounds read and write issues
+590	razor7877/PixelBoy	032621ee30b7	a23334aae1f5	CWE-125	src/memory.c	653	0.92	Fixed memory read write potential overflow behavior
+591	razterizer/applaudio	1d9303a914bb	ad34e454e660	CWE-125	include/applaudio/AudioEngine.h	3793	0.96	AudioEngine.h: Probably fix for eluding audio-related segfault crash in Asciiroids (and maybe other apps too?).
+592	razterizer/Termin8or	984c7e63c058	59f81e12d46f	CWE-125	Dynamics/CollisionHandler.h	2001	0.95	CollisionHandler.h:
+593	reactos/reactos	cce3eb939311	44b2a46d032f	CWE-125	base/applications/regedit/find.c	864	0.95	Fix buffer read past end problem. (#5146)
+594	ready-player1/haribote	b93c10943095	aedf4cadc66f	CWE-125	main.c	390	0.95	Fix to detect tmpFlags[] index out of range
+595	redorav/crstl	ea0d3dcb96f5	cd2631f713ca	CWE-125	include/crstl/array.h	867	0.97	Add bounds checking to array
+596	redpanda-data/redpanda	c4affcd0115e	1ff6c83451a0	CWE-125	src/v/kafka/protocol/kafka_batch_adapter.cc	298	0.92	k/batch_adapter: always set short_read flag when batch is incomplete
+597	RememberOfLife/surena	b32a2d4dccbf	800a01eee841	CWE-125	src/repl.c	844	0.97	fix out-of-bounds read of movestr arguments
+598	RENCURELI/CustomLibrary	6f10cce702d5	21334f556c77	CWE-125	DataStructures/include/Array.hpp	415	0.95	Updated Array at and operator[]
+599	RenzAlt/msm-4.19	dd4459ef77f6	b40c3c65041d	CWE-125	techpack/audio/dsp/q6asm.c	725	0.97	dsp: q6asm: Add check for ADSP payload size
+600	riwux/rcore	e415fbbb49d7	c293e5662da6	CWE-125	posix/src/tee.c	667	0.95	posix/tee: fix potential out-of-bounds read
+601	rizinorg/rizin	f24036a3b762	6b9dd81732b4	CWE-125	librz/asm/arch/v850/v850_disas.c	434	0.95	CID 435760: Out-of-bounds read
+602	rkriemann/HLR	4a189e0d6c49	c64f3322391e	CWE-125	include/hlr/compress/aflp.hh	1208	0.96	added bounds check for zdata in mulvec_lr
+603	rmottola/Arctic-Fox	f5c5c6fb511b	939ff5bbcc69	CWE-125	modules/libmar/src/mar_read.c	359	0.97	Bug 1209551 - Don't read past the end of a buffer in libmar
+604	rnleach/eco-lib	e344fc858be2	00e4ce34507a	CWE-125	src/elk.h	2650	0.95	Read past end of array bug fix.
+605	ROCm/rocm-libraries	e6ee38be20c2	b369172cc6cf	CWE-125	projects/rocfft/library/src/device/transpose.cpp	829	0.95	transpose: don't read past the end of outStride
+606	roemil/LinkedList	21e804bd0f37	7d926d0f6f1a	CWE-125	LinkedList.cpp	1196	0.95	add check for index in bounds
+607	romhacks1776/GBArunner3RTC	d1efd9bf81e8	2f0609f7d388	CWE-125	code/core/arm9/source/SdCache/SdCache.c	2794	0.95	Implemented support for out-of-bounds rom reads. Fixes #138, fixes #113
+608	ropensci/writexl	534a06a3c3db	7f2e6b134286	CWE-125	src/write_xlsx.c	392	0.97	Avoid out of bounds read for unequal col length
+609	Rosalie241/clipper	c737b5a5e6d2	3a13d4e74c44	CWE-125	clipper/guitar.cpp	1043	0.95	Add bounds checking to dpad_values and pickup_values in guitar.cpp
+610	Rosalie241/RMG	37839b0178b4	69c24b913190	CWE-125	Source/RMG/UserInterface/Dialog/SettingsDialog.cpp	468	0.96	RMG: fix out of bounds read in SettingsDialog::loadGamePluginSettings()
+611	rpetrich/callander	f3888a7f263c	c109acb03b66	CWE-125	callander_main.c	378	0.85	Fix out of bounds read
+612	rspamd/rspamd	2e8009f5adf0	10d4463aa93c	CWE-125	src/libserver/milter.c	2646	0.96	[Fix] milter: robust RCPT ESMTP args parsing and safe cursor advance
+613	Runnereeume/pytorch	40029ba3d257	0ebadb3ec13e	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+614	RVCK-Project/rvck	f0923011c126	57752d523a3f	CWE-125	drivers/net/ethernet/qlogic/qede/qede_fp.c	879	0.98	net: qlogic/qede: fix potential out-of-bounds read in qede_tpa_cont() and qede_tpa_end()
+615	RVCK-Project/rvck-olk	08a28078886a	d42aa266a780	CWE-125	drivers/soc/qcom/mdt_loader.c	2000	0.97	soc: qcom: mdt_loader: Ensure we don't read past the ELF header
+616	ryan-de-boer/SimpleXTree	fed72de72559	009cb1ce6ff1	CWE-125	src/RandomAccessBufferedReader.cpp	1993	0.92	Fix error when read past end of file
+617	RZ781/libcitrus	c4f604fcfd83	20b6d0b8b67a	CWE-125	src/citrus.c	1701	0.95	Added bounds checking to some functions
+618	saifulapm/kakoune	ee39bf6c259f	296e874cdd58	CWE-125	src/buffer_utils.cc	896	0.93	Try to fix crash due to fifo read regression
+619	sailfishos-mirror/bluez	49d69b77fd4f	d01da89d6a1d	CWE-125	src/shared/bap.c	1498	0.96	shared/bap: check pac cc and metadata length before use
+620	sailfishos-mirror/calligra	c5e172e4682d	7ed286d13507	CWE-125	filters/sheets/excel/import/ExcelImport.cpp	342	0.97	Don't read one past the end
+621	sailfishos-mirror/file	411ec5bf0708	598b330050a9	CWE-125	src/compress.c	578	0.96	fix out of bounds read (clusterfuzz)
+622	sailfishos-mirror/llvm-project	7815df19deaa	d0da85745dac	CWE-125	clang/test/Preprocessor/print-header-json.c	440	0.95	[Clang] Fix brittle print-header-json.c test (#162484)
+623	sailfishos-mirror/qtdeclarative	a5412bece857	9c72d7f3dcf5	CWE-125	src/quicktestutils/quick/visualtestutils.cpp	459	0.95	QQuickVisualTestUtils::compareImages: fail if image depth is not 32
+624	sailfishos-mirror/sudo	820d0ca5edd5	f764980def4f	CWE-125	src/utmp.c	1145	0.96	utmp_setid: Make sure we don't read past the end of ut_line
+625	saitoha/xserver-SIXEL	9471a5243d45	a4399b0cd439	CWE-125	dbe/dbe.c	1257	0.97	dbe: unvalidated lengths in DbeSwapBuffers calls [CVE-2014-8097]
+626	SakuraEngine/SakuraEngine	77cb8a0def75	39e6f987dc71	CWE-125	samples/application/game/src/render/forward_pass.cpp	801	0.85	fix vulkan read out of bounds warning of 0-stride vertex streams
+627	Samsung/CAS	c0bde4a8c617	83544a2deb7b	CWE-125	tracer/execve_trace.c	441	0.96	Fix out-of-bounds read in tracer when ignore_repeated_opens is on
+628	sanchitachaurasia/DBIS-Project	2cf1c2447726	9b6eac994cad	CWE-125	src/backend/utils/activity/backend_status.c	444	0.82	Avoid memory size overflow when allocating backend activity buffer
+629	sangam11a/nuttx	4ce205cf0860	c9bc6b1ad554	CWE-125	libs/libc/locale/lib_iconv.c	513	0.96	lib_iconv.c:Fix possible out-of-bounds reads
+630	scrapfly/chromium	77c59444db9c	09b0daa05b8c	CWE-125	third_party/blink/renderer/core/html/parser/html_document_parser_fastpath.cc	2037	0.97	blink: ensures html fast path parser doesnt read past end
+631	sdutson/SpriteEditor	feceaab09ef6	31c8139aaeb7	CWE-125	canvas.cpp	951	0.95	Added bounds checking for drawing on the canvas.
+632	SecLabz/proxmark3	6b648396e700	9e8adce7a98b	CWE-125	client/src/mifare/mifarehost.c	331	0.86	fix -Wstringop-overread error
+633	SecMeant/mk2	4ee3cb8dec0f	a8eccd1f7027	CWE-125	mk2.c	7988	0.86	Rebased to kernel v6.2, bug fixes
+634	seeDesign-420/liqadwaita	a0af4e023cfa	7c5bb9ee636c	CWE-125	src/adw-tab-view.c	505	0.92	tab-view: Fix GtkSectionModel.get_section() behavior
+635	seemoo-lab/owl	8e4e840b212a	62e4230c016e	CWE-125	daemon/owl.c	525	0.9	Fix possible buffer overread in wlan string
+636	seidelma/freebsd-src	d30a1689f5b3	611cf392672c	CWE-125	lib/libefivar/efivar-dp-format.c	451	0.96	libefivar: Fix a buffer overread.
+637	seznam/richtext-processor	ca5651a61013	2af5c1a1e09b	CWE-125	string.c	275	0.95	Add bounds check to string_substring
+638	sgranfield4403-3/shadPS4	c5a64ab902ff	61b49b49f60f	CWE-125	src/shader_recompiler/backend/spirv/emit_spirv_atomic.cpp	453	0.85	fix: Add missing OpSelectionMerge in bounds check.
+639	sgtest/megarepo	fd4358bef1d5	b726bbe9d9ff	CWE-125	tensorflow/third_party/xla/xla/array.h	285	0.95	tensorflow: [XLA] Add bounds checks to xla::Array::Slice
+640	shakugannosaints/5dc_ml	81757e481d0d	60c42991b822	CWE-125	src/core/action.cpp	399	0.95	Prevent out-of-bounds access in action.cpp
+641	sharingTSU/FunASR19	c253fe7d7a27	7b58bdccfee1	CWE-125	runtime/onnxruntime/src/funasrruntime.cpp	1717	0.95	Add bounds check for msg_stamp before timestamp processing (#2760)
+642	Sharrakor/PokemonMelba	4ed4b6901983	de3493ff0ec3	CWE-125	src/wild_encounter.c	3372	0.97	[BUGFIX] for abilities affecting wild encounter tables
+643	shashankdangi5423/whisper	1fc3a660ed3d	e194d9b5c80b	CWE-125	Mcm.cpp	473	0.95	Fixed bug in Mcm::commitVecReadOps: Code was considering elements past the end of a read-operation.
+644	ShiftMediaProject/libxml2	2876ac5392a4	8e9fdc20f013	CWE-125	xmllint.c	351	0.97	[CVE-2024-34459] Fix buffer overread with `xmllint --htmlout`
+645	ShikinChen/redroid_lineage_rockchip_frameworks_av	b85352641564	74a6c2b2c258	CWE-125	media/codec2/vndk/platform/C2SurfaceSyncObj.cpp	416	0.97	C2SurfaceSyncObj: prevent OOB read in Import
+646	shogo82148/emperl5	eb1b97ad0e9f	0b8fa7165157	CWE-125	locale.c	316	0.95	locale.c: Don't read off buffer end
+647	sigbin35/Stock_c2q_kernel	db010dcf0fef	3cbed7e847d5	CWE-125	arch/arm/net/bpf_jit_32.c	1662	0.93	arm, bpf: Fix offset overflow for BPF_MEM BPF_DW
+648	simplito/privmx-endpoint	2aed2368aad0	89c9b7caaabf	CWE-125	endpoint/store/src/FileHandler.cpp	546	0.9	fix: Fix chunk index calculation for empty data
+649	Siqve/siqhub-iot	980fec6604fb	b07b97330152	CWE-125	Arduino/src/LED/LEDController.cpp	987	0.95	Added check for out of bounds activeMode
+650	slapdau/pCodeDump	ad66b00f6a54	70fed2bf597f	CWE-125	pcodedump/segment.cpp	630	0.95	Add bounds checking to SegmentDictionaryEntry constructor.
+651	sleiner/pizmidi	1b749a4fa349	abfb9e04b86f	CWE-125	pizjuce/midiPads/midiPads.cpp	630	0.97	Fix out-of-bounds read in midiPads
+652	Smarita-New/RISC-V_Emulator	230b4e2cf515	7973d4b3269e	CWE-125	RV32I.cpp	1916	0.92	Added memory bounds checking.
+653	SmashPP/libvpx	33f3ae34144e	7e88600bf907	CWE-125	vpx_dsp/arm/highbd_intrapred_neon.c	2183	0.98	Fix potential buffer over-read in highbd d117 predictor Neon
+654	smlu/OpenJones3D	698ecddd6f60	88351364963b	CWE-125	Jones3D/Main/JonesMain.c	457	0.95	[Jones3D] Fix using invalid buffer & buffer overread
+655	snailspeed3/RiiStudio	bc2c45d14619	7108787348be	CWE-125	source/librii/rhst/MeshUtils.hpp	425	0.97	[librii] rsl: SplitByPrimitiveRestart() Don't attempt to read one past end of span
+656	SourceArcade/flashprog	5feb8cdb6ff4	b822ce85aaed	CWE-125	helpers.c	619	0.97	helpers.c: Fix undefined behavior in strndup()
+657	sPHENIX-Collaboration/coresoftware	05bdfa0af3af	5d92dce43785	CWE-125	offline/packages/epd/EpdReco.cc	642	0.85	add bounds check to GetTilePhi,GetTilePhi0 methods
+658	spiretrading/nexus	2f6e21c76385	b9be874d7e30	CWE-125	Applications/Spire/Source/Ui/TableBody.cpp	674	0.9	Added bounds checking to the TableBody when resetting its visible region.
+659	SpliFF/metalstorm	de6de0258d0c	6bf7b1a22b99	CWE-125	rts/Sim/Path/TKPFS/PathEstimator.cpp	2040	0.95	added missing bounds check in starting block search
+660	sptzmllr/legends-gis	5ac971703bbb	3c9a0c75660d	CWE-125	saga-gis/src/saga_core/saga_api/metadata.h	771	0.96	saga_api, CSG_MetaData::Get_Child(int Index): fix, return NULL if Index is out-of-range
+661	stealify-backports/https-dyncall.org-pub-dyncall-dyncall	8e9637851326	754966345570	CWE-125	test/suite_aggrs/main.c	371	0.8	added missing nullptr check to access bounds guard
+662	StefanMichielse/linux-kernel	a84fbf205609	1bd69b4bf1dd	CWE-125	tools/perf/builtin-stat.c	358	0.96	perf stat: Fix aggr mode initialization
+663	StephenCrawley/krua	961d8f5488ee	ba3c54a46e75	CWE-125	src/eval.c	340	0.96	add bounds check to variable tokenization
+664	StrangerDeer/cpp-space-invader	06b22dada7e3	1d454277b1ca	CWE-125	Game.cpp	657	0.9	fix random index being out of range when picking a random pickup after crystal asteroid is destroyed
+665	strukturag/libheif	f2d7c57c71a0	af0fd4faf8a6	CWE-125	libheif/region.cc	430	0.98	fix out-of-bounds read (oss-fuzz Issue 58150)
+666	summaryInfo/nsst	1ffd02d33348	6d85c616724b	CWE-125	term.c	369	0.85	Don't read past the end of the buffer in term_paste
+667	sunyaojing/pg	a0b013625908	6103d2ccaed4	CWE-125	src/backend/postmaster/pgstat.c	434	0.85	Avoid memory size overflow when allocating backend activity buffer
+668	supriti/ceph-standalone-backup	bb05e30092f5	4f50887c1f72	CWE-125	src/osd/ReplicatedBackend.cc	6048	0.95	osd/scrub: do not attempt to read past the end of an object
+669	swift-project/pilotclient	d1b1ee9c06c6	dfc288bfd741	CWE-125	src/plugins/simulator/fsxcommon/simulatorfsxcommon.cpp	382	0.92	Guard against aircraft with more than 4 engines
+670	sysprog21/mado	0c27f62e563a	208b00907b5b	CWE-125	src/image-gif.c	5959	0.95	Fix potential out-of-bounds read access
+671	sysprog21/shecc	2412df4ea740	4da0b6ed43a5	CWE-125	src/globals.c	397	0.96	Fix a crash when reporting an error at the end of a file
+672	takahashijake/Data-Structures-Practice	70ae25c2f1a8	45285c540121	CWE-125	ArrayList/ArrayList.h	666	0.9	added bounds checking
+673	taskset/kernel-automotive-9	af9d669f875e	a3965a77de26	CWE-125	tools/lib/bpf/libbpf.c	510	0.96	libbpf: Avoid reading past ELF data section end when copying license
+674	tbpaolini/imgconceal	7da8d565e4b0	1bfdaa6d8945	CWE-125	src/globals.h	490	0.9	Error for attemped out-of-bounds read from the image
+675	tc-agent/glaze	2edbe2627697	d4d6ee98081a	CWE-125	include/glaze/core/seek.hpp	279	0.96	Add bounds check for seek vector access (#1822)
+676	tc-agent/libssh2	8ddf3b317fa0	1045cfd03321	CWE-125	src/agent.c	976	0.98	agent: pageant backend, bound reply copy, handle missing reply (#1711)
+677	Tcholly/voxel	8be36030ef9f	2180eacea9b9	CWE-125	src/chunk.c	930	0.96	Added some error and bounds checking
+678	Team254/aos-public	ca780bc0f942	556ec23ced8f	CWE-125	third_party/flatbuffers/src/reflection.cpp	1232	0.97	Fix flatbuffers::Verify() method for <4 byte buffers
+679	TeamOpenFIRE/OpenFIRE-App	87ab2d04511a	46842e630db9	CWE-125	src/appserial.cpp	4300	0.92	Break out of profile loading when out-of-bounds warning is read
+680	TeejMcSteez/ITCS3112FinalProject	edd956ff985f	e301147e996c	CWE-125	src/classes/Tokenizers.cpp	1067	0.95	Fix read past end error by either incrementing the counter or removing bytes/adding pair, not both
+681	TerraBreus/cub3d	be3684647d9a	0a30877e0f25	CWE-125	geometry_game/DDA_attempt.c	864	0.96	added out of bounds check for wall detection
+682	TexasInstruments/ti-linux-kernel	22eb669f0de3	d4868b3f1879	CWE-125	drivers/crypto/sa2ul.c	1180	0.97	PENDING: crypto: sa2ul - Fix command label template corruption.
+683	The-Briel-Deal/factorio-clone	bfe4cf1bad9a	aba66f76e9db	CWE-125	src/player.c	515	0.85	Add assert to check sprite index is within bounds.
+684	theReuben/pokefirered-coop	a96e59272354	67618dac32c4	CWE-125	src/wild_encounter.c	3372	0.97	[BUGFIX] for abilities affecting wild encounter tables
+685	TheShrubMaster/dolphin-wiim-audio-fork	8b610101bcf3	c0c180bdc21c	CWE-125	Source/Core/Core/AchievementManager.cpp	459	0.95	Fix memory bounds error in achievements dev
+686	thiremani/pluto	12467f7e475a	a6716fcb6acc	CWE-125	runtime/array.c	1165	0.97	fix(runtime): 🔒 add bounds checking to array get functions
+687	tidewise/drivers-orogen-lidar_livox	e2b7395193fd	be1aa5ddb95a	CWE-125	tasks/Task.cpp	2212	0.95	fix: add bounds checks to error
+688	TinkerBoard-Android/rockchip-android-u-boot	77b5b8cb2089	a4cbeb347290	CWE-125	fs/ext4/ext4fs.c	470	0.95	CVE-2019-13104: ext4: check for underflow in ext4fs_read_file
+689	TinyMUSH/TinyMUSH	1cdaa799f011	c45d3a4c2b78	CWE-125	netmush/wild.c	1986	0.95	wild: critical final bugs in glob_match and register_match
+690	tjko/jpegoptim	29a073ad297a	f20f0e877533	CWE-125	jpegoptim.c	391	0.96	Fix possible read past the end of inbuffer (when parsing corrupt JPEG).
+691	tlaukkanen/tangara-fw	25c5896dc5c2	7a54ff0df9c1	CWE-125	src/audio/include/stream_info.hpp	836	0.92	add some bounds checking asserts
+692	tom42/shrinkler-gba	065f93d9691c	8613b13e0611	CWE-125	shrinklergba/src/lzss.cpp	349	0.97	lzss_decoder: check for read past end of compressed data
+693	tonestone57/Haiku-FEB02	31b7065940be	2b162ce97262	CWE-125	src/system/kernel/slab/allocator.cpp	720	0.96	kernel/slab: Remove terminating 0 from kBlockSizes.
+694	toniebox-reverse-engineering/teddycloud	b0ea28b95457	2f4d21a0f766	CWE-125	src/platform/platform_linux.c	927	0.96	catch buffer overread
+695	toniguliyev/pytorch	0ab2c9a6bb92	2c68bb950bb9	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+696	torvalds1Found/linux	4a8f8fafbd6b	f890c8513f45	CWE-125	fs/bcachefs/btree_update.h	371	0.96	bcachefs: Add extra padding in bkey_make_mut_noupdate()
+697	totalspectrum/spin2cpp	a93be2ad5568	eca5718aaa44	CWE-125	backends/nucode/nuir.c	826	0.92	fix ptr index out of range bug
+698	ToyFarms/aplayer	9a330f32e446	d2f5b9c1f33d	CWE-125	src/struct/pathlib.c	565	0.95	Add bounds check
+699	trailofbits/vast	4ffe4c3e388e	cf1de984ed9d	CWE-125	include/vast/Conversion/ABI/AggregateTypes.hpp	1369	0.96	conv:abi: Fix out of bounds reads when deconstructing aggregate at callsite.
+700	TravisWheelerLab/BATH	1c76d9e4774f	b07064ab8536	CWE-125	src/p7_splice.c	944	0.92	Fix bug where non-standard nucleotide characters cause read past end of sub-sequence
+701	truncs/recastnavigation	3c4a34968afa	405cc095ab3a	CWE-125	DetourTileCache/Source/DetourTileCacheBuilder.cpp	323	0.97	Fix for out of bounds read in tile cache builder. (#601)
+702	tudelft-cda-lab/FlexFringe	b80d365b7d98	bb624372d223	CWE-125	source/predict.cpp	433	0.9	Fix bug where predict_trace would try to read past the end of the align_it iterator in certain cases
+703	tugrul512bit/CompressedStringLib	80be522334d6	9aa1601743d1	CWE-125	CompressStringLib.h	378	0.95	Added bounds check for the predictor compression start.
+704	TuNNan2003/kuzu_AI	18c7e529ffbf	0beb96d1d321	CWE-125	src/storage/buffer_manager/buffer_manager.cpp	533	0.85	Fix undefined behaviour in the Buffer Manager after failure (#4246)
+705	TuringBitChain/TBCNODE	c6208239d42f	4d05617dca27	CWE-125	src/validation.cpp	419	0.95	fix: fix a potential out-of-bounds read issue in HeightFormScript()
+706	tux-type/supsmu	99f18395807f	7e39076df36d	CWE-125	supsmu/supsmu.c	1924	0.92	Add periodic case bounds checks and wrapping to smooth function
+707	uACPI/uACPI	55df282c7ff9	71fee3a4a636	CWE-125	source/interpreter.c	789	0.97	interpreter: fix potential OOB for non-null-terminated strings
+708	ubinux/linux-yocto_ubinux	6114f2e8d7fb	bd23d76506ca	CWE-125	drivers/media/platform/mxc/capture/ov5640_mipi.c	654	0.97	LF-5735 media: ov5640: Fix Coverity Issue: 21141306 Out-of-bounds read
+709	uclouvain/openjpeg	1650ff939cef	a1a56ff93961	CWE-125	src/bin/common/color.c	3089	0.97	Merge pull request #1566 from rouault/fix_1563
+710	ugexe/dyncall	ec15d13c40c9	36113498600f	CWE-125	test/suite_aggrs/main.c	371	0.8	added missing nullptr check to access bounds guard
+711	Unity-Technologies/MeshSyncDCCPlugins	a69cd6e05a22	1a0dd81b42b1	CWE-125	Plugins~/Src/MeshSyncClientBlender/msblenContext.cpp	725	0.92	blender-fix: material index crash fix (#367)
+712	UPBGE/upbge	a31a5b2212b4	0d596ec6aafe	CWE-125	intern/ghost/intern/GHOST_SystemWayland.cc	280	0.97	Fix: potential out of bounds read in Waylands multi-line URL parsing
+713	usein-abilev/mic-audio-rack	7321c44f7744	81c2d87a1039	CWE-125	src/ui/plugin_chain.h	537	0.95	fix: add bounds check before showing plugin content
+714	V-Sekai-fire/godot-sandbox-robust-weight-transfer	ce4a0560e518	398d4e250273	CWE-125	robust_weight_transfer/robust_skin_weight_transfer/robust_weight_transfer.cpp	3230	0.86	Add bounds checking.
+715	vandriodd/holbertonschool-low_level_programming	22ebbc152ff0	8ebb1e6e2c78	CWE-125	doubly_linked_lists/8-delete_dnodeint.c	801	0.9	[Fix task 8] out of range index case
+716	Velko/8-bit-CPU	c6c743865a04	4141b06be94b	CWE-125	emulator/cpu-modules/control_words.c	2060	0.95	Fix out-of-bounds read
+717	venoomdev/xiaomi_surya	e11f2b89fad6	28599686e354	CWE-125	drivers/media/tuners/m88rs6000t.c	716	0.97	media: m88rs6000t: avoid potential out-of-bounds reads on arrays
+718	vga-group/tauray	8bbdadd30d4e	07a8304fa008	CWE-125	src/descriptor_set.cc	806	0.97	Fix out-of-bounds read in descriptor set update
+719	vgteam/vg	e89a60161370	82554941f525	CWE-125	src/index_registry.cpp	1470	0.96	don't read out-of-bounds filenames
+720	victoralfred/mtls_lib	9d8fc8b6db8e	84008981f2ff	CWE-125	src/mtls_identity.c	1168	0.95	Fix stringop-overread warning in SPIFFE ID copy
+721	villagesql/villagesql-server	aa04a51f2179	b441dbee81d0	CWE-125	strings/dtoa.cc	465	0.95	Bug#35154335 mysqld asan crash at my_strtod_int
+722	Violensia28/DIY-Charger-Simple	45048e91c728	43a141f8f0db	CWE-125	src/UI.cpp	2189	0.92	Improve ISR handling and add bounds checking
+723	vjhin01-hash/secscan	ef71e5e37dd0	ff92f5bae941	CWE-125	nbase/nbase_addrset.c	320	0.96	Avoid out-of-bounds read leading to runaway allocations. Fixes #2731
+724	vk4bay/esp-idf	66995965e783	80454bbc59a6	CWE-125	components/esp_http_client/lib/http_auth.c	1428	0.96	fix(esp_http_client): prevent out-of-bounds read in Digest auth
+725	Vovolandinio/s21_matrix_oop	f0831d2d26da	cb7cd1cb9a9b	CWE-125	src/s21_matrix_oop.cc	371	0.9	added an additional check for out of bounds matrix.
+726	vsevolod-oparin/CTranslate2-Synth	bdd550ea78ca	e4ef27c8e1ee	CWE-125	src/decoding.cc	658	0.95	Fix out of bounds vector read in biased decoding (#1059)
+727	vsicurella/everytone-tuner	45f223afc9f5	e0399aa3aa42	CWE-125	Source/MidiNoteTuner.cpp	641	0.95	adjusted mts bounds and added source check
+728	w92801933/openscad	b81369dffc3f	04aa887cd3e8	CWE-125	src/comment.cc	283	0.97	Add file bounds check to comment parser
+729	warmcat/libwebsockets	7df24cca7144	2bb9598562b3	CWE-125	lib/misc/upng.c	362	0.99	NN-2025-0104: UPNG out of bounds read
+730	waveygang/wfmash	5a3ce52a9e01	7c95af9e0926	CWE-125	src/align/include/computeAlignments.hpp	1377	0.95	refactor: Add target padding with bounds checking during mapping record parsing
+731	WDrijver/scummvm	5809c34120b1	2a13273e5caf	CWE-125	engines/scumm/string.cpp	399	0.96	SCUMM: Fix past-buffer read on fakeBidiString
+732	weaverant/openssh-portable	c991273c18af	b5b405fee7f3	CWE-125	hostfile.c	677	0.98	upstream: fix a out-of-bounds read if the known_hosts file is
+733	webmproject/libwebp	95ea5226c870	902bc9190331	CWE-125	src/dec/vp8l_dec.c	1248	0.95	Fix invalid incremental decoding check.
+734	webrogue-runtime/glib	2c345bd8e234	155d00a61ee4	CWE-125	fuzzing/fuzz_data_input_stream_read_upto.c	1154	0.92	Merge branch 'fuzz-fix' into 'main'
+735	webserver-llc/angie	21c017e29a03	0a7322faa789	CWE-125	src/http/modules/ngx_http_proxy_module.c	895	0.97	Proxy: fixed segfault in URI change.
+736	WenHsuanYu/Leetcode	67d8692c1835	1ae73b00933f	CWE-125	10. Regular Expression Matching.cpp	1308	0.95	Fix index out of range
+737	WerWolv/ImHex	45ea22083e70	9ede1ab32c5e	CWE-125	plugins/builtin/source/content/views/view_hex_editor.cpp	1739	0.96	fix: Out of bounds memory read in hex editor with multi-byte visualizers
+738	WerWolv/PatternLanguage	d21deb9c5acb	66882739d3bb	CWE-125	lib/source/pl/core/preprocessor.cpp	501	0.95	preprocessor: Fixed out of bounds read when having comment at end of file
+739	WhaleConnect/whaleconnect	789ba1bbc7de	fcae43904a7d	CWE-125	src/components/textselect.cpp	435	0.95	Add out of bounds check for text selection
+740	whatpulse/linux-external-pcap-service	4c40bb63e4de	7f0e558136f5	CWE-125	pfringcapturethread.cpp	1299	0.95	pfringcapturethread.cpp: make sure that we not read data past a frame.
+741	WickerBaskett/CS311	75aec53a5896	c862a8ef3205	CWE-125	homework5/gfsarray.hpp	2008	0.96	Added bounds checking to insert and erase
+742	wiedehopf/readsb	71b4390c7c12	25b1409e0745	CWE-125	api.c	435	0.97	api: fix out of bounds read
+743	WinAndronuX/gestemp	4eca863d01ac	27ca2b83aa0e	CWE-125	lib/listview/src/listview.c	1191	0.8	Merge pull request #12 from WinAndronuX/devliblistview
+744	wolfSSL/wolfssl	d6b4b27cd154	be233fc80584	CWE-125	src/tls13.c	508	0.92	CID 299893 out of bounds read with XMEMCMP
+745	wolfwood/SSPiRAL	72dc68d5b521	8ee53b0db115	CWE-125	c/spiral.c	871	0.96	[C] fix (discarded) out-of-bounds reads from binomialCoef LUT
+746	wrl/rutabaga	35460b1b810b	98cd7ef9c57c	CWE-125	src/text/font-manager.c	664	0.95	font-manager: fix read-past-end when initialising fonts
+747	wtarreau/httpterm	01c60e9fc842	b722defa8a7a	CWE-125	httpterm.c	364	0.95	BUG/MEDIUM: abort on too large request header block
+748	X-oss-byte/Trezor.firmwork	b1bee00a3a8f	c5d22b43955f	CWE-125	crypto/bip39.c	1098	0.95	fix(crypto): Fix bip39 out of bounds read.
+749	X11Libre/xserver	2e631d145444	71b25119f70f	CWE-125	hw/xwin/InitOutput.c	316	0.96	xwin: fix compiler warning on potential buffer read overflow
+750	xihtyM/unicode-escape	5a1d7076a78a	7be2f2e357a1	CWE-125	unicode_escape.cc	1804	0.93	Added bounds checking for \x escapes
+751	Xilinx/embeddedsw	3c0d989c9e41	60eeb9fb8f20	CWE-125	lib/sw_services/xilpm/src/versal_common/server/xpm_api.c	1150	0.97	xilpm: versal_common: server: Prevent out-of-bounds read when handling device attributes
+752	xingjianwei/pg15	95e91da66cf5	afc79591de8e	CWE-125	src/backend/utils/activity/backend_status.c	444	0.9	Avoid memory size overflow when allocating backend activity buffer
+753	Yashaeron12/DS-PBL	1adae275e6b6	ff46f7a9e2f4	CWE-125	stack.c	759	0.96	Enhance stack operations with bounds checking
+754	yashPat98/keplar_vk	dfd6a5980dfc	4ef5b3c75f60	CWE-125	graphics/gltf_model.cpp	950	0.95	[gltf] : Fix out-of-bounds indexing in material texture array
+755	ydb-platform/ydb	a6db175bc7b5	98fa122ce1cf	CWE-125	ydb/library/yql/core/type_ann/type_ann_core.cpp	1408	0.92	Fix vector out-of-bounds read in SqlProcess type ann
+756	yuffon/temp-tcpdump.bc	52f602dbea16	1f3cdf9e55a5	CWE-125	print-geneve.c	304	0.95	Geneve: Add a bounds check
+757	yugabyte/yugabyte-db	2a3c2ffa3275	4910c79722d7	CWE-125	convert.c	250	0.97	Fix read past the end of string in to_sigle_byte().
+758	yuvolkotrub/athena	a94915c7f951	07cfb4b7303f	CWE-125	Control/CxxUtils/test/ConcurrentPtrSet_test.cxx	345	0.9	Merge branch 'bounds.CxxUtils-20231013' into 'main'
+759	z64me/z64scene	e44534ddd4c5	33e5f1ef496a	CWE-125	src/skelanime.c	1694	0.96	fix crash on OOB animation data
+760	z80rotom/Luminescent	0477411674d1	7368c3aaff32	CWE-125	src/patches/drnd.cpp	746	0.95	Added bounds checking for some nat dex functions
+761	zabbix/zabbix	55825ca4c9a3	f460ae1a8927	CWE-125	src/libs/zbxsysinfo/common/dns.c	454	0.96	...G...... [DEV-2702] fixed buffer overread in DNS response
+762	Zamirosaurous/zamir	2df70ee45e46	62c84ab815c4	CWE-125	include/mgba-util/vector.h	1795	0.85	Util: Add debug bounds checking to vector
+763	zchunk/zchunk	1829fd18c962	1d8f14484b4e	CWE-125	src/lib/compint.c	459	0.97	Fix read off-by-one bug in compressed int function
+764	zer0reaction/util	99461a604bcb	00e2d158e704	CWE-125	da.h	2206	0.93	[da] added runtime bounds check for popping and inserting
+765	zhou-lab/biscuit	889d2d8a7cc8	1c510a160f99	CWE-125	src/cinread.h	193	0.9	Resolve #65
+766	ziguilp/videolan_dav1d	076955a1534b	3d98a242a055	CWE-125	src/refmvs.c	753	0.97	refmvs: Fix buffer overread in save_tmvs() asm
+767	Zondax/ledger-casper	50ba3d7a7cde	3ee6df8f232f	CWE-125	app/src/crypto.c	875	0.96	add array bounds check
+768	ZQuestClassic/ZQuestClassic	16b54f0148c6	92dd8a21cf50	CWE-125	src/zc/ffscript.cpp	1556	0.94	refactor(zscript): add bounds check for `Screen->SideWarpID`, `mapdata::SideWarpID`
+769	zupat/related_post_gen	0247928602be	bad007b67397	CWE-125	cpp/main.cpp	2946	0.92	Merge pull request #399 from cyrusmsk/main
+770	zynthbox/libzl	5a2adad0f3c5	82d8dcc6b162	CWE-125	lib/SamplerSynthVoice.cpp	589	0.96	SamplerSynthVoice: Don't read past the sample end point
+771	zynthbox/libzynthbox	68836ee85b33	80ae780bc835	CWE-125	lib/SamplerSynthVoice.cpp	589	0.96	SamplerSynthVoice: Don't read past the sample end point
+772	delphix/grub2	702005fb29e9	1fabc5b85590	CWE-125	grub-core/fs/xfs.c	603	0.97	fs/xfs: Fix out-of-bounds read
+773	Zebra2711/edid-decode	2a0199715ef6	fa8c33396ade	CWE-125	parse-cta-block.cpp	773	0.97	edid-decode: fix buffer overread in infoframe parsing
+774	angstsmurf/spatterlight	4dbcb861562c	9f03c4e033f6	CWE-125	terps/level9/level9.c	615	0.97	Level 9: Fix more out-of-bounds reads
+775	Bforartists/Bforartists	680e2a6dd5bf	c042f381957f	CWE-125	source/blender/draw/engines/overlay/overlay_next_private.hh	288	0.96	Fix #130903: Overlay-Next: Crash using asan in Relation drawing
+776	boolforge/scummvm-alis-experimental	d35e881707c1	e0cc7ab08bf7	CWE-125	engines/bagel/spacebar/sraf_computer.cpp	2197	0.97	BAGEL: Fix out of bounds read. CID 1544824, 1544831, 1544852
+777	Elpitech/kernel	78023f4840e7	0394f8cf59ca	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+778	FuriLabs/linux-furiphone-radon	ae13f49b8dbc	ff6e0f754216	CWE-125	drivers/media/usb/hdpvr/hdpvr-video.c	272	0.96	media: hdpvr: fix error value returns in hdpvr_read
+779	Hasiergo/Lenovo_TB-X606F_kernel	1ed44e646b40	5c3fedad1780	CWE-125	drivers/usb/gadget/function/f_ncm.c	4368	0.97	USB: gadget: f_ncm: add bounds checks to ncm_unwrap_ntb()
+780	Kelsidavis/futura	db87ba80a50d	8f89da5c65b9	CWE-125	kernel/sys_dup2.c	5328	0.96	sys_dup2: Enhance Phase 5 FD bounds validation documentation
+781	librempeg/librempeg	f5e8fbd84e05	0a7b5e15bc11	CWE-125	libavcodec/vvc/dec.c	463	0.97	lavc/vvc: Fix buffer overread in CABAC
+782	mehdikholoosi/FreeRDP-3	cf5df96c149e	61062128e281	CWE-125	libfreerdp/core/security.c	257	0.97	[coverity] 1543228 Out-of-bounds read
+783	Limine-Bootloader/Limine	bfaba348fe42	f769ce5a01c5	CWE-125	common/fs/fat32.s2.c	1135	0.96	fs/fat32: Add bounds check to FAT16/FAT32 cluster map reads
+784	vstakhov/libucl	852f752708ae	54a5b5943b49	CWE-125	src/ucl_util.c	289	0.97	ucl_strnstr: fix out-of-bounds read
+785	CTSRD-CHERI/cheribsd	ee6cfb9079fb	8c63e6be1a7a	CWE-125	contrib/less/filename.c	251	0.96	less(1): Prevent bin_file() -> is_utf8_well_formed() buffer overrun
+786	EpilogLaserCorp/ghostscript	05efb77627aa	9f8ad8cff4ca	CWE-125	base/gstype2.c	428	0.95	oss-fuzz 50306: Add bounds check in Type 2 charstring interpreter
+787	GerbilSoft/rom-properties	89cd61d6bebe	c489d93a0908	CWE-125	src/libromdata/Other/EXE_PE.cpp	555	0.98	[libromdata] EXEPrivate::addFields_PE_Import(): Add an extra bounds check for iltAdvance.
+788	Hasiergo/Samsung-SM-A307FN-kernel	e9c66fd1d7a6	865890c7bd2b	CWE-125	drivers/video/console/fbcon.c	358	0.96	fbcon: Fix user font detection test at fbcon_resize().
+789	intel/quantum-intrinsics	efb5632dad9e	7f0c58ca3e80	CWE-125	llvm/lib/ExecutionEngine/Interpreter/ExternalFunctions.cpp	500	0.95	Do not read past the end of the contained type list
+790	amd/Linux_ISP_Kernel	5f392ebf3347	e2397d1c9f87	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c	445	0.96	drm/amdgpu: fix mc_data out-of-bounds read warning
+791	Bennko/bachelor-thesis-contiki-ng-extention	068edb5c9ba4	f638934358e0	CWE-125	os/net/ipv6/uip-nd6.c	395	0.97	Added size check to ensure data buffer is large enough, preventing out of bounds read
+792	boostorg/charconv	d0ad1f51fea6	fe54b41e6fdf	CWE-125	include/boost/charconv/detail/parser.hpp	2067	0.95	Add bounds checking to parser
+793	cacosc/ffmpeg	0af1d6995969	d34c7384351a	CWE-125	libavcodec/hevc/hevcdec.c	859	0.96	avcodec/hevc/hevcdec: move the slice header buffer overread check up in the function
+794	chengpeng-wang/dynamips	34d44d13a8f9	1588cdfa3d54	CWE-125	common/dev_mpc860.c	451	0.95	Merge pull request #167 from flaviojs/fix-out-of-bounds-read-mpc860_idma_fetch_bd
+795	dariocastillo11/binutils-gdb-objdump-plugin	aba5e314c8a7	f85611f4216a	CWE-125	gas/macro.c	942	0.96	More bounds checking in macro_expand
+796	ekuiter/torte-linux	75f7c95e8166	f7f3f02b2746	CWE-125	drivers/char/hw_random/core.c	456	0.96	hwrng: core - Add WARN_ON for buggy read return values
+797	Ezurio/wb-kernel	a54e2b2db1b7	f6e629dfe6f5	CWE-125	drivers/staging/rtl8723bs/core/rtw_ieee80211.c	506	0.98	staging: rtl8723bs: fix out-of-bounds read in rtw_get_ie() parser
+798	grivera64/libxml2-analysis	3ad7f8162457	c83147bff23f	CWE-125	xmllint.c	351	0.95	[CVE-2024-34459] Fix buffer overread with `xmllint --htmlout`
+799	IntroversionSoftware/gamelibs-libarchive	1667b31d0b17	a612bf62f86a	CWE-125	libarchive/archive_read_support_format_7zip.c	470	0.96	7z: fix out-of-bounds read in 7z self extracting archive detection
+800	lizr-arch/renderdoc-ai	f3c9074a7348	3a8fecf08e9d	CWE-125	renderdoc/driver/vulkan/vk_shader_cache.cpp	415	0.95	Fix out of bounds read of "&array[0]" (use array.data())
+801	mackyle/sqlite	a5a4038cc625	25ad2db269e7	CWE-125	ext/misc/memvfs.c	1026	0.96	Fix a buffer overread in demo code in ext/misc/memvfs.c.
+802	MediaArea/MediaInfoLib	3c1bf755c0e5	ee0536e31589	CWE-125	Source/MediaInfo/Multiple/File_Ancillary.cpp	727	0.96	Fix buffer overread in File_Ancillary.cpp
+803	mmoeller86/snescdrombinutils	6e1ee99772d2	40e7bdbddc8b	CWE-125	gas/macro.c	942	0.96	More bounds checking in macro_expand
+804	molkiya/clamav-macos-arm-fuzzing	76dab42a3097	f82492aef4e6	CWE-125	libclamav/readdb.c	6797	0.96	DB load, CRB: Fix benign heap buffer overflow
+805	nashmuhandes/VkDoom	19e1d400e4c5	2e795bebb40c	CWE-125	src/playsim/p_3dmidtex.cpp	784	0.95	Add bounds checking to GetMidTexturePosition, add assert to P_GetMidTexturePosition
+806	NTUT-FUCK-PTSD/Fuck-PTSD	d51763676607	a0cf94a7a31d	CWE-125	src/Music/RhythmIndicator.cpp	502	0.9	Merge pull request #99 from onon1101/patch
+807	parasetam0l/solis-kernel	8c22f59b33a6	f524942c136f	CWE-125	drivers/video/fbdev/omap2/omapfb/omapfb-ioctl.c	513	0.95	fbdev/omapfb: fix omapfb_memory_read infoleak
+808	phantom-smith512wq/app-ethereum	2827643cada3	6693e8bd4837	CWE-125	src_features/provideTrustedName/cmd_provide_trusted_name.c	731	0.97	Fix out-of-bounds read on TLV parser
+809	yuanjun8033/diskfire	d4e1bbb63690	d8062ea66da4	CWE-125	fs/f2fs.c	304	0.96	fs/f2fs: Do not copy file names that are too long
+810	7etsuo/tetsuo-pulse	b6ca86f713e8	5f95317ad187	CWE-125	src/http/SocketHPACK-huffman.c	1080	0.95	Merge pull request #1563 from 7etsuo/issue-1380-hpack-huffman-bounds-check
+811	8dcc/minesweeper	11b4a70e4322	55bb348587e8	CWE-125	src/main.c	975	0.95	Add bounds checks to cursor
+812	a1ive/grub	1657b46b471f	f9963e7cc5c8	CWE-125	grub-core/disk/lvm.c	2411	0.97	disk/lvm: Do not overread metadata
+813	AliveTeam/alive_reversing	514f1c083278	935a0dfc5c84	CWE-125	Source/AliveLibAO/GameAutoPlayer.cpp	1468	0.95	Merge pull request #1565 from paulsapps/master
+814	andyvand/kernel-xiaomi-sm6115	ffdc80e21777	efa6b89b5328	CWE-125	drivers/bus/mhi/core/mhi_main.c	400	0.95	mhi: core: Read transfer length from an event properly
+815	AnsonHooL/Gdelta	fd5669305b11	dbe32faf210a	CWE-125	gdelta.cpp	1213	0.95	Merge pull request #1 from WtzLAS/main
+816	atrium-os/freebsd-src	d930ec4ff976	3f707064a5f0	CWE-125	sys/dev/mii/dp83822phy.c	224	0.96	dp83822phy: Add missing MII_PHY_END to avoid buffer overread on probe
+817	AxelSchneewind/euclidean-shopa-approximation	f6a994851916	4f4532e76b1a	CWE-125	src/triangulation/subdivision_info_impl.h	2232	0.92	add bounds check
+818	Blarse/grub	ce3c081d0635	e57c13f0721b	CWE-125	grub-core/fs/xfs.c	603	0.98	fs/xfs: Fix out-of-bounds read
+819	BlueDream0911/kakoune	e204b9b6ad71	8dbf9584136e	CWE-125	src/buffer_utils.cc	896	0.92	Try to fix crash due to fifo read regression
+820	calamity-inc/Soup	82b393498502	6cc486a59d11	CWE-125	soup/LangDesc.cpp	409	0.95	Fix possible out-of-bounds read in LangDesc::tokenise
+821	camtisocial/p2p-chess	37978aa68981	df00d28acbc4	CWE-125	board.cpp	7913	0.82	linked getLegalMoves to movePiece and added bounds checking
+822	ccxtechnologies/linux-ccx-lts-6.1	d9b2c671306e	6a22d6454e79	CWE-125	drivers/soc/qcom/mdt_loader.c	1999	0.97	soc: qcom: mdt_loader: Ensure we don't read past the ELF header
+823	chrisant996/clink	7bd12cd22dd9	e99beb878ff4	CWE-125	clink/lib/src/word_classifications.cpp	374	0.96	Fix buffer overread caused by usage of strcmp on non null-terminated char arrays (#417)
+824	Coolaid003/pcsx2	26a68ef76ace	e4c1dc2359ed	CWE-125	pcsx2/GSDumpReplayer.cpp	2123	0.98	GSDumpReplayer: Fix possible memcpy out of bounds read and fix different size implicit casting warnings
+825	Daft-Freak/DaftBoy32	f51a7901a6e4	d8cbd8cbc1d5	CWE-125	core/AGBMemory.cpp	1486	0.96	Return "correct" vaules for out-of-bounds ROM reads
+826	dzaima/CBQN	06808414da9a	7f28308e44a4	CWE-125	src/builtins/select.c	6256	0.95	Separate code path for `cxsz=1`, fix out of bounds read for `RNK(x)==0`
+827	embrace-io/embrace-android-sdk	49faacd2e4b2	b4d037f34614	CWE-125	embrace-android-sdk/src/main/cpp/sampler/stacktrace_sampler.c	1309	0.95	add bounds check for current sample
+828	etemesi254/ffmpeg-ht	7140bea574b0	64f5ced40705	CWE-125	libavcodec/jpeg2000htdec.c	1255	0.96	avcodec/jpeg2000: Ensure refilling never reads past array end.
+829	fwupd/fwupd	d181f36c1d9a	0489baace4ba	CWE-125	libfwupdplugin/fu-bluez-device.c	920	0.95	trivial: Fix a recently added Bluez potential buffer-overread
+830	GNS3/dynamips	1c98f205c701	408441207a72	CWE-125	common/utils.c	289	0.97	Fix out-of-bounds read in hex_decode
+831	grommunio/gromox	72ff115ae28c	e6df7abd160c	CWE-125	lib/cookie_parser.cpp	488	0.97	lib: fix buffer over-read in cookie decoding
+832	HAPPYS1NGH/signet-ledger-eth-app	d1a3b6af0184	5ff59f92ef1b	CWE-125	src_features/provideTrustedName/cmd_provide_trusted_name.c	731	0.97	Fix out-of-bounds read on TLV parser
+833	itbird2020/squid_7_4	67190723c299	801593a993a6	CWE-125	src/time/rfc1123.cc	338	0.95	RFC 1123: Fix date parsing (#1538)
+834	jeffmerkey/linux	154828bf9559	1520007aa361	CWE-125	drivers/staging/rtl8723bs/core/rtw_ieee80211.c	506	0.98	staging: rtl8723bs: fix out-of-bounds read in rtw_get_ie() parser
+835	JGRennison/OpenTTD-patches	ee4e82c1b6d7	40f9b61b4c05	CWE-125	src/plans_gui.cpp	249	0.95	Plans GUI: Fix out of bounds read when selected plan remotely removed
+836	johncurley/ShaderTranslator	3d6094972024	ce841d44494d	CWE-125	src/gamedata/r_defs.h	540	0.95	Add bounds check
+837	JoysKo/HYBRID_CAF_kernel	358ce6f0688d	066ce78a68c1	CWE-125	net/bluetooth/hci_event.c	415	0.96	Bluetooth: avoid memcmp() out of bounds warning
+838	katef/libfsm	1a3e03857e9d	f40c58acaf78	CWE-125	src/adt/queue.c	313	0.9	queue: Fix a read past the end of the queue.
+839	kbinani/je2be	a23ba824adc0	6fc78662e2e3	CWE-125	include/je2be/toje/chunk-cache.hpp	2169	0.95	fix: Make ChunkCache::index nullopt when out of range
+840	kbinani/je2be-core	6b5fb4a7b8ae	b716d777c08d	CWE-125	include/je2be/toje/chunk-cache.hpp	2169	0.95	fix: Make ChunkCache::index nullopt when out of range
+841	kbsonlong/OpenCloudOS-Kernel	d2368bfcd856	82b486a8ac1a	CWE-125	drivers/usb/gadget/configfs.c	265	0.97	usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+842	KczBen/rs-linux-autoconnect	285897cb873f	c3973a290206	CWE-125	main.c	6886	0.95	Fix out of bounds reads
+843	LeeroysHub/Momentum-Apps	de1766af7643	7f2db8ce0b7f	CWE-125	actions/action.c	1631	0.93	Merge pull request #17 from WillyJL/fix/link-buffer-overread
+844	libressl/openbsd	7628b3cbf8e0	f92405709fc8	CWE-125	src/lib/libcrypto/rsa/rsa_oaep.c	1919	0.96	Fix a buffer overread in OAEP padding removal
+845	linux-surface/kernel	bf323db1d883	e841d8ea7223	CWE-125	drivers/staging/rtl8723bs/core/rtw_mlme_ext.c	887	0.97	staging: rtl8723bs: fix out-of-bounds read in OnBeacon ESR IE parsing
+846	lmchale/linux	38292407c2bb	25411f5fcf57	CWE-125	drivers/staging/rtl8723bs/core/rtw_mlme_ext.c	887	0.97	staging: rtl8723bs: fix out-of-bounds read in OnBeacon ESR IE parsing
+847	LouisMary008/Five	8e0d0f36b197	0483f5d62097	CWE-125	libarchive/archive_write_disk_windows.c	156	0.96	Fix out of bounds read in Windows symlink support
+848	MahmoudWali/HalconDev	eb51c4f41ac9	51710b936b75	CWE-125	EdgeExtraction/TestApp/EdgeExtraction.cpp	332	0.85	fix index out of range for close shape value
+849	MahStudio/WSLackware-kernel	1cdf5a7254a7	4b3918e10c15	CWE-125	drivers/tty/n_tty.c	1498	0.85	tty: n_tty: Restore EOF push handling behavior
+850	Mellvik/TLVC	c5686fbe4f04	dab1dc72cf71	CWE-125	elks/arch/i86/drivers/char/pty.c	337	0.85	[kernel] Fix pty buffer overread bug on signals
+851	MentorEmbedded/linux-flex-imx	2d355d14e950	cec271647721	CWE-125	drivers/tty/n_tty.c	1498	0.86	tty: n_tty: Restore EOF push handling behavior
+852	Miloas/emacs-mac	73903d6eadd7	36105b558704	CWE-125	src/json.c	325	0.9	Initialize state->error_buffer_read
+853	MolecularMatters/raw_pdb	de670899f42e	dfb2b5819f0d	CWE-125	src/PDB_ModuleLineStream.h	1581	0.97	Merge pull request #57 from tderoos/modulelinestream-fixes
+854	MrE-Fog/openbsdf	e8635dd34b4a	c28098c0dc68	CWE-125	src/lib/libcrypto/rsa/rsa_oaep.c	1919	0.96	Fix a buffer overread in OAEP padding removal
+855	MrE-Fog/wolfssl33	5c7be2fa98ea	c3b51af6cd0b	CWE-125	wolfcrypt/src/asn.c	360	0.95	Merge pull request #6202 from philljj/zd15807
+856	n-stott/x64emulator	a9fa26a345b5	703a6a1d9ff9	CWE-125	emulator/src/x64/mmu.cpp	1518	0.92	Mmu: add bounds check on memmove
+857	nik012003/ark-kernel-nabu	9c5e490093e8	37266a9ec7f5	CWE-125	tools/testing/selftests/nolibc/nolibc-test.c	437	0.95	selftests/nolibc: prevent out of bounds access in expect_vfprintf
+858	odamex/odamex	f755fd62290f	f9d2f47a4fe2	CWE-125	common/p_acs.cpp	344	0.95	fix potential out-of-bounds read in strbin
+859	OliW07/concept-kernel	9f9967fed9d0	19272b37aa4f	CWE-125	drivers/soc/qcom/mdt_loader.c	1999	0.97	soc: qcom: mdt_loader: Ensure we don't read past the ELF header
+860	oneapi-src/unified-memory-framework	5fefad36e281	7727ad184e03	CWE-125	src/provider/provider_tracking.c	583	0.95	Merge pull request #1181 from bratpiorka/rrudnick_dp_coverity_fix
+861	OpenMW/openmw	ed116ebf0418	50ab6c71c3c9	CWE-125	components/contentselector/model/contentmodel.cpp	452	0.9	Merge branch 'bounds-check' into 'master'
+862	OSGeo/gdal	1a6fe40db8be	5d91c28572ec	CWE-125	frmts/sentinel2/sentinel2dataset.cpp	1801	0.95	Sentinel2: fix potential out-of-bounds read (master only)
+863	outscale-mgo/zabbix	53ef2b7119f5	79d7ed9d1291	CWE-125	src/libs/zbxsysinfo/common/dns.c	5640	0.97	...G...... [DEV-2702] fixed buffer overread in DNS response
+864	particle-iot/tachyon-ubuntu-24.04-kernel	fefa05d44b1a	c71112e29379	CWE-125	sound/soc/qcom/qdsp6/topology.c	568	0.96	ASoC: qcom: topology: validate the max_op_port value
+865	piraterna/aurix	d7d6e1e232e8	0cbd54ee2ec6	CWE-125	boot/common/lib/string.c	190	0.96	fix: buffer overread vulnerability in strncpy
+866	PouyaShe/VeraMP-2	27bae8c9f5a2	4d2bf99dbcf9	CWE-125	code/shared/state/RlMessageBuffer.h	1270	0.95	fix(shared): {Read,Write}BitsSingle out-of-bounds
+867	rbm01/OpenBSD-src	f52de2706c3d	f316d0a7ea17	CWE-125	lib/libcrypto/rsa/rsa_oaep.c	1919	0.96	Fix a buffer overread in OAEP padding removal
+868	Reversive/android-reclass-server	96779dd3d0af	5ce43d936d96	CWE-125	network/packet/handler/handler.cpp	2626	0.92	fix: use std::get_if and add bounds check in handlers
+869	robinnewhouse/athena	1657d5f86118	e6afe587f24e	CWE-125	Control/CxxUtils/test/ConcurrentStrMap_test.cxx	400	0.9	CxxUtils: Fix race in test.
+870	rtissera/libchdr	96bdd36700b4	aaca599e18e4	CWE-125	src/libchdr_chd.c	6343	0.96	chd: Fix potential buffer overread in compressed data
+871	ruby/prism	173ccb84adb9	a4fba282874d	CWE-125	src/prism.c	1373	0.96	Avoid out-of-bounds reads
+872	scummvm/scummvm	723e9a2eb3a4	916f2dabc7f8	CWE-125	engines/director/castmember/script.cpp	489	0.96	DIRECTOR: Resolve hitting eos for scriptcast reads
+873	SKyletoft/hip-templates	04635a9e5eaa	6c34e5c84e03	CWE-125	gpu.hpp	4306	0.95	gpu: Update more error messages + add bounds checks
+874	Source-Authors/Obsoletium	ea900fabaf07	18fe42ca506c	CWE-125	utils/vbsp/vbsp.cpp	557	0.95	[vbsp] Fix potential out-of-bounds read for command line arg -embed
+875	StrikerX3/Ymir	e7223339c5d1	8aac7d57b666	CWE-125	libs/ymir-core/src/ymir/hw/vdp/vdp.cpp	1698	0.95	fix(VDP): Fix out-of-bounds read from array when rendering scroll NBGs in high-resolution modes
+876	Toteya/alx-low_level_programming	b09d0f1079ec	3b83a22dd043	CWE-125	0x14-bit_manipulation/2-get_bit.c	152	0.92	Task2: get the bit of a number at a given index, fix for: index out of range
+877	Trevohack/R0DDY	6d5ac7d8b759	f7b1441a9a80	CWE-125	src/roddy.c	2402	0.92	buffer overread fix, mutex subbed for spinlock optimization
+878	vinumdoc/vinum	a50cdccf81b9	9e30c8a73676	CWE-125	subprojects/vunit/vunit.c	411	0.97	vunit: Fix out of bounds read on read_all_from_pipe()
+879	weiss/c99-snprintf	7413f57ab98b	27b59ac13b47	CWE-125	snprintf.c	422	0.9	Fix out of bounds read in fmtstr
+880	wetrynagetgames/26rickard	1f27c47973bf	a2b57dd188ad	CWE-125	Userland/Libraries/LibPDF/Reader.cpp	271	0.95	LibPDF: Check for end of stream in Reader::matches_regular_character()
+881	yeabat8tcap/firedancer-apple	87f0924159ba	6990ff7cb83e	CWE-125	src/disco/gui/fd_gui.c	2031	0.85	gui: add bounds check to catch_up slots
+882	yusufarslanturk/zabbix-bgmot-2fa	8ecf86fd5865	2671711bb37b	CWE-125	src/libs/zbxsysinfo/common/dns.c	5626	0.95	...G...... [DEV-2702] fixed buffer overread in DNS response
+883	yusufarslanturk/zabbix_44x_next	a3b03a908948	2b915e5642eb	CWE-125	src/libs/zbxsysinfo/common/dns.c	6012	0.97	[ZBX-23855] Possible buffer overread from reading DNS responses (CVE-2023-32726)
+884	delphix/grub2	917072a83ac6	3685eb65f2b8	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+885	Zebra2711/edid-decode	25c6e797cfbb	e0998c21dbec	CWE-125	parse-displayid-block.cpp	456	0.97	edid-decode: fix buffer overread on product identification parsing
+886	angstsmurf/spatterlight	d698a2c5d07d	e290e47223b6	CWE-125	terps/advsys/advexe.c	492	0.97	Advsys: Fix read out of bounds
+887	Bforartists/Bforartists	5fe0ac040fc2	524a1637cb76	CWE-125	source/blender/draw/engines/overlay/overlay_next_private.hh	288	0.96	Fix #130903: Overlay-Next: Crash using asan in Relation drawing
+888	boolforge/scummvm-alis-experimental	aa7e21d6c05e	9142f4454fe5	CWE-125	engines/chewy/detail.cpp	1000	0.96	CHEWY: Fix coverity 1475951, 1475954 and 1475956 (out of bounds reads)
+889	Elpitech/kernel	857f4ed319aa	b01e77f3fc6e	CWE-125	drivers/usb/gadget/configfs.c	265	0.97	usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+890	FuriLabs/linux-furiphone-radon	c82c242aa4e1	2c2c67d72a95	CWE-125	drivers/usb/gadget/configfs.c	265	0.96	usb: gadget: configfs: Prevent OOB read/write in usb_string_copy()
+891	Hasiergo/Lenovo_TB-X606F_kernel	8d544a7f1fc0	2d8eafc9700f	CWE-125	drivers/video/console/fbcon.c	358	0.96	fbcon: Fix user font detection test at fbcon_resize().
+892	Kelsidavis/futura	867088061ae7	0dacaf614232	CWE-125	src/user/compositor/futura-wayland/comp.c	1093	0.95	fix: add bounds checking to compositor present_damage
+893	librempeg/librempeg	3f58dc31f008	e2dcf318e364	CWE-125	libavcodec/hevc/hevcdec.c	859	0.96	avcodec/hevc/hevcdec: move the slice header buffer overread check up in the function
+894	mehdikholoosi/FreeRDP-3	70eec6c18e86	501b86baf459	CWE-125	libfreerdp/codec/ncrush.c	1537	0.97	[coverity] 1543279 Out-of-bounds read
+895	Limine-Bootloader/Limine	3e5eb63856ac	b9b521f48de6	CWE-125	common/lib/part.s2.c	427	0.96	lib/part: Add bounds checking to volume_read() function
+896	vstakhov/libucl	f9e544672e24	852f752708ae	CWE-125	src/ucl_parser.c	273	0.97	ucl_expand_variable: fix out-of-bounds read
+897	CTSRD-CHERI/cheribsd	3e4701023d5f	c6446afa3d12	CWE-125	sys/dev/mii/dp83867phy.c	226	0.96	dp83867phy: Add missing MII_PHY_END to avoid buffer overread on attach
+898	EpilogLaserCorp/ghostscript	efafa5e97611	90072538c2fb	CWE-125	pdf/pdf_int.c	1761	0.95	GhostPDF - wrap streams in SubFileDecode filter
+899	GerbilSoft/rom-properties	6714713eb207	4082a1fea6d9	CWE-125	src/librptext/conversion.cpp	234	0.97	[librptext] u16_strnlen(): Fix a minor heap buffer read overflow.
+900	Hasiergo/Samsung-SM-A307FN-kernel	125716b41bb1	43253ebc4e78	CWE-125	drivers/hid/hid-roccat-kone.c	1601	0.96	HID: roccat: add bounds checking in kone_sysfs_write_settings()
+901	intel/quantum-intrinsics	5bcdb60e11c1	ecc526e7af8b	CWE-125	llvm/lib/Support/APFloat.cpp	491	0.95	Don't potentially read past the end of the fill data when making a NaN from
+902	amd/Linux_ISP_Kernel	e2397d1c9f87	6205f84de99a	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.95	drm/amdgpu: fix ucode out-of-bounds read warning
+903	Bennko/bachelor-thesis-contiki-ng-extention	9b743c075910	f638934358e0	CWE-125	os/net/routing/rpl-classic/rpl-icmp6.c	2091	0.97	Added length checks to dio_input in RPL classic, preventing multiple out of bounds reads
+904	boostorg/charconv	7a55db6b2ecd	3814f424e898	CWE-125	include/boost/charconv/detail/ryu/ryu_generic_128.hpp	994	0.85	Add bounds checking to fixed paths
+905	cacosc/ffmpeg	01701bdcd536	b2eabe0ff2c9	CWE-125	libavcodec/vvc/ps.c	370	0.96	lavc/vvc: Prevent OOB access in subpic_tiles
+906	chengpeng-wang/dynamips	1588cdfa3d54	408441207a72	CWE-125	common/utils.c	289	0.95	Merge pull request #166 from flaviojs/fix-out-of-bounds-read-hex_decode
+907	dariocastillo11/binutils-gdb-objdump-plugin	6f5614d4f00b	fd75b5cf95ef	CWE-125	bfd/ecoff.c	1937	0.96	_bfd_ecoff_slurp_symbol_table buffer overflow
+908	ekuiter/torte-linux	4fe4ccff811c	ea0d5336cc45	CWE-125	fs/bcachefs/btree_update.h	371	0.96	bcachefs: Add extra padding in bkey_make_mut_noupdate()
+909	Ezurio/wb-kernel	d1ab7f9cee22	61871c83259a	CWE-125	drivers/staging/rtl8723bs/core/rtw_mlme_ext.c	887	0.97	staging: rtl8723bs: fix out-of-bounds read in OnBeacon ESR IE parsing
+910	grivera64/libxml2-analysis	0e42adce77a9	1061537efdf3	CWE-125	parserInternals.c	541	0.92	parser: Halt parser if switching encodings fails
+911	IntroversionSoftware/gamelibs-libarchive	51793de83424	23f414385eb4	CWE-125	libarchive/archive_read_support_format_7zip.c	198	0.95	Merge pull request #2613 from mmatuska/fix/7zipsfx-2
+912	lizr-arch/renderdoc-ai	39c7dc10271c	8203032ec3f8	CWE-125	qrenderdoc/Code/pyrenderdoc/PythonContext.cpp	368	0.95	Fix python message handling reading out of bounds read
+913	mackyle/sqlite	cc14bd409901	f8a5daddd60b	CWE-125	src/test2.c	345	0.96	Fix an off-by-one error causing a buffer overread in test2.c.
+914	MediaArea/MediaInfoLib	e95f8b6aa0f6	dbed0279c059	CWE-125	Source/MediaInfo/Audio/File_Aac_Main.cpp	471	0.95	Fix out-of-bounds array read in File_Aac_Main
+915	mmoeller86/snescdrombinutils	d12b8d620c6a	fe69d4fcf019	CWE-125	gas/macro.c	1738	0.95	asan : use of uninitialized value in buffer_and_nest
+916	molkiya/clamav-macos-arm-fuzzing	030180804bf8	3dc50c83aee0	CWE-125	libclamav/jsparse/js-norm.c	5078	0.95	Fix benign overread in HTML/js-norm parser
+917	nashmuhandes/VkDoom	4b3273b2292b	275635adc56a	CWE-125	src/gamedata/r_defs.h	540	0.95	Add bounds check
+918	NTUT-FUCK-PTSD/Fuck-PTSD	f16fa42562b2	2b8beec694fa	CWE-125	src/Music/RhythmIndicator.cpp	502	0.86	fix out of range the index
+919	parasetam0l/solis-kernel	cfeb93720e49	e0dbb4da8bc0	CWE-125	net/nfc/llcp_sock.c	381	0.95	nfc: Fix the sockaddr length sanitization in llcp_sock_connect
+920	phantom-smith512wq/app-ethereum	b102468fb8fb	c20d3b407dfb	CWE-125	src_features/provideDynamicNetwork/network_dynamic.c	406	0.96	Fix potential out-of-bounds read by up to 2 bytes during TLV parsing
+921	yuanjun8033/diskfire	d8062ea66da4	61a416760c88	CWE-125	fs/f2fs.c	3455	0.96	fs/f2fs: Do not read past the end of nat bitmap
+922	delphix/grub2	aa3fb9417d57	a573828cbdda	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+923	Zebra2711/edid-decode	b5a22ba6a321	832374ef88ee	CWE-125	parse-cta-block.cpp	1377	0.97	edid-decode: fix infoframe DB parsing regression
+924	angstsmurf/spatterlight	c31a2792b828	d5322c8adacd	CWE-125	terps/hugo/source/heexpr.c	324	0.97	HUGO: Fix another read out of bounds
+925	Bforartists/Bforartists	28b3da1ff01d	3cb7ebdeaf25	CWE-125	source/blender/sequencer/intern/strip_time.cc	951	0.95	Fix #113890: Buffer overread when rendering after strip content range
+926	boolforge/scummvm-alis-experimental	8c05a3e1513e	06860ce06ee5	CWE-125	engines/twp/twp.cpp	595	0.96	TWP: Fix out-of-bounds read in twp.
+927	Elpitech/kernel	3b190f155f8e	7f347015ec31	CWE-125	drivers/hid/hid-asus.c	508	0.96	hid: asus: asus_report_fixup: fix potential read out of bounds
+928	FuriLabs/linux-furiphone-radon	1a7b3ba45b7b	1bbd2b692f9a	CWE-125	drivers/net/can/usb/kvaser_usb/kvaser_usb_leaf.c	3529	0.96	can: kvaser_usb_leaf: Fix overread with an invalid command
+929	Hasiergo/Lenovo_TB-X606F_kernel	cb80fe313d99	09ee7ac5d655	CWE-125	drivers/video/fbdev/omap2/omapfb/omapfb-ioctl.c	513	0.95	fbdev/omapfb: fix omapfb_memory_read infoleak
+930	Kelsidavis/futura	0b92e450ad8f	cc20d2259986	CWE-125	kernel/sys_mmap.c	2784	0.95	sys_mmap: Fix LONG_MAX/SIZE_MAX integer overflow mismatch (Phase 5)
+931	librempeg/librempeg	366f299d52ee	1e899ae022c6	CWE-125	libavformat/ssp_sd9.c	664	0.96	avformat/ssp_sd9: check offset
+932	mehdikholoosi/FreeRDP-3	e7973d15ff9f	940317282cdc	CWE-125	winpr/libwinpr/clipboard/posix.c	2829	0.97	Fix out of bounds reads in parse_uri_to_local_file
+933	Limine-Bootloader/Limine	5fcaaff0290c	3487bc14f0aa	CWE-125	common/lib/config.c	6022	0.96	lib/config: Add SMBIOS structure validation and bounds checking
+934	vstakhov/libucl	9b898eaa88b4	9e0e06f4f3c9	CWE-125	src/ucl_parser.c	2741	0.96	ucl_expand_single_variable: better bounds check
+935	CTSRD-CHERI/cheribsd	874afbb0b490	7a8c1e8ce030	CWE-125	stand/userboot/test/test.c	373	0.9	test_diskread(): detect end of the disk
+936	EpilogLaserCorp/ghostscript	2325692b4577	37054b848074	CWE-125	base/gdevp14.c	2054	0.95	graphics library - another heap-buffer overflow in copy_mono
+937	GerbilSoft/rom-properties	e7ab57ad93bb	37814b87e822	CWE-125	src/libromdata/disc/AndroidResourceReader.cpp	5867	0.95	[libromdata] AndroidResourceReader: Add assert() calls to bounds checks.
+938	Hasiergo/Samsung-SM-A307FN-kernel	34b4c9677a2e	b15a828a8789	CWE-125	arch/arm/mach-zynq/platsmp.c	312	0.92	ARM: zynq: Use memcpy_toio instead of memcpy on smp bring-up
+939	intel/quantum-intrinsics	6326d7a1b09f	107f7564c43d	CWE-125	clang/lib/AST/Stmt.cpp	447	0.95	Don't overread the buffer when an %x escape in inline asm ends prematurely.
+940	delphix/grub2	fa4f353b6a1d	42667cc30051	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+941	Zebra2711/edid-decode	e0998c21dbec	322df4d0ae9f	CWE-125	parse-displayid-block.cpp	794	0.96	edid-decode: fix buffer overread on displayid block parsing
+942	angstsmurf/spatterlight	587dfb997a8b	3bfb06b79c54	CWE-125	terps/hugo/source/heexpr.c	322	0.97	HUGO: Fix out of bounds read
+943	Bforartists/Bforartists	bdab4fa2b1d5	7b27a8ae1e97	CWE-125	source/blender/sequencer/intern/strip_time.cc	951	0.95	Fix #113890: Buffer overread when rendering after strip content range
+944	boolforge/scummvm-alis-experimental	a88fc1ce281d	de20f4b39583	CWE-125	engines/ags/engine/ac/game_state.cpp	651	0.95	AGS: Fix compiler warning
+945	Elpitech/kernel	2caa66c37df5	c8dc76406ccd	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_cgs.c	318	0.96	drm/amdgpu: fix ucode out-of-bounds read warning
+946	FuriLabs/linux-furiphone-radon	b9e47212c62c	26f654958a10	CWE-125	drivers/gpu/drm/i915/intel_dp.c	659	0.95	drm/i915/display: fix compiler warning about array overrun
+947	Hasiergo/Lenovo_TB-X606F_kernel	f63dd7919b63	20473337a26f	CWE-125	arch/arm/mach-zynq/platsmp.c	312	0.92	ARM: zynq: Use memcpy_toio instead of memcpy on smp bring-up
+948	Kelsidavis/futura	3b21e4ade992	310c4f290638	CWE-125	kernel/sys_recvmsg.c	4406	0.85	sys_recvmsg: Enhance Phase 5 ancillary data validation documentation
+949	librempeg/librempeg	90186620dd9b	483ef6190ae3	CWE-125	libavformat/2dx.c	470	0.96	avformat/2dx: check for probe buffer overreads
+950	mehdikholoosi/FreeRDP-3	6241ce567468	285bea320d67	CWE-125	libfreerdp/codec/ncrush.c	474	0.96	[coverity] 1543052 Out-of-bounds read
+951	Limine-Bootloader/Limine	8ebc72c65a37	9be73e10329a	CWE-125	common/lib/elf.c	6223	0.96	lib/elf: Add several bounds checks and misc bug fixes
+952	vstakhov/libucl	9e0e06f4f3c9	a9c0965ebe15	CWE-125	src/ucl_parser.c	315	0.95	ucl_chunk_skipc: avoid out-of-bounds read
+953	delphix/grub2	44a3651022e1	e79ff26134d6	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+954	Zebra2711/edid-decode	3269205ce985	25c6e797cfbb	CWE-125	parse-displayid-block.cpp	342	0.96	edid-decode: fix buffer overread while parsing Stereo Display Interface DB
+955	angstsmurf/spatterlight	23d9fbc653d4	3ce39b2f32be	CWE-125	terps/scott/load_ti99_4a.c	263	0.97	SCOTT: Fix out-of-bounds reads in TI-99/4A code
+956	Bforartists/Bforartists	19937db06239	caaca1938e33	CWE-125	source/blender/io/usd/intern/usd_reader_curve.cc	646	0.95	Fix: Assert in USD curves reader offset creation
+957	boolforge/scummvm-alis-experimental	25cf429e3fd4	57b3f0743aa1	CWE-125	engines/director/debugtools.cpp	198	0.95	DIRECTOR: Fix out-of-bounds read in debug tools.
+958	Elpitech/kernel	b6abdafccb61	2caa66c37df5	CWE-125	drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c	445	0.95	drm/amdgpu: fix mc_data out-of-bounds read warning
+959	FuriLabs/linux-furiphone-radon	1e3109174c5b	c7dd857eebc8	CWE-125	net/bluetooth/hci_event.c	415	0.95	Bluetooth: avoid memcmp() out of bounds warning
+960	Hasiergo/Lenovo_TB-X606F_kernel	4ad8ad8eba4d	1f7e5163f747	CWE-125	drivers/hid/hid-roccat-kone.c	1601	0.92	HID: roccat: add bounds checking in kone_sysfs_write_settings()
+961	Kelsidavis/futura	743b224e5c7f	141336ea55d6	CWE-125	kernel/sys_splice.c	1667	0.82	sys_splice: Add offset+len integer overflow validation
+962	librempeg/librempeg	2f8a26e7177b	99b2a1968ffb	CWE-125	libavcodec/exr.c	1483	0.92	avcodec/exr: stop changing directly gb->buffer, use bytestream2 API instead
+963	mehdikholoosi/FreeRDP-3	61062128e281	da85ec371c07	CWE-125	winpr/libwinpr/sspi/Negotiate/negotiate.c	870	0.86	[coverity] 1543067 Out-of-bounds read
+964	delphix/grub2	5e41fe7ceb1a	949a9279373c	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+965	Zebra2711/edid-decode	fa8c33396ade	3171f003ba78	CWE-125	parse-displayid-block.cpp	325	0.96	edid-decode: fix a transfer characteristics buffer overread
+966	angstsmurf/spatterlight	523e4ea8e6a0	d0d1d6e934ab	CWE-125	terps/scott/game_specific.c	384	0.86	SCOTT: Fix another out-of-bounds read
+967	Bforartists/Bforartists	3ad0f6f89b6f	2954824db4c8	CWE-125	source/blender/io/usd/intern/usd_reader_curve.cc	646	0.95	Fix: Assert in USD curves reader offset creation
+968	delphix/grub2	c63a38fb1c06	25eda47cd252	CWE-125	grub-core/fs/f2fs.c	3251	0.97	fs/f2fs: Do not read past the end of nat bitmap
+969	Zebra2711/edid-decode	322df4d0ae9f	2a0199715ef6	CWE-125	parse-cta-block.cpp	254	0.96	edid-decode: fix buffer overread on CTA block parsing
+970	angstsmurf/spatterlight	1edf3173a7ec	5470b31e2ba3	CWE-125	terps/scott/C64checksums.c	413	0.85	Fix read out of bounds in C64 detection
+971	Bforartists/Bforartists	3dd8f91145af	64b2bf1aed94	CWE-125	source/blender/io/usd/intern/usd_reader_curve.cc	646	0.95	Fix: Assert in USD curves reader offset creation
+972	delphix/grub2	3685eb65f2b8	271194564e52	CWE-125	grub-core/fs/f2fs.c	1423	0.96	fs/f2fs: Do not read past the end of nat journal entries
+973	Zebra2711/edid-decode	832374ef88ee	afca55020831	CWE-125	parse-displayid-block.cpp	373	0.95	edid-decode: fix DisplayID checksum regression
+974	delphix/grub2	24aac631583a	cb6f1f6f1b5a	CWE-125	grub-core/fs/ext2.c	1594	0.96	fs/ext2: Rework out-of-bounds read for inline and external extents

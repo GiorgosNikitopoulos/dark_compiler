@@ -1,0 +1,37 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual environments ---
+venv/
+.venv/
+env/
+
+# --- Experiment / run outputs (can be tens of GB each) ---
+dark_orchestrator/dark_smoke_one/
+dark_orchestrator/dark_smoke_realistic/
+dark_orchestrator/dark_100_realistic/
+dark_orchestrator/dark_1000_cwe125/
+# Any other dark_* run output directory at the orchestrator root...
+dark_orchestrator/dark_*/
+# ...but never the source package itself
+!dark_orchestrator/dark_orchestrator/
+
+# Traced ELF binaries and Docker build artifacts
+*.o
+trace/elfs/
+Dockerfile.success
+
+# --- Editor / OS ---
+.DS_Store
+*.swp
+.idea/
+.vscode/

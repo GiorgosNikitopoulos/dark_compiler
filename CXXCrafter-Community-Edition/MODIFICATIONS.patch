@@ -1,0 +1,497 @@
+diff --git a/src/cxxcrafter/cli.py b/src/cxxcrafter/cli.py
+index 7abb17d..3c3b9d4 100644
+--- a/src/cxxcrafter/cli.py
++++ b/src/cxxcrafter/cli.py
+@@ -1,7 +1,12 @@
+ import os
+ import logging
+ from datetime import datetime
+-from cxxcrafter.log_utils import setup_logging, log_the_dockerfile, log_the_error_message
++from cxxcrafter.log_utils import (
++    attach_thread_log_file,
++    detach_thread_log_handler,
++    log_the_dockerfile,
++    log_the_error_message,
++)
+ from cxxcrafter.generation_module import DockerfileGenerator, DockerfileModifier
+ from cxxcrafter.utils import save_successful_dockerfile
+ from cxxcrafter.parsing_module import parser
+@@ -12,7 +17,16 @@ from cxxcrafter.llm.bot import get_sdk_token_counts
+ 
+ 
+ class CXXCrafter:
+-    def __init__(self, project_path):
++    def __init__(self, project_path, image_tag=None, image_tag_factory=None):
++        """
++        Args:
++            project_path: source dir of the project to build.
++            image_tag: optional fixed tag for *every* attempt (overrides
++                ``image_tag_factory``). Useful for one-shot builds.
++            image_tag_factory: optional ``callable(attempt:int) -> str`` that
++                returns a per-attempt tag. Lets callers (e.g. the
++                dark_orchestrator) version each Dockerfile retry.
++        """
+         self.project_path = project_path
+         self.start_time = datetime.now().strftime('%Y%m%d_%H%M')
+         self.project_name = os.path.basename(project_path)
+@@ -22,14 +36,31 @@ class CXXCrafter:
+         self.flag_version = 1
+         self.modifier = DockerfileModifier()
+ 
+-        setup_logging(self.log_file, self.project_name)
++        self.image_tag = image_tag
++        self.image_tag_factory = image_tag_factory
++        self.image_id = None
++        self.intermediate_image_ids = []
++        self.intermediate_image_tags = []
++        self._log_handler = None
++
++        self._log_handler = attach_thread_log_file(self.log_file, self.project_name)
+         self.logger = logging.getLogger(__name__)
+         self.logger.disabled = False
+ 
++    def _log_build_summary(self) -> None:
++        self.logger.info(
++            f"Building process of project <{self.project_name}> ended.\n"
++            f"Overall input tokens count: {get_sdk_token_counts()[0]}.\n"
++            f"Overall output tokens count: {get_sdk_token_counts()[1]}.",
++        )
++
++    def _release_log_handler(self) -> None:
++        if self._log_handler is not None:
++            detach_thread_log_handler(self._log_handler)
++            self._log_handler = None
++
+     def __del__(self):
+-        self.logger.info(f"Building process of project <{self.project_name}> ended.\n"
+-                         f"Overall input tokens count: {get_sdk_token_counts()[0]}.\n"
+-                         f"Overall output tokens count: {get_sdk_token_counts()[1]}.")
++        self._release_log_handler()
+ 
+ 
+     def parse_project(self):
+@@ -68,28 +99,52 @@ class CXXCrafter:
+         log_the_dockerfile(self.dockerfile_path, self.flag_version, self.history_dir)
+ 
+ 
++    def _resolve_image_tag(self):
++        if self.image_tag_factory is not None:
++            try:
++                return self.image_tag_factory(self.flag_version)
++            except Exception as exc:
++                self.logger.warning(f"image_tag_factory raised: {exc}")
++                return None
++        return self.image_tag
++
+     def execute_dockerfile(self):
+         self.logger.info('Execution Module Starts')
+-        flag, error = executor(os.path.dirname(self.dockerfile_path), build_system_name=self.build_system_name)
++        tag = self._resolve_image_tag()
++        flag, error, image_id = executor(
++            os.path.dirname(self.dockerfile_path),
++            build_system_name=self.build_system_name,
++            tag=tag,
++        )
++        if image_id:
++            self.intermediate_image_ids.append(image_id)
++            if flag:
++                self.image_id = image_id
++        if tag:
++            self.intermediate_image_tags.append(tag)
+         self.logger.info('Execution Module Finishes')
+         return flag, error
+ 
+ 
+     
+     def run(self):
+-        self.parse_project()
+-        self.generate_dockerfile()
+-        while True:
+-            flag_success, error_message = self.execute_dockerfile()
+-            if not flag_success:
+-                self.logger.error(f"Execution failed with error: {error_message}")
+-                log_the_error_message(error_message, self.flag_version, self.history_dir)
+-                if self.flag_version >= 10:
+-                    self.logger.info("\nTry over 10 times")
++        try:
++            self.parse_project()
++            self.generate_dockerfile()
++            while True:
++                flag_success, error_message = self.execute_dockerfile()
++                if not flag_success:
++                    self.logger.error(f"Execution failed with error: {error_message}")
++                    log_the_error_message(error_message, self.flag_version, self.history_dir)
++                    if self.flag_version >= 10:
++                        self.logger.info("\nTry over 10 times")
++                        return self.project_name, flag_success
++                    self.modify_dockerfile(error_message)
++                else:
++                    save_successful_dockerfile(self.dockerfile_path, self.project_name, get_solution_base_dir())
++                    self.logger.info(f"{self.project_name} is good!")
+                     return self.project_name, flag_success
+-                self.modify_dockerfile(error_message)
+-            else:
+-                save_successful_dockerfile(self.dockerfile_path, self.project_name, get_solution_base_dir())
+-                self.logger.info(f"{self.project_name} is good!")
+-                return self.project_name, flag_success
++        finally:
++            self._log_build_summary()
++            self._release_log_handler()
+     
+\ No newline at end of file
+diff --git a/src/cxxcrafter/config.py b/src/cxxcrafter/config.py
+index 6610062..5936f90 100644
+--- a/src/cxxcrafter/config.py
++++ b/src/cxxcrafter/config.py
+@@ -1,9 +1,12 @@
+ import os
+ 
+ # === Config ===
+-CONFIG_LLM_MODEL = ""
+-CONFIG_API_KEY = ""
+-CONFIG_BASE_URL = ""
++#CONFIG_LLM_MODEL = ""
++CONFIG_LLM_MODEL = "openai.gpt-oss-120b"
++CONFIG_API_KEY = "sk-27f96c7b2f474526ba6b5dac1a62832f"
++#CONFIG_BASE_URL = ""
++CONFIG_BASE_URL = "https://chat.dartmouth.edu/api"
++
+ 
+ MP_POOL_SIZE = 10
+ 
+diff --git a/src/cxxcrafter/execution_module/__init__.py b/src/cxxcrafter/execution_module/__init__.py
+index 4338b43..b40c684 100644
+--- a/src/cxxcrafter/execution_module/__init__.py
++++ b/src/cxxcrafter/execution_module/__init__.py
+@@ -12,19 +12,26 @@ def check_message(message):
+         prev_message = message
+     return message
+ 
+-def executor(dockerfile_path, build_system_name):
+-    flag_success, execution_message = build_docker_image_by_api(dockerfile_path)
++def executor(dockerfile_path, build_system_name, tag=None):
++    """Build the project's Dockerfile and run the success discriminators.
++
++    Returns ``(flag_success, message, image_id)``. ``image_id`` is the sha256
++    of the produced image when the build succeeded and the engine reported
++    one, otherwise ``None``. The optional ``tag`` is forwarded so the
++    orchestrator can label every dark_orchestrator-managed build.
++    """
++    flag_success, execution_message, image_id = build_docker_image_by_api(dockerfile_path, tag=tag)
+ 
+     execution_message = check_message(execution_message)
+     if flag_success == True:
+         flag_success, success_check_message = build_success_check_2(dockerfile_path, execution_message, build_system_name)
+         if flag_success == True:
+             flag_success, reflection_message = build_success_check_reflection(dockerfile_path, execution_message, build_system_name)
+-            return flag_success, reflection_message
++            return flag_success, reflection_message, image_id
+         else:
+-            return flag_success, success_check_message
++            return flag_success, success_check_message, image_id
+     else:
+-        return flag_success, execution_message
++        return flag_success, execution_message, image_id
+ 
+ 
+ 
+diff --git a/src/cxxcrafter/execution_module/docker_manager.py b/src/cxxcrafter/execution_module/docker_manager.py
+index 9a5f4a5..80cbec7 100644
+--- a/src/cxxcrafter/execution_module/docker_manager.py
++++ b/src/cxxcrafter/execution_module/docker_manager.py
+@@ -39,21 +39,62 @@ def _get_docker_client() -> docker.APIClient:
+         raise RuntimeError(f'Docker daemon not available: {e}') from e
+ 
+ 
+-def build_docker_image(project_dir):
+-    result = subprocess.run(["docker", "build", project_dir], capture_output=False, text=True)
++def build_docker_image(project_dir, tag=None):
++    cmd = ["docker", "build"]
++    if tag:
++        cmd.extend(["-t", tag])
++    cmd.append(project_dir)
++    result = subprocess.run(cmd, capture_output=False, text=True)
+     if result.returncode != 0:
+         return False
+     return True
+ 
+ 
+-def build_docker_image_by_api(project_dir):
++def _extract_image_id(chunk_history):
++    """Best-effort: pull the final image id out of the build chunk stream.
++
++    The docker engine emits an ``aux`` chunk like
++    ``{"aux": {"ID": "sha256:..."}}`` on success, and a textual
++    ``Successfully built <short_id>`` line as a fallback.
++    """
++    for chunk in reversed(chunk_history):
++        aux = chunk.get('aux') if isinstance(chunk, dict) else None
++        if isinstance(aux, dict) and aux.get('ID'):
++            return aux['ID']
++    for chunk in reversed(chunk_history):
++        stream = chunk.get('stream') if isinstance(chunk, dict) else None
++        if isinstance(stream, str) and 'Successfully built' in stream:
++            try:
++                return stream.strip().split()[-1]
++            except Exception:
++                pass
++    return None
++
++
++def build_docker_image_by_api(project_dir, tag=None):
++    """Build an image via the Docker engine API.
++
++    Args:
++        project_dir: directory containing the Dockerfile.
++        tag: optional repository:tag string to apply to the resulting image.
++            When set, ``rm``/``forcerm`` are also passed so the legacy
++            builder cleans up its intermediate containers automatically.
++
++    Returns:
++        ``(flag_success, message_or_chunks, image_id)`` where ``image_id``
++        is the sha256 of the final image when known and ``None`` otherwise.
++    """
+ 
+     logger = logging.getLogger(__name__)
+     logger.disabled = False
+     client = _get_docker_client()
+     flag_success = True
++    image_id = None
+     try:
+-        response = client.build(path=project_dir, decode=True)
++        build_kwargs = {"path": project_dir, "decode": True, "rm": True, "forcerm": True}
++        if tag:
++            build_kwargs["tag"] = tag
++        response = client.build(**build_kwargs)
+         chunk_history = []
+         unexpected_chunk = []
+         for chunk in response:
+@@ -68,16 +109,17 @@ def build_docker_image_by_api(project_dir):
+             flag_success = False
+             error = chunk['errorDetail']['message']
+             if len(chunk_history) >=5:
+-                return flag_success, "".join([chunk_item['stream'] for chunk_item in chunk_history[-5:-1]])+error
++                return flag_success, "".join([chunk_item['stream'] for chunk_item in chunk_history[-5:-1] if 'stream' in chunk_item])+error, None
+             else:
+-                return flag_success, "".join([chunk_item['stream'] for chunk_item in chunk_history[:-1]])+error
++                return flag_success, "".join([chunk_item['stream'] for chunk_item in chunk_history[:-1] if 'stream' in chunk_item])+error, None
+         if 'message' in chunk:
+             if 'dockerfile parse error' in chunk['message']:
+                 flag_success = False
+-                return flag_success, chunk['message']
+-        
+-        return flag_success, chunk_history
++                return flag_success, chunk['message'], None
++
++        image_id = _extract_image_id(chunk_history)
++        return flag_success, chunk_history, image_id
+     except Exception as e:
+         flag_success = False
+         message = str(e)
+-        return flag_success, message
+\ No newline at end of file
++        return flag_success, message, None
+\ No newline at end of file
+diff --git a/src/cxxcrafter/execution_module/utils.py b/src/cxxcrafter/execution_module/utils.py
+index 749a4b8..6524a15 100644
+--- a/src/cxxcrafter/execution_module/utils.py
++++ b/src/cxxcrafter/execution_module/utils.py
+@@ -12,11 +12,19 @@ def remove_ansi_escape_sequences(text):
+     return cleaned_message
+ 
+ def extract_json_content(text):
+-
+     pattern = r"```json(.*?)```"
+     match = re.search(pattern, text, re.DOTALL)
+-    
++
+     if match:
+-        return match.group(1).strip().replace('\n','')
+-    else:
+-        return "No json content found"
+\ No newline at end of file
++        return match.group(1).strip().replace('\n', '')
++
++    stripped = text.strip()
++    if stripped.startswith('(') and stripped.endswith(')'):
++        return stripped.replace('\n', '')
++
++    # Common bare success form when the model skips the ```json fence.
++    simple = re.search(r'\((True|False)\s*,\s*None\)', stripped)
++    if simple:
++        return simple.group(0)
++
++    return "No json content found"
+\ No newline at end of file
+diff --git a/src/cxxcrafter/generation_module/__init__.py b/src/cxxcrafter/generation_module/__init__.py
+index b90921e..44b06fb 100644
+--- a/src/cxxcrafter/generation_module/__init__.py
++++ b/src/cxxcrafter/generation_module/__init__.py
+@@ -55,7 +55,7 @@ class DockerfileGenerator:
+ 
+         try:
+             if not os.path.exists(temp):
+-                shutil.copytree(self.project_path, temp)
++                shutil.copytree(self.project_path, temp, symlinks=True)
+         except Exception as e:
+             self.logger.error(
+                 f"Error copying the repo: {e}. Params: self.project_path: {self.project_path}; temp: {temp}")
+diff --git a/src/cxxcrafter/generation_module/template/dockerfile_template.py b/src/cxxcrafter/generation_module/template/dockerfile_template.py
+index 84fdf3d..eb6faed 100644
+--- a/src/cxxcrafter/generation_module/template/dockerfile_template.py
++++ b/src/cxxcrafter/generation_module/template/dockerfile_template.py
+@@ -4,9 +4,9 @@ dockerfile_template = """
+ 
+     ENV DEBIAN_FRONTEND=noninteractive
+ 
+-    RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list \
+-    && sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list \
+-    && apt-get update \
++    # Keep the base image's default upstream APT sources. Do NOT rewrite
++    # /etc/apt/sources.list to any third-party mirror.
++    RUN apt-get update \
+     && apt-get upgrade -y
+ 
+     # Install necessary packages
+diff --git a/src/cxxcrafter/generation_module/template/prompt_template.py b/src/cxxcrafter/generation_module/template/prompt_template.py
+index ecad273..f112fcf 100644
+--- a/src/cxxcrafter/generation_module/template/prompt_template.py
++++ b/src/cxxcrafter/generation_module/template/prompt_template.py
+@@ -20,6 +20,7 @@ def get_initial_prompt(project_name, user_intention, environment_requirement, de
+             1. Install commands must be executed one at a time.
+             2. Avoid repeating identical RUN commands.
+             3. Please adhere to Dockerfile syntax. For example, ensure that comments and commands are on separate lines. Comments should start with a # and be placed independently of commands.
++            4. Do not rewrite /etc/apt/sources.list to any third-party mirror (no mirrors.aliyun.com, mirrors.tuna.tsinghua.edu.cn, mirrors.huaweicloud.com, mirrors.cloud.tencent.com, mirrors.ustc.edu.cn, mirrors.bfsu.edu.cn, etc.). Keep the default upstream Ubuntu mirror that ships in the base image.
+         {user_intention}
+         Some useful information:
+             Environment requirement: {environment_requirement}
+diff --git a/src/cxxcrafter/log_utils.py b/src/cxxcrafter/log_utils.py
+index e4749a5..b5759c7 100644
+--- a/src/cxxcrafter/log_utils.py
++++ b/src/cxxcrafter/log_utils.py
+@@ -1,36 +1,86 @@
+-import os
+ import logging
+-import logging.config
+-
+-def setup_logging(log_file, project_name):
+-    logging_config = {
+-        'version': 1,
+-        #'disable_existing_loggers': False,
+-        'formatters': {
+-            'default': {
+-                'format': f'%(asctime)s - %(name)s -{project_name} - %(levelname)s - %(message)s',
+-            },
+-        },
+-        'handlers': {
+-            'file': {
+-                'class': 'logging.FileHandler',
+-                'filename': log_file,
+-                'formatter': 'default',
+-                'level': 'DEBUG'
+-            },
+-            'console': {
+-                'class': 'logging.StreamHandler',
+-                'formatter': 'default',
+-                'level': 'DEBUG'
+-            },
+-        },
+-        'root': {
+-            'level': 'DEBUG',
+-            'handlers': ['file', 'console'],
+-        },
+-    }
+-
+-    logging.config.dictConfig(logging_config)
++import os
++import threading
++
++_root_init_lock = threading.Lock()
++_handler_lock = threading.Lock()
++_root_initialized = False
++
++
++class _ThreadFilter(logging.Filter):
++    """Route log records to the file handler owned by the creating thread."""
++
++    def __init__(self, thread_id: int) -> None:
++        super().__init__()
++        self._thread_id = thread_id
++
++    def filter(self, record: logging.LogRecord) -> bool:
++        return record.thread == self._thread_id
++
++
++def _formatter(project_name: str) -> logging.Formatter:
++    return logging.Formatter(
++        f"%(asctime)s - %(name)s -{project_name} - %(levelname)s - %(message)s",
++    )
++
++
++def _ensure_root_logging() -> None:
++    """Configure root once with a shared console handler (stdout may interleave)."""
++    global _root_initialized
++    with _root_init_lock:
++        if _root_initialized:
++            return
++        root = logging.getLogger()
++        root.setLevel(logging.DEBUG)
++        has_console = any(
++            isinstance(handler, logging.StreamHandler)
++            and not isinstance(handler, logging.FileHandler)
++            for handler in root.handlers
++        )
++        if not has_console:
++            console = logging.StreamHandler()
++            console.setLevel(logging.DEBUG)
++            console.setFormatter(
++                logging.Formatter(
++                    "%(asctime)s - %(name)s - %(threadName)s - "
++                    "%(levelname)s - %(message)s",
++                ),
++            )
++            root.addHandler(console)
++        _root_initialized = True
++
++
++def attach_thread_log_file(log_file: str, project_name: str) -> logging.FileHandler:
++    """Attach a per-thread file handler to the root logger."""
++    _ensure_root_logging()
++    log_dir = os.path.dirname(log_file)
++    if log_dir:
++        os.makedirs(log_dir, exist_ok=True)
++
++    handler = logging.FileHandler(log_file, encoding="utf-8")
++    handler.setLevel(logging.DEBUG)
++    handler.setFormatter(_formatter(project_name))
++    handler.addFilter(_ThreadFilter(threading.get_ident()))
++    with _handler_lock:
++        logging.getLogger().addHandler(handler)
++    return handler
++
++
++def detach_thread_log_handler(handler: logging.Handler | None) -> None:
++    """Remove and close a handler previously returned by ``attach_thread_log_file``."""
++    if handler is None:
++        return
++    with _handler_lock:
++        root = logging.getLogger()
++        if handler in root.handlers:
++            root.removeHandler(handler)
++    handler.close()
++
++
++def setup_logging(log_file: str, project_name: str) -> logging.FileHandler:
++    """Backward-compatible alias for ``attach_thread_log_file``."""
++    return attach_thread_log_file(log_file, project_name)
++
+ 
+ def log_the_dockerfile(dockerfile_path, version, history_dir):
+ 
+@@ -45,4 +95,4 @@ def log_the_error_message(error_message, version, history_dir):
+     error_message_version_name = "error_message"+ '-v' + str(version)
+     error_message_version_path = os.path.join(history_dir, error_message_version_name)
+     with open(error_message_version_path, 'w') as f:
+-        f.write(error_message)
+\ No newline at end of file
++        f.write(error_message)

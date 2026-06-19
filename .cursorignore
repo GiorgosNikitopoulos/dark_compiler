@@ -1,0 +1,8 @@
+# dark_orchestrator linked-ELF build trees
+**/cxx_compile/
+dark_orchestrator/dark_*/
+**/__pycache__/
+*.pyc
+*.so
+*.o
+*.pkl

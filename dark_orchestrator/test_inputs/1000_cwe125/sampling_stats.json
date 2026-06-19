@@ -1,0 +1,9 @@
+{
+  "target_size": 1000,
+  "pool_size": 974,
+  "selected_size": 974,
+  "distinct_repos": 771,
+  "max_consecutive_same_repo": 1,
+  "seed": 42,
+  "source": "/home/gnikitopoulos/sima_binpool/uve_extractor/125_commits/accepted_patches.jsonl"
+}

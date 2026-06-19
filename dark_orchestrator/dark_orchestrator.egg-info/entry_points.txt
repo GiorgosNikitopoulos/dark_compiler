@@ -1,2 +1,0 @@
-[console_scripts]
-dark-orchestrator = dark_orchestrator.cli:main

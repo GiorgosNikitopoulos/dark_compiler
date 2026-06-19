@@ -1,0 +1,16 @@
+**/.DS_Store
+tools/
+VENV/
+data*/
+oss-fuzz/
+**/__pycache__
+**/*.pyc
+script/*.json
+nohup*
+logs*/
+**/*egg-info*/
+**/*egg-info*
+**/.vscode
+**/build/
+.venv
+.idea/

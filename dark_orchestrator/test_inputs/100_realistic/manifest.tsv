@@ -1,0 +1,101 @@
+#	repo	sha	parent	cwe	file	patch_len	confidence	message
+1	1980490718/u-boot-2016	1d9ab5c675e0	cd5123d43eae	CWE-787	scripts/kconfig/confdata.c	1399	0.96	scripts/kconfig/confdata.c: Fix buffer overflow and format truncation warnings
+2	86Box/86Box	449c224ff7dd	5f9153e3f035	CWE-787	src/chipset/sis_85c4xx.c	241	0.92	SiS 471: Fix array out of bounds writes.
+3	accel-ppp/accel-ppp	2bbf451b94a3	d013d3ff2150	CWE-121	accel-pppd/ctrl/l2tp/l2tp.c	1128	0.97	l2tp: fix buffer overflow and type errors in Calling/Called Number handling
+4	adammccartney/lowlevel	86e7b6c6ded4	a9bfa09c2057	CWE-120	sizeof/sizeof.c	942	0.93	Simplified version that uses memcpy
+5	alisherqodirjonov/vpp	37a2cb2c741c	7b6a5a1e4e98	CWE-121	src/vlib/buffer_funcs.h	392	0.95	vlib: fix vlib_buffer_free_inline() AVX-512 overflow
+6	angstsmurf/spatterlight	9c8e3a736c2c	d61309eca5a2	CWE-125	terps/scott/load_ti99_4a.c	809	0.97	SCOTT: Fix out-of-bounds reads in TI99/4A code
+7	apache/doris	fe7ff96eb1a9	accd342c8bbb	CWE-787	be/test/olap/rowset/segment_v2/segment_corruption_test.cpp	1343	0.86	[fix](ut) Fix SegmentCorruptionTest ASAN heap-buffer-overflow (#58456)
+8	apache/mynewt-nimble	f39330866a85	845ea65aca8c	CWE-787	nimble/host/src/ble_hs_hci_evt.c	918	0.92	nimble/host: Validate advertising instance before parsing event
+9	APN-Pucky/tyrant_optimize	bbbdd7ab8dfe	5fffbff3f740	CWE-787	tyrant_optimize.cpp	2303	0.85	Fix android buffer write carry over overflow char
+10	Bitcoin-ABC/bitcoin-abc	1eee3d94846d	8e6e45c18e94	CWE-125	src/streams.h	2208	0.95	streams: Fix read-past-the-end and integer overflows
+11	bobok0720/FileSystem	de6276396d03	0063f737f243	CWE-787	fs/src/server.c	492	0.97	Merge pull request #18 from bobok0720/codex/fix-heap-buffer-overflow-in-handle_ls
+12	BotchedRPR/bbf100-kernel-codelinaro	a706b95e985a	e0a45b584afd	CWE-787	kernel/bpf/arraymap.c	322	0.97	bpf, array: fix heap out-of-bounds access when updating elements
+13	ChaitanayaKulkarni/util-linux	e9aa06bad334	d155c11d2e53	CWE-126	text-utils/hexdump-parse.c	459	0.97	hexdump-parse: handle truncated format pattern
+14	chris-armstrong/ocgtk	60ebaa95fdc1	72799e54c796	CWE-119	lablgtk4/src/ml_gdkpixbuf.c	5202	0.95	Fix critical security vulnerabilities in ml_gdkpixbuf.c
+15	chrislarson/autonomous-delivery-bot	596b127823e5	e9254480b651	CWE-119	arduino/src/serial.cpp	470	0.9	fix off by one error
+16	clarkep/quickpick	c4e9340486a9	450869aa7735	CWE-787	main.c	987	0.95	Fix buffer overflow
+17	CM4all/libcommon	5532beb3b687	87310ba25780	CWE-119	src/net/djb/NetstringInput.cxx	309	0.9	net/djb/NetstringInput: fix off-by-one error in max_size check
+18	cm68/ccc	e8c54ce145ee	1b15d28a6683	CWE-121	ritchie/pass1/c00.c	320	0.95	pass1: fix buffer overflow from setbuf size mismatch
+19	Country-If/PL0	da1e41b03d17	379b9dbdd351	CWE-119	PL0.c	1241	0.9	fig bug: array out of bounds, add array check
+20	COVESA/dlt-daemon	e885cffa2728	ae9655b5201b	CWE-787	src/console/dlt-sortbytimestamp.c	1938	0.95	[BUG] console: Fix buffer overflow (#795)
+21	dmikushin/cufft-oss	f8369bf46e41	750aa244dedc	CWE-125	library/src/device/transpose.cpp	829	0.97	transpose: don't read past the end of outStride
+22	douchevannam/pytorch	3253169cfd34	fe3e0050f33e	CWE-125	torch/csrc/distributed/c10d/reducer.cpp	515	0.95	Reducer: add check on received data to avoid segfault (#152143)
+23	dpiparo/root_bp_support	d44fa9e674ca	0992621c3e8c	CWE-120	rootx/src/rootx.cxx	4016	0.95	[core] Replace sprintf with snprintf
+24	dxx-rebirth/dxx-rebirth	cc84653cad09	b750c0e4415a	CWE-119	common/3d/clipper.cpp	781	0.92	Delegate temporary_points_t bounds checks to std::array::at
+25	dylan-lom/bin	b84e5652d24a	2d08dd3ee7bd	CWE-125	scratch.c	597	0.85	Don't construct command string when scratch is in dry mode
+26	ericli2333/NJU_CS144	7ad0d845b7a7	4555cdd2575b	CWE-787	src/byte_stream.cc	845	0.95	fix buffer overflow capacity
+27	Etayde/Cpp_Adv_World_Game_Engine	aebdf24bcea8	ec000e040782	CWE-119	Player.cpp	326	0.9	Fix player movement bounds check to prevent off-by-one errors
+28	facebook/fboss	4fefd1ac09b1	e6213ac28614	CWE-121	fboss/agent/test/agent_hw_tests/AgentVoqSwitchWithFabricPortsTests.cpp	568	0.96	Fix AgentVoqSwitchWithFabricPortsTest.collectStats to run in multi-switch mode
+29	facebook/fresco	a3ba9523aea7	06b958102669	CWE-125	static-webp/src/main/jni/static-webp/webp_bitmapfactory.cpp	339	0.97	Fix out of bounds read in readStreamFully
+30	facebook/igl	9cdbcc8e92e8	509c29a72740	CWE-125	src/igl/vulkan/RenderCommandEncoder.cpp	549	0.92	igl | vulkan | Bounds checking
+31	framegraph/ffmpeg	0066e79c9eca	d1f7a44e89fa	CWE-125	libavcodec/libopenh264dec.c	775	0.96	avcodec/libopenh264dec: Increase array sizes, fix stack-buffer overread
+32	fraunhoferhhi/vvdec	8a2474b5af52	725f8834cfe6	CWE-119	tests/vvdec_unit_test/vvdec_unit_test.cpp	1101	0.97	Pad Coeff and Clip buffers to 8 elements in ALF 5x5 unit_test
+33	getzeed/multipath-tools	7ac0f9c7f781	3db6872d9a41	CWE-125	multipathd/uxlsnr.c	399	0.96	multipathd: fix read past end of of buffer in sending reply
+34	GNOME/gegl	51d6fe4c43a6	018c0847f440	CWE-125	gegl/property-types/gegl-path.c	405	0.99	Fix out of bounds variadic argument read in gegl_path_list_append
+35	google/angle	02ffcb3667ca	6b71ba83ee75	CWE-119	src/libANGLE/renderer/vulkan/CLKernelVk.cpp	777	0.96	CL/VK: Fix heap overflow when kernel args exceed size
+36	google/filament	08fb39a1e4b3	d8a71ce195da	CWE-787	tools/matc/src/matc/Lexer.h	220	0.85	Fix buffer overflow in matc
+37	google/glog	319a0dfba4ac	e567cfc44212	CWE-787	src/demangle.cc	963	0.96	fix: stack buffer overflow (#957)
+38	GreatGameDota/mdec-decompression	84d16761d74b	b4cb0dc63ecd	CWE-125	decoder.cpp	3909	0.97	Add bounds check
+39	GreengageDB/greengage	9b3900cdb734	22b2e6e9df54	CWE-125	src/backend/postmaster/pgstat.c	434	0.92	Avoid memory size overflow when allocating backend activity buffer
+40	haproxy/haproxy	14e4f2b811ff	3f9194bfc991	CWE-122	src/mux_quic.c	843	0.95	BUG/MEDIUM: mux-quic: fix crash on invalid fctl frame dereference
+41	harfbuzz/harfbuzz	cec95a2d2684	4d1f6e049cf7	CWE-787	src/OT/Color/COLR/COLR.hh	719	0.9	Try to fix heap-buffer-overflow
+42	inseo-oh/yjkos	0d4258bb9ce5	ab1e2f43037f	CWE-122	kernel/fs/vfs.c	1119	0.95	vfs: fix heap overflow when leading / is missing
+43	jfboys/nginx	eec047c93634	2b5024685888	CWE-125	src/http/modules/ngx_http_proxy_module.c	895	0.97	Proxy: fixed segfault in URI change.
+44	karmic64/axaka-player	6d944c8bc07c	576ec7d3eeae	CWE-787	axaka-player.c	4891	0.96	fix buffer overflows
+45	kbsonlong/OpenCloudOS-Kernel	a9daa2009a54	82b7832a2776	CWE-125	fs/nilfs2/dir.c	319	0.97	nilfs2: fix OOB in nilfs_set_de_type
+46	KDE/flatpak-kcm	deafe0ca1aca	88ec3d164280	CWE-119	autotests/flatpakpermissiontest.cpp	592	0.95	Fix off-by-one error in tests
+47	KDE/kclock	b96c454f249c	5adb2f9fbaad	CWE-125	src/kclock/savedlocationsmodel.cpp	320	0.95	SavedLocationsModel: Add bounds check in data
+48	KDE/kcodecs	21942a570f9c	08c6126503cc	CWE-787	src/kcodecs.cpp	317	0.9	Fix buffer overflow in Codec::codecForName
+49	KDE/networkmanager-qt	e1598a69caa5	3cf924f72c42	CWE-787	src/utils.cpp	448	0.95	Don't write to QByteArray out of bounds
+50	KDE/parley	8316f23ffb88	6e99460cb793	CWE-125	src/practice/configure/blockoptions.cpp	636	0.95	Fix out of bounds read
+51	KDE/tokodon	85c9a503eba9	3903e30fe78c	CWE-125	src/followrequestmodel.cpp	3542	0.96	Add bounds checking to FollowRequestModel
+52	Kelsidavis/futura	8f89da5c65b9	d801d2d0a23f	CWE-125	kernel/sys_dup.c	3332	0.97	sys_dup: Add Phase 5 FD bounds validation
+53	Knifa/led-matrix-zmq-server	bdb7eef09e0d	b9b94f67819b	CWE-787	src/server_main.cpp	1815	0.92	fix buffer overflow potential on message parsing
+54	libpng/libpng	afb217ac457c	a37d48365195	CWE-787	contrib/tools/pngfix.c	495	0.95	Fix file name buffer overflow.
+55	libsdl-org/sdl2-compat	467928760738	b7f79f9c8b2e	CWE-787	src/sdl2_compat.c	701	0.97	Fix buffer overflow in Event2to3
+56	libsdl-org/SDL_shader_tools	d3073890737f	c7c469869773	CWE-119	SDL_shader_compiler.c	3029	0.92	Semantic analysis: Check that literal array indices' are in bounds.
+57	ljQAQ233/textos-pre	a39b41b0f654	1f7dba91dcd6	CWE-787	src/kernel/debug.c	240	0.9	[fix] debug.c : stack (buffer) overflow
+58	longturn/freeciv21	8aad0034cc65	a0c3dccc6133	CWE-787	server/edithand.cpp	328	0.9	Fix buffer overflow in edithand.cpp
+59	lucas-mansson/edag01-efficient-c	0fe60c272e32	126fc2e0881d	CWE-787	labs/lab3/simplex.c	1683	0.86	fix buffer overflow bug
+60	lucas-mior/zerdax2	e33c05e4dea2	d389616d4759	CWE-119	c_filter.c	280	0.9	fix off by one error
+61	m4c0/oto	4f1319e38c4f	624dfa36ae76	CWE-787	src/wad.cpp	800	0.95	ogg: fix buffer overflow in audio decoding
+62	Menesay/The_Bus_Trip	65e217d32abe	1ca14bac2b2e	CWE-787	tbt.c	2872	0.97	buffer overflow partial fix
+63	MethodicalAcceleratorDesign/MAD-X	7998e738eca5	4e0f3742b2f4	CWE-119	src/mad_table.c	387	0.97	name_to_table_curr: fix temp buffer size calc
+64	mhalle/OpenIGTLink	4b9b7edf8102	0ad4b4d86f52	CWE-126	Source/igtlBindMessage.cxx	450	0.97	Fix RTSBindMessage OOB read on zero-length body
+65	microsoft/DirectXTK12	69ede4ccce8b	a89b5b73e84f	CWE-125	Audio/WAVFileReader.cpp	3927	0.95	Fix out-of-bounds read bug in WAVFileReader (#151)
+66	microsoft/mu_basecore	171335e34ea9	fadf4f377e86	CWE-125	UefiCpuPkg/Library/MtrrLib/UnitTest/Support.c	276	0.97	UefiCpuPkg/MtrrLib: Fix unit test read overflow
+67	microsoft/mu_feature_mm_supv	0fab36a6019a	e0f0b1293cc3	CWE-787	MmSupervisorPkg/Core/PrivilegeMgmt/SyscallDispatcher.c	474	0.97	Fixed unvalidated CpuIndex (Arg2) in SMM_START_AP_PROC can cause out of bound writes (#21)
+68	microsoft/mu_silicon_intel_tiano	a859f4fc0397	909849be87a7	CWE-125	MdePkg/Library/UefiDevicePathLib/DevicePathToText.c	461	0.96	MdePkg: Fix a buffer overread.
+69	misa-md/potential	3909a891be2b	3676537e86a5	CWE-125	src/container/linear_array.hpp	1068	0.9	fix(pot-table): fix index out of range in calculation caused by the incorrect size in table bcast
+70	moderngl/moderngl	c4a68b44521d	bcda7601eab5	CWE-787	src/moderngl.cpp	1033	0.88	Fix buffer size overflows
+71	NASA-Planetary-Science/rss_ringoccs	fb18ea7d48e6	b7a15822822e	CWE-119	src/reconstruction/rss_ringoccs_diffraction_correction_legendre.c	890	0.92	Fixing off-by-one error.
+72	Nebensound/servoxxd-esphome	d902669cdc5a	baa333cddc48	CWE-119	components/servoxxd/stepper/servoxxd_stepper_engine.cpp	2001	0.95	Add bounds checking for EN pin array access
+73	NETWAYS/check_interfaces	8af5e4a67848	79b3023f6245	CWE-119	snmp_bulkget.c	1037	0.9	Fix off-by-one error
+74	nginx/nginx	bcb41c919390	6446f99107ff	CWE-125	src/http/modules/ngx_http_proxy_module.c	895	0.97	Proxy: fixed segfault in URI change.
+75	ngtcp2/ngtcp2	44b662bd139c	d6d6ed80b58a	CWE-787	lib/ngtcp2_conn.c	2489	0.95	Fix heap buffer overflow writing not validated ACK to qlog
+76	ossimlabs/ossim	34b6742412de	5223dfa6544e	CWE-119	src/support_data/ossimNitfXmlTag.cpp	265	0.86	Off by one error fix
+77	ozzi17/itp-organizado	089757a33946	a247d783f0eb	CWE-119	junho2025/histograma.cpp	368	0.95	Fix plateau finding logic to correctly check array bounds in findplateau function
+78	projectceladon/linux-intel-lts2022-chromium	713fefe878de	5dfe7af364c9	CWE-787	drivers/accel/qaic/qaic_control.c	1010	0.97	UPSTREAM: accel/qaic: tighten bounds checking in encode_message()
+79	radareorg/radare2-mcp	755469cbf395	eb3fba12a335	CWE-787	src/readbuffer.c	778	0.95	Fix buffer overflow in readbuffer code
+80	Reversive/android-reclass-server	27704c960b57	0cb30cea7e68	CWE-125	network/server/server.cpp	644	0.96	fix: add bounds check for handler dispatch
+81	roemil/LinkedList	21e804bd0f37	7d926d0f6f1a	CWE-125	LinkedList.cpp	1196	0.95	add check for index in bounds
+82	RVCK-Project/rvck	f0923011c126	57752d523a3f	CWE-125	drivers/net/ethernet/qlogic/qede/qede_fp.c	879	0.98	net: qlogic/qede: fix potential out-of-bounds read in qede_tpa_cont() and qede_tpa_end()
+83	SakuraEngine/SakuraEngine	77cb8a0def75	39e6f987dc71	CWE-125	samples/application/game/src/render/forward_pass.cpp	801	0.85	fix vulkan read out of bounds warning of 0-stride vertex streams
+84	Samsung/kflat	a5e9938289f8	8c5f12ddb4d9	CWE-126	lib/unflatten.cpp	443	0.95	Fix buffer overflow in Flatten lib
+85	SecLabz/proxmark3	6b648396e700	9e8adce7a98b	CWE-125	client/src/mifare/mifarehost.c	331	0.86	fix -Wstringop-overread error
+86	ShawnWeiChew/Frosted-Glass-Instrumentation	83512b8cd93b	ad3fc477ad56	CWE-787	lib/Tracer/tracer_types.h	275	0.86	fix: decrement string length to prevent overflowing hardware buffer
+87	solanabughunter-glitch/palace	86d5f0256379	6258717b4098	CWE-122	palace/fem/mesh.cpp	1077	0.92	Fix heap overflow error caught with ASan
+88	sschaetz/switchyard	4f841caf9c46	64639aaee824	CWE-787	vendor/uhidctl/uhidctl.c	1187	0.95	Fix buffer overflow
+89	Sumukha-M/proj_759	ba121f428a94	513d053bd1c1	CWE-119	3_cuda_mpi_overlap/backward.cpp	209	0.96	Fix off-by-one error in loop condition
+90	TechNexion/linux-tn-imx	6c4e6f49ffcd	a4e65c8cc106	CWE-787	drivers/staging/media/imx/gmsl-max9286.c	350	0.97	LF-14065: media: gmsl-max9286: Fix potential out of bounds write issue
+91	the-open-seed/libnamumark	4c3a40ceb991	850847427d31	CWE-787	library/src/parser.c	564	0.88	fix potential buffer overflow
+92	tillitis/tillitis-key1	14e4cd09c93c	ec9ef31140a8	CWE-787	hw/usb_interface/ch552_fw/src/main.c	1452	0.95	ch552: Fix FIDO data copy
+93	toyowata/suica-reader-rcs620s	86b8c3759e3e	d3a1058c2eb3	CWE-787	main.cpp	605	0.92	Fix string buffer overflow
+94	TravisWheelerLab/BATH	1c76d9e4774f	b07064ab8536	CWE-125	src/p7_splice.c	944	0.92	Fix bug where non-standard nucleotide characters cause read past end of sub-sequence
+95	UCBoulder/tardigrade_micromorphic_elasto_plasticity	cfcbec301821	fad20652961f	CWE-787	src/cpp/tests/test_tardigrade_micromorphic_elasto_plasticity.cpp	345	0.9	MAINT: Correcting off by one errors
+96	vermaark/timescaledb	d3d30c054766	d256758fd771	CWE-787	src/ts_catalog/dimension_partition.c	989	0.95	Fix heap buffer overflow
+97	wheelercj/Radix-Converter	52a89a0ac96b	b21c60416475	CWE-119	Radix-Converter/radix.cpp	498	0.9	Fix off-by-one errors
+98	Windigo/Oscar64_test	66dfe5df46db	9117827cfc77	CWE-119	oscar64/InterCode.cpp	331	0.95	Fixed constant array bounds check regression
+99	Xilinx/embeddedsw	3c0d989c9e41	60eeb9fb8f20	CWE-125	lib/sw_services/xilpm/src/versal_common/server/xpm_api.c	1150	0.97	xilpm: versal_common: server: Prevent out-of-bounds read when handling device attributes
+100	YetAnotherMod/qemu	486405f88648	1507587d30fd	CWE-119	hw/net/smc91c111.c	2157	0.97	hw/net/smc91c111: Sanitize packet length on tx

@@ -12,6 +12,10 @@ test_inputs/
   accepted_patches.jsonl     # 8 small, well-known C/C++ release pairs
   smoke_one/
     accepted_patches.jsonl   # 1 pair (cJSON v1.7.18) for fastest smoke
+  input_realistic_test/
+    accepted_patches.jsonl   # 5 curated real bug-fix commits
+  100_realistic/
+    accepted_patches.jsonl   # 100 bug-fix commits, one per repo (overnight)
 ```
 
 ## What's inside `accepted_patches.jsonl` (the 8-pair set)
